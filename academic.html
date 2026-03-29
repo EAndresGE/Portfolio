@@ -6,78 +6,218 @@
 -->
 <html>
 	<head>
-		<title>Technical Skills</title>
+		<title>Technical Skills | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main2.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
+			html, body { background-color: #1b2030; height: 100%; }
+			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+			#header { background-color: #1b2030; padding: 0; }
+			#header .inner { padding: 0; }
 			#main {
-			  background-color: #333;
-			  color: #fff;
+			  background-color: #1b2030;
+			  color: #d8e0f0;
+			  padding-top: 3em;
+			  padding-bottom: 2em;
+			  flex: 1;
 			}
-		  
-			.inner {
-			  max-width: 800px;
-			  margin: 0 auto;
+			#main .inner {
+			  padding: 0 2.5em 0.5em;
 			}
-			.follow-heading {
-				color: white;
-			  }
+			#footer { background-color: #141820; }
+			.follow-heading { color: white; }
 
-			  .img-container img {
-				max-width: 100%;
-				height: auto;
-			  }
-		  </style>
-		  
+			/* Skills layout */
+			.skills-grid {
+			  display: grid;
+			  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			  gap: 1.5em;
+			  margin-top: 1.5em;
+			}
+			.skill-group {
+			  background-color: #242d42;
+			  border-radius: 8px;
+			  padding: 1.5em;
+			}
+			.skill-group-title {
+			  display: flex;
+			  align-items: center;
+			  gap: 0.6em;
+			  font-size: 0.8em;
+			  font-weight: 700;
+			  letter-spacing: 0.08em;
+			  text-transform: uppercase;
+			  color: #8896b8;
+			  margin-bottom: 1.2em;
+			  padding-bottom: 0.6em;
+			  border-bottom: 1px solid #2d3855;
+			}
+			.skill-group-title i { font-size: 1.1em; }
+
+			.skill-item { margin-bottom: 1em; }
+			.skill-item:last-child { margin-bottom: 0; }
+
+			.skill-label {
+			  display: flex;
+			  justify-content: space-between;
+			  align-items: center;
+			  margin-bottom: 0.35em;
+			}
+			.skill-name {
+			  color: #d8e0f0;
+			  font-size: 0.9em;
+			  font-weight: 700;
+			}
+			.skill-pct {
+			  color: #8896b8;
+			  font-size: 0.8em;
+			}
+			.skill-bar {
+			  height: 8px;
+			  background-color: #2d3855;
+			  border-radius: 4px;
+			  overflow: hidden;
+			}
+			.skill-fill {
+			  height: 100%;
+			  background: linear-gradient(90deg, #2d7dd2, #5ba3f5);
+			  border-radius: 4px;
+			  width: 0;
+			  transition: width 1s ease;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<a href="index.html">
 					<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px;">
-				  </a>
-				<!-- Header -->							  
-					<header id="main">
-						<div class="inner">
+				</a>
 
-					</header>
-
+				<!-- Header -->
+				<header id="header">
+					<div class="inner"></div>
+				</header>
 
 				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-						
-							<h1>Technical Skills</h1>
-							<p>The table presented below showcases a range of technical and conceptual skills that have been assigned a value based on my personal perception of the level of proficiency in each skill. The assigned value is based on the complexity of the projects, both academic and professional, that I have undertaken. The purpose of this table is to provide a brief overview of my skillset and level of expertise in various areas.</p>
-							<hr /></div>
-							
-					
-						
-					<!-- Main -->
-					<div id="main">
-						<div class="img-container">
-						  <span class="image main"><img src="images/table2.jpg" alt="" /></span>
-						</div>
-					  </div>
+				<div id="main">
+					<div class="inner">
+
+						<h1>Technical Skills</h1>
+						<p>The skills below reflect my personal assessment of proficiency based on the complexity of academic and professional projects I have undertaken. Levels are grouped by domain.</p>
+						<hr />
+
+						<div class="skills-grid">
+
+							<!-- GIS Platforms -->
+							<div class="skill-group">
+								<div class="skill-group-title"><i class="fas fa-globe"></i> GIS Platforms</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">ArcGIS Pro</span><span class="skill-pct">90%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">ArcGIS Online</span><span class="skill-pct">85%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">ArcGIS Desktop</span><span class="skill-pct">80%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">QGIS</span><span class="skill-pct">85%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+								</div>
+							</div>
+
+							<!-- Data Integration & Automation -->
+							<div class="skill-group">
+								<div class="skill-group-title"><i class="fas fa-cogs"></i> Data Integration &amp; Automation</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">FME</span><span class="skill-pct">90%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">Python</span><span class="skill-pct">75%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">Environmental Data Mining</span><span class="skill-pct">70%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+								</div>
+							</div>
+
+							<!-- Statistical & Spatial Analysis -->
+							<div class="skill-group">
+								<div class="skill-group-title"><i class="fas fa-chart-bar"></i> Statistical &amp; Spatial Analysis</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">Spatial Data Analysis</span><span class="skill-pct">85%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">R — Spatial &amp; Statistical Modelling</span><span class="skill-pct">70%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">SPSS — Statistical Modelling</span><span class="skill-pct">65%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">MATLAB — Spatial &amp; Statistical Modelling</span><span class="skill-pct">65%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">Network Analysis</span><span class="skill-pct">65%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">MAXENT — Species Distribution Modelling</span><span class="skill-pct">55%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="55"></div></div>
+								</div>
+							</div>
+
+							<!-- Remote Sensing & 3D -->
+							<div class="skill-group">
+								<div class="skill-group-title"><i class="fas fa-satellite"></i> Remote Sensing &amp; 3D Data</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">Point Cloud &amp; Remote Sensing</span><span class="skill-pct">70%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">LiDAR 360</span><span class="skill-pct">60%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">WebODM — Drone Imagery Processing</span><span class="skill-pct">65%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+								</div>
+								<div class="skill-item">
+									<div class="skill-label"><span class="skill-name">Environmental Risk Assessment</span><span class="skill-pct">75%</span></div>
+									<div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+								</div>
+							</div>
+
+						</div><!-- end skills-grid -->
+
 					</div>
+				</div>
+
 				<!-- Footer -->
 				<footer id="footer">
 					<div class="inner">
-						
 						<section>
 							<h2 class="follow-heading">Follow</h2>
 							<ul class="icons">
 								<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
 								<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-
 							</ul>
 						</section>
 						<ul class="copyright">
-							<p>Copyright © 2023 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+							<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
 						</ul>
 					</div>
 				</footer>
@@ -90,6 +230,15 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+		<!-- Animate progress bars on load -->
+		<script>
+			window.addEventListener('load', function() {
+				document.querySelectorAll('.skill-fill').forEach(function(bar) {
+					bar.style.width = bar.getAttribute('data-width') + '%';
+				});
+			});
+		</script>
 
 	</body>
 </html>

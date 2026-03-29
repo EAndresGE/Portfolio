@@ -6,74 +6,163 @@
 -->
 <html>
 	<head>
-		<title>Academic preparation</title>
+		<title>Education | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main2.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
+			html, body { background-color: #1b2030; height: 100%; }
+			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+			#header { background-color: #1b2030; padding: 0; }
+			#header .inner { padding: 0; }
 			#main {
-			  background-color: #333;
-			  color: #fff;
+			  background-color: #1b2030;
+			  color: #d8e0f0;
+			  padding-top: 3em;
+			  padding-bottom: 2em;
+			  flex: 1;
 			}
-		  
-			.inner {
-			  max-width: 800px;
-			  margin: 0 auto;
+			#main .inner {
+			  padding: 0 2.5em 0.5em;
 			}
-			.follow-heading {
-				color: white;
-			  }
+			#footer {
+			  background-color: #141820;
+			}
+			.follow-heading { color: white; }
 
-		  </style>
-		  
+			/* Education cards */
+			.edu-card {
+			  display: flex;
+			  align-items: flex-start;
+			  background-color: #242d42;
+			  border-radius: 8px;
+			  padding: 1.5em;
+			  margin-bottom: 1.5em;
+			  gap: 1.5em;
+			}
+			.edu-icon {
+			  width: 70px;
+			  height: 70px;
+			  min-width: 70px;
+			  border-radius: 50%;
+			  background-color: #2d3855;
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+			  font-size: 1.8em;
+			  color: #8896b8;
+			}
+			.edu-content h3 {
+			  font-weight: 700;
+			  font-size: 0.85em;
+			  letter-spacing: 0.04em;
+			  text-transform: uppercase;
+			  color: #d8e0f0;
+			  margin: 0 0 0.3em 0;
+			  line-height: 1.4;
+			}
+			.edu-institution {
+			  font-weight: 700;
+			  color: #d8e0f0;
+			  font-size: 1em;
+			  margin-bottom: 0.2em;
+			}
+			.edu-date {
+			  color: #8896b8;
+			  font-size: 0.85em;
+			  margin-bottom: 0.5em;
+			}
+			.edu-detail {
+			  color: #8896b8;
+			  font-size: 0.9em;
+			  margin-bottom: 0.15em;
+			}
+			.edu-tag {
+			  display: inline-block;
+			  background-color: #2d3855;
+			  color: #8896b8;
+			  font-size: 0.7em;
+			  padding: 0.2em 0.7em;
+			  border-radius: 3px;
+			  text-transform: uppercase;
+			  letter-spacing: 0.1em;
+			  margin-top: 0.6em;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<a href="index.html">
 					<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px;">
-				  </a>
-				  
-				<!-- Header -->							  
-					<header id="main">
-						<div class="inner">
+				</a>
 
-					</header>
-
+				<!-- Header -->
+				<header id="header">
+					<div class="inner"></div>
+				</header>
 
 				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-						
-							<h1>Education</h1>
-							<p>This section showcases my education path, which has been instrumental in shaping my professional growth and personal development. From my academic degrees to my continued learning and development, I am excited to highlight my educational background.</p>
-							<hr /></div>
-					
-							<span class="image main"><img src="images/3.jpg" alt="" /></span>
-						
-					
-					<!-- Main -->
-					<div id="main">
-						<div class="inner">
+				<div id="main">
+					<div class="inner">
+
+						<h1>Education</h1>
+						<p>This section showcases my education path, which has been instrumental in shaping my professional growth and personal development. From my academic degrees to my continued learning and development, I am excited to highlight my educational background.</p>
+						<hr />
+
+						<!-- Master's -->
+						<div class="edu-card">
+							<div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+							<div class="edu-content">
+								<h3>Master's Degree in Biology of Environmental Change</h3>
+								<div class="edu-institution">University of Eastern Finland</div>
+								<div class="edu-date">November 2022</div>
+								<div class="edu-detail">Major: Environmental Informatics (GIS, spatial analysis, and environmental data modelling)</div>
+								<div class="edu-detail">Minor: Environmental Sciences</div>
+							</div>
 						</div>
+
+						<!-- BSc -->
+						<div class="edu-card">
+							<div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+							<div class="edu-content">
+								<h3>BSc, Resource and Environmental Management</h3>
+								<div class="edu-institution">Australian National University</div>
+								<div class="edu-date">December 2017</div>
+								<div class="edu-detail">Major: Geography (GIS, spatial analysis, environmental systems)</div>
+								<div class="edu-detail">Minor: Biodiversity Conservation</div>
+							</div>
+						</div>
+
+						<!-- Certification -->
+						<div class="edu-card">
+							<div class="edu-icon"><i class="fas fa-certificate"></i></div>
+							<div class="edu-content">
+								<h3>Internal Auditor of Integrated Management Systems</h3>
+								<div class="edu-institution">National Polytechnic School</div>
+								<div class="edu-detail">ISO 9001:2015 &nbsp;|&nbsp; ISO 14001:2015 &nbsp;|&nbsp; ISO 45001:2018</div>
+								<span class="edu-tag">Certification</span>
+							</div>
+						</div>
+
 					</div>
-					</div>
+				</div>
+
 				<!-- Footer -->
 				<footer id="footer">
 					<div class="inner">
-						
 						<section>
 							<h2 class="follow-heading">Follow</h2>
 							<ul class="icons">
 								<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
 								<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
 							</ul>
 						</section>
 						<ul class="copyright">
-							<p>Copyright © 2023 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+							<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
 						</ul>
 					</div>
 				</footer>

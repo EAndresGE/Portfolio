@@ -6,11 +6,143 @@
 -->
 <html>
 	<head>
-		<title>Home</title>
+		<title>Home | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+		  /* ── Global dark base ── */
+		  html, body { background-color: #1b2030; color: #d8e0f0; }
+		  #wrapper { background-color: #1b2030; }
+		  #main { background-color: #1b2030; color: #d8e0f0; }
+		  #main p { color: #8896b8; }
+		  h1, h2, h3 { color: #d8e0f0; }
+		  a { color: #2d7dd2; }
+		  a:hover { color: #5ba3f5 !important; }
+		  hr { border-color: #2d3855; }
+		  /* ── Banner ── */
+		  .banner {
+			position: relative;
+			height: 400px;
+			background-size: cover;
+			border-radius: 10px;
+		  }
+		  .banner::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%; height: 100%;
+			background-color: rgba(10, 14, 30, 0.55);
+			transition: opacity 0.5s ease;
+			opacity: 1;
+		  }
+		  .banner-text {
+			position: absolute;
+			top: 50%; left: 50%;
+			transform: translate(-50%, -50%);
+			color: #ffffff;
+			text-align: center;
+			font-size: 24px;
+		  }
+		  .banner-text h1 { margin-bottom: 10px; font-size: 60px; color: #fff; }
+		  .banner-text p  { margin: 0; font-size: 24px; color: #d8e0f0; }
+		  .section-title  { text-align: center; margin: 10px auto 0; font-size: 50px; color: #d8e0f0; }
+		  /* ── Footer banner ── */
+		  .foot {
+			position: relative;
+			height: 300px;
+			background-size: cover;
+			border-radius: 10px;
+		  }
+		  .foot::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%; height: 100%;
+			background-color: rgba(10, 14, 30, 0.55);
+			transition: opacity 0.5s ease;
+			opacity: 1;
+		  }
+		  .foot-foot {
+			position: absolute;
+			top: 60%; left: 50%;
+			transform: translate(-50%, -50%);
+			color: #d8e0f0;
+			text-align: center;
+			font-size: 24px;
+		  }
+		  @media screen and (max-width: 767px) {
+			.banner-text h1 { font-size: 36px; }
+			.banner-text p  { font-size: 18px; }
+			.foot-foot      { font-size: 16px; }
+		  }
+		  /* ── Tile heights ── */
+		  .tiles article > .image { height: 220px; }
+		  .tiles article > .image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+		  .tiles article > .image:after { display: none; }
+		  /* Remove template decorative squares on tiles */
+		  .tiles article:before { display: none !important; }
+		  /* ── Tile overlay colours (new palette) ── */
+		  .tiles article.style3 > .image:before { background-color: #2ea855 !important; }
+		  .tiles article.style5 > .image:before { background-color: #2d7dd2 !important; }
+		  .tiles article.style6 > .image:before { background-color: #1a9ea6 !important; }
+		  /* ── Nav buttons ── */
+		  .nav-btn {
+			background: #242d42 !important;
+			color: #d8e0f0 !important;
+			border-color: #2d3855 !important;
+			transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s !important;
+		  }
+		  .nav-btn:hover {
+			background: #2d7dd2 !important;
+			border-color: #2d7dd2 !important;
+			color: #fff !important;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 14px rgba(45,125,210,0.35) !important;
+		  }
+		  /* ── Filter bar ── */
+		  .projects-header { text-align: center; margin-bottom: 0.4em; }
+		  .filter-bar {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 0.6em;
+			margin: 0.8em 0 1.6em;
+		  }
+		  .filter-chip {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.45em;
+			padding: 0.45em 1.1em;
+			border-radius: 8px;
+			border: 2px solid #2d3855;
+			font-family: inherit;
+			font-size: 0.78em;
+			font-weight: 600;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			cursor: pointer;
+			transition: background 0.22s, color 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.15s;
+			background: #242d42;
+			color: #d8e0f0 !important;
+		  }
+		  .filter-chip .chip-icon { font-size: 0.9em; }
+		  /* Hover */
+		  .filter-chip[data-filter="all"]:hover          { background: #1a2030; border-color: #4a5980; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+		  .filter-chip[data-filter="professional"]:hover  { background: #2d7dd2; border-color: #2d7dd2; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(45,125,210,0.45); }
+		  .filter-chip[data-filter="academic"]:hover      { background: #1a9ea6; border-color: #1a9ea6; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(26,158,166,0.45); }
+		  .filter-chip[data-filter="personal"]:hover      { background: #2ea855; border-color: #2ea855; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(46,168,85,0.45); }
+		  /* Active */
+		  .filter-chip[data-filter="all"].active          { background: #1a2030; border-color: #4a5980; color: #fff !important; box-shadow: 0 4px 14px rgba(0,0,0,0.4); }
+		  .filter-chip[data-filter="professional"].active  { background: #2d7dd2; border-color: #2d7dd2; color: #fff !important; box-shadow: 0 4px 14px rgba(45,125,210,0.5); }
+		  .filter-chip[data-filter="academic"].active      { background: #1a9ea6; border-color: #1a9ea6; color: #fff !important; box-shadow: 0 4px 14px rgba(26,158,166,0.5); }
+		  .filter-chip[data-filter="personal"].active      { background: #2ea855; border-color: #2ea855; color: #fff !important; box-shadow: 0 4px 14px rgba(46,168,85,0.5); }
+		  /* Tile hide */
+		  .tiles article { transition: opacity 0.25s; }
+		  .tiles article.hidden { display: none; }
+		</style>
 	</head>
 	<body class="is-preload">
 		<!--Transition-->
@@ -24,103 +156,12 @@
 						<div class="inner">
 						
 							<!-- Banner -->
-							  <head>
-								<title>My Banner</title>
-								<style>
-								  .banner {
-									position: relative;
-									height: 400px;
-									background-size: cover;
-									border-radius: 10px;
-								    
-								}
-								.banner::before {
-									content: "";
-									position: absolute;
-									top: 0;
-									left: 0;
-									width: 100%;
-									height: 100%;
-									background-color: rgba(0, 0, 0, 0.5);
-									filter: blur(10px);
-									transition: opacity 0.5s ease;
-									opacity: 1;
-								}
-      
-									.banner-text {
-									position: absolute;
-									top: 50%;
-									left: 50%;
-									transform: translate(-50%, -50%);
-									color: whitesmoke;
-									text-align: center;
-									font-size: 24px;
-								  }
-								.banner-text h1 {
-								  margin-bottom: 10px;
-								  font-size: 60px;
-								}
-								.banner-text p {
-								  margin: 0;
-								  font-size: 24px;
-								}
-								.section-title {
-									text-align: center;
-									margin: 10px auto 0;
-									font-size: 50px;
-								  }
-								
-								  .foot {
-									position: relative;
-									height: 300px;
-									background-size: cover;
-									border-radius: 10px;
-								  }
-								
-								.foot::before {
-									content: "";
-									position: absolute;
-									top: 0;
-									left: 0;
-									width: 100%;
-									height: 100%;
-									background-color: rgba(0, 0, 0, 0.5);
-									filter: blur(10px);
-									transition: opacity 0.5s ease;
-									opacity: 1;
-								}
-								  .foot-foot {
-									position: absolute;
-									top: 60%;
-									left: 50%;
-									transform: translate(-50%, -50%);
-									color: whitesmoke;
-									text-align: center;
-									font-size: 24px;
-								  }
-								  
-								  @media screen and (max-width: 767px) {
-									/* Styles for devices with a maximum width of 767px */
-									.banner-text h1 {
-									  font-size: 36px;
-									}
-									.banner-text p {
-									  font-size: 18px;
-									}
-									.foot-foot {
-									  font-size: 16px;
-									}
-								  }
-								</style>
-							  </head>
-							  <body>
-								<div class="banner" style="background-image: url('images/banner.jpg');">
-								  <div class="banner-text">
-									<h1>Hello, I am Andres Gordon</h1>
-									<p>I am an enthusiastic GIS analyst eager to utilize my skills and experience in solving complex spatial problems.</p>
-								  </div>
-								</div>
-							  </body>
+							<div class="banner" style="background-image: url('images/banner.jpg');">
+							  <div class="banner-text">
+								<h1>Hello, I am Andres Gordon</h1>
+								<p>I am an enthusiastic GIS analyst eager to utilize my skills and experience in solving complex spatial problems.</p>
+							  </div>
+							</div>
 							
 				<!-- Main -->
 					<div id="main">
@@ -134,11 +175,11 @@
 
 				<ul class="actions fit">
 
-					<li><a href="academic.html" class="button primary fit">Technical skills</a></li>
+					<li><a href="academic.html" class="button fit nav-btn">Technical skills</a></li>
 
-					<li><a href="education.html" class="button secondary fit">Academic preparation</a></li>
+					<li><a href="education.html" class="button fit nav-btn">Academic preparation</a></li>
 
-					<li><a href="work.html" class="button third fit">Professional experience</a></li>
+					<li><a href="work.html" class="button fit nav-btn">Professional experience</a></li>
 
 				</ul>
 
@@ -148,11 +189,27 @@
 					<!-- Main continues  -->
 					
 
-					<h1 class="section-title">Past projects</h1>		
+					<div class="projects-header">
+						<h1 class="section-title">Past projects</h1>
+					</div>
+					<div class="filter-bar">
+						<button class="filter-chip active" data-filter="all">
+							<i class="fas fa-border-all chip-icon"></i> All
+						</button>
+						<button class="filter-chip" data-filter="professional">
+							<i class="fas fa-briefcase chip-icon"></i> Professional
+						</button>
+						<button class="filter-chip" data-filter="academic">
+							<i class="fas fa-graduation-cap chip-icon"></i> Academic
+						</button>
+						<button class="filter-chip" data-filter="personal">
+							<i class="fas fa-palette chip-icon"></i> Personal
+						</button>
+					</div>
 							<section class="tiles">
-								<article class="style3">
+								<article class="style3" data-category="personal">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/Quito_paper_cut.jpg" alt="Paper cut cartography of Quito" />
 									</span>
 									<a href="pp1.html">
 										<h2>Paper cut cartography</h2>
@@ -161,9 +218,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style5">
+								<article class="style5" data-category="professional">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/fme.jpg" alt="FME data integration" />
 									</span>
 									<a href="work3.html">
 										<h2>FME data integration</h2>
@@ -172,9 +229,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style5">
+								<article class="style5" data-category="professional">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/mvc.jpg" alt="Moose-Vehicle Collisions spatial analysis" />
 									</span>
 									<a href="work2.html">
 										<h2>Spatial and statistical analysis</h2>
@@ -183,9 +240,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style5">
+								<article class="style5" data-category="professional">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/professional1.jpg" alt="Public Participation GIS" />
 									</span>
 									<a href="work1.html">
 										<h2>Public Participation GIS</h2>
@@ -194,20 +251,20 @@
 										</div>
 									</a>
 								</article>
-								<article class="style5">
+								<article class="style5" data-category="professional">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/r3.png" alt="GIS database administration" />
 									</span>
 									<a href="work4.html">
 										<h2>GIS database administrator</h2>
 										<div class="content">
-											<p> Ensuring the accuracy, integrity, and security of the data stored in the geodatabase</p>
+											<p>Ensuring the accuracy, integrity, and security of the data stored in the geodatabase</p>
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/visibility.jpg" alt="Visibility analysis" />
 									</span>
 									<a href="visibility.html">
 										<h2>Visibility analysis</h2>
@@ -216,9 +273,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/risk.jpg" alt="Avalanche risk modelling" />
 									</span>
 									<a href="risk.html">
 										<h2>Risk modelling</h2>
@@ -227,9 +284,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/batch.jpg" alt="Multicriteria Decision Analysis" />
 									</span>
 									<a href="MCDA.html">
 										<h2>Multicriteria Decision Analysis</h2>
@@ -238,9 +295,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/pre.jpg" alt="Geostatistics" />
 									</span>
 									<a href="geo.html">
 										<h2>Geostatistics</h2>
@@ -249,9 +306,9 @@
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/batch.jpg" alt="Programming and batch processing" />
 									</span>
 									<a href="batch.html">
 										<h2>Programming and batch processing</h2>
@@ -260,20 +317,20 @@
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/pro.png" alt="Network analysis" />
 									</span>
 									<a href="network.html">
 										<h2>Network analysis</h2>
 										<div class="content">
-											<p>Evaluating the accessibility of the proposed stops along the Stage 1 ACT light rail system </p>
+											<p>Evaluating the accessibility of the proposed stops along the Stage 1 ACT light rail system</p>
 										</div>
 									</a>
 								</article>
-								<article class="style6">
+								<article class="style6" data-category="academic">
 									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/remote.jpg" alt="Remote sensing" />
 									</span>
 									<a href="remote.html">
 										<h2>Remote sensing</h2>
@@ -300,7 +357,7 @@
 								</ul>
 							</section>
 							<ul class="copyright">
-								<p>Copyright © 2023 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+								<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
 							</ul>
 						</div>
 					</div>
@@ -313,6 +370,29 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+		<script>
+			(function () {
+				var chips = document.querySelectorAll('.filter-chip');
+				var tiles = document.querySelectorAll('.tiles article');
+
+				chips.forEach(function (chip) {
+					chip.addEventListener('click', function () {
+						var filter = this.getAttribute('data-filter');
+						chips.forEach(function (c) { c.classList.remove('active'); });
+						this.classList.add('active');
+
+						tiles.forEach(function (tile) {
+							if (filter === 'all' || tile.getAttribute('data-category') === filter) {
+								tile.classList.remove('hidden');
+							} else {
+								tile.classList.add('hidden');
+							}
+						});
+					});
+				});
+			})();
+		</script>
 
 	</body>
 </html>
