@@ -1,33 +1,21 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Programming and batch processing</title>
+		<title>Batch Processing Open Forest Data for Management Planning | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-			#main {
-				text-align: center;
-			}
-	
-			#main .inner {
-				display: inline-block;
-				text-align: justify;
-			}
-					#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; }
-		
+			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+			#main { flex: 1; text-align: center; }
+			#main .inner { display: inline-block; text-align: left; width: 100%; }
 			html, body { background-color: #1b2030; color: #d8e0f0; }
 			#header { background-color: #1b2030; padding: 0; }
 			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 0.5em; }
+			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
 			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
@@ -35,68 +23,72 @@
 			a:hover { color: #5ba3f5; }
 			p, li { color: #8896b8; }
 			h1, h2, h3, h4 { color: #d8e0f0; }
-			.title { color: #d8e0f0; }
-			.button2 { border-color: #2d3855; color: #d8e0f0; }
 			#header ul.icons a { color: #8896b8; }
+			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
+			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
+			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
+			.outcome-card i { color: #2d7dd2; margin-right: 0.4em; }
+			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #8896b8; margin: 0; }
+			.project-image { width: 100%; border-radius: 8px; margin: 1em 0 1.5em; display: block; }
+			.built-with { margin-top: 2em; padding-top: 1.5em; border-top: 1px solid #2d3855; }
+			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
+			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
+			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #8896b8; text-transform: uppercase; }
 		</style>
 	</head>
 	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<a href="index.html">
-					<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px;">
-				  </a>
-				
-		  <!-- Header -->							  
-				<header id="header">
-					<div class="inner">
+		<div id="wrapper">
+			<a href="index.html">
+				<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
+			</a>
+			<header id="header">
+				<div class="inner">
+					<ul class="actions">
+						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#1a9ea6;color:#fff;"><i class="fas fa-graduation-cap" style="margin-right:0.45em;"></i>Academic project</span></li>
+					</ul>
+				</div>
+			</header>
+			<div id="main">
+				<div class="inner">
 
-						<!--subtitle-->
-						<ul class="actions">
-							<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#1a9ea6;color:#fff;"><i class="fas fa-graduation-cap" style="margin-right:0.45em;"></i>Academic project</span></li>
-						  </ul>
-
-					</header>
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<h1>Improving Open Forest Data for Forest Management: A Spatial Data Analysis Project</h1>
-							<p>The Finnish Forest Centre (Metsäkeskus) provides open forest data for forest management and planning. The data consists of stand-level forest information estimated by combining the airborne laser scanning (ALS) features with ground-truth data from field-measured sample plots using the area-based approach. The data is available in GeoPackage format on 16m x 16 m grid cells (hila) from which the attributes have been summarized for the forest compartments (kuvio, the operational forest management units). The open forest data is an essential resource for forest management, but processing it can be time-consuming and requires specialized skills.</p>
-							<span class="image main"><img src="images/batch.jpg" alt="" /></span>
-							<p>As part of an academic project, I was tasked with improving the open forest data for customers by addressing their feedback. The feedback highlighted two main issues: missing forest height variation and canopy cover data for some gridded forest information and operational forest management units that were too small in size. To address these issues, I learned several tools and techniques related to data processing and analysis.</p>
-						<p>First, I accessed and used the open forest data provided by the Finnish Forest Centre. This required me to become familiar with the data structure, including the GeoPackage format and the forest compartment units. Second, I processed the large spatial datasets using programming languages such as R and Python, which allowed me to manipulate and analyze the data more efficiently. I also learned how to use batch processing techniques to speed up data processing.
-
-							Through this project, I gained proficiency in spatial data processing and analysis. I learned how to extract and summarize forest attributes using spatial analysis tools and techniques, and how to communicate with customers to deliver high-quality data products. Additionally, I developed skills in programming, batch processing, and using open forest data.</p>
-						<p><strong>The project provided valuable experience in working with real-world data and understanding the importance of addressing customer feedback. Overall, the project helped me develop a range of technical and communication skills that are essential in the field of data science and analytics.</strong></p>
-						</div>
+					<h1>Batch Processing Open Forest Data for Management Planning</h1>
+					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
+					<p>The Finnish Forest Centre provides open forest inventory data in GeoPackage format at 16x16 m grid resolution. Processing this data for practical management planning is time-consuming and requires programming skills — a barrier for many forest managers who need the information most.</p>
+					<img src="images/batch.jpg" alt="Forest data batch processing spatial analysis Finland" class="project-image"/>
+					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
+					<p>Python and R were used to build batch processing pipelines automating ingestion, transformation, and analysis of large spatial forest datasets. Scripts handled format conversion, attribute extraction, and aggregation from grid cells to forest compartment level — the operational unit used in Finnish forest management.</p>
+					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
+					<div class="outcome-grid">
+						<div class="outcome-card"><p><i class="fas fa-cogs"></i> Automated pipeline built for large-scale Finnish forest inventory data processing</p></div>
+						<div class="outcome-card"><p><i class="fas fa-table"></i> Grid-cell data aggregated to forest compartment level for operational usability</p></div>
+						<div class="outcome-card"><p><i class="fas fa-code"></i> Reusable Python and R scripts reducing processing time significantly</p></div>
 					</div>
-
-				<!-- Footer -->
-				<footer id="footer">
-					<div class="inner">
-						
-						<section>
-							<h2 class="follow-heading">Follow</h2>
-							<ul class="icons">
-								<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-						</section>
-						<ul class="copyright">
-							<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					<div class="built-with">
+					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
+					<div class="tech-stack"><span class="tech-chip">Python</span><span class="tech-chip">R</span><span class="tech-chip">ArcPy</span><span class="tech-chip">GeoPackage</span><span class="tech-chip">Batch Processing</span><span class="tech-chip">Pandas</span></div>
+				</div>
+				</div>
+			</div>
+			<footer id="footer">
+				<div class="inner">
+					<section>
+						<h2 class="follow-heading">Follow</h2>
+						<ul class="icons">
+							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
 						</ul>
-					</div>
-				</footer>
-
+					</section>
+					<ul class="copyright">
+						<p>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					</ul>
+				</div>
+			</footer>
 		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 	</body>
 </html>

@@ -1,34 +1,21 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Paper cut cartography</title>
+		<title>Exploring Quito's Topography Through Paper-Cut Maps | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-			#main {
-				text-align: center;
-			}
-	
-			#main .inner {
-				display: inline-block;
-				text-align: justify;
-			}
-					#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; }
-		
+			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+			#main { flex: 1; text-align: center; }
+			#main .inner { display: inline-block; text-align: left; width: 100%; }
 			html, body { background-color: #1b2030; color: #d8e0f0; }
 			#header { background-color: #1b2030; padding: 0; }
 			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 0.5em; }
+			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
 			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
@@ -36,68 +23,72 @@
 			a:hover { color: #5ba3f5; }
 			p, li { color: #8896b8; }
 			h1, h2, h3, h4 { color: #d8e0f0; }
-			.title { color: #d8e0f0; }
-			.button2 { border-color: #2d3855; color: #d8e0f0; }
 			#header ul.icons a { color: #8896b8; }
+			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
+			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
+			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
+			.outcome-card i { color: #2d7dd2; margin-right: 0.4em; }
+			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #8896b8; margin: 0; }
+			.project-image { width: 100%; border-radius: 8px; margin: 1em 0 1.5em; display: block; }
+			.built-with { margin-top: 2em; padding-top: 1.5em; border-top: 1px solid #2d3855; }
+			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
+			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
+			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #8896b8; text-transform: uppercase; }
 		</style>
 	</head>
 	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<a href="index.html">
-					<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px;">
-				  </a>
-				  
-				<!-- Header -->							  
-					<header id="header">
-						<div class="inner">
-
-							<!--subtitle-->
-							<ul class="actions">
+		<div id="wrapper">
+			<a href="index.html">
+				<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
+			</a>
+			<header id="header">
+				<div class="inner">
+					<ul class="actions">
 						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2ea855;color:#fff;"><i class="fas fa-palette" style="margin-right:0.45em;"></i>Personal project</span></li>
-							  </ul>
+					</ul>
+				</div>
+			</header>
+			<div id="main">
+				<div class="inner">
 
-							</header>	
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<h1>Exploring Quito's Topography Through Paper-Cut Maps</h1>
-							<span class="image main"><img src="images/Quito_paper_cut.jpg" alt="" /></span>
-					<p>Quito, the capital city of Ecuador, boasts a unique combination of natural beauty and urban charm. Situated in a valley surrounded by mountains, this dynamic city has become a hub of creativity and innovation. One way to appreciate the intricate topography of Quito and its surroundings is through the art of paper-cut maps.</p>
-<p>Paper-cut maps are an increasingly popular way to depict landscapes, highlighting the unique features and character of a region. The process of creating these maps involves intricate cartography skills, as the artist must carefully cut and layer paper to create a three-dimensional representation of the terrain. In the case of Quito, the resulting maps showcase the dramatic elevations and stunning views of the Andean mountain range, while capturing the essence of this vibrant city.
-
-	It's important to note that the paper-cut map of the elevations surrounding Quito was created using ArcGIS Pro, a geographic information system software that provides cartographers with the tools to create precise and detailed maps. Using this digital tool, cartographers can accurately depict the terrain and landscape of a region, which can then be used to produce stunning paper-cut maps, like the one showcasing Quito.</p>
-						<p><strong>The paper-cut map of the elevations surrounding Quito is an excellent example of the combination of technology and artistry that is being used to create stunning and informative maps. By using tools like ArcGIS Pro, cartographers are able to create intricate, three-dimensional maps that capture the unique character and features of a region, while providing valuable insights into the world around us.</strong></p>
-
-						</div>
+					<h1>Exploring Quito's Topography Through Paper-Cut Maps</h1>
+					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
+					<p>Quito sits in a narrow Andean valley at 2,850 m, surrounded by volcanic peaks. Communicating its dramatic elevation changes through an artistic format that is both geographically accurate and visually compelling.</p>
+					<img src="images/Quito_paper_cut.jpg" alt="Paper cut cartography map of Quito Ecuador elevation" class="project-image"/>
+					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
+					<p>ArcGIS Pro was used to process Digital Elevation Model data for the Quito region, generating hillshade and contour outputs that formed the basis of the paper-cut design. The elevation layers were translated into cut levels representing distinct altitude bands, combining cartographic precision with a layered paper-cut aesthetic.</p>
+					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
+					<div class="outcome-grid">
+						<div class="outcome-card"><p><i class="fas fa-mountain"></i> Quito's complex Andean topography rendered as a layered paper-cut elevation map</p></div>
+						<div class="outcome-card"><p><i class="fas fa-drafting-compass"></i> Cartographic accuracy maintained throughout — DEM data processed in ArcGIS Pro</p></div>
+						<div class="outcome-card"><p><i class="fas fa-paint-brush"></i> Personal project exploring the intersection of GIS technology and artistic cartography</p></div>
 					</div>
-
-				<!-- Footer -->
-				<footer id="footer">
-					<div class="inner">
-						
-						<section>
-							<h2 class="follow-heading">Follow</h2>
-							<ul class="icons">
-								<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
+					<div class="built-with">
+					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
+					<div class="tech-stack"><span class="tech-chip">ArcGIS Pro</span><span class="tech-chip">Cartographic Design</span><span class="tech-chip">3D Visualization</span><span class="tech-chip">DEM Analysis</span><span class="tech-chip">Hillshade Rendering</span></div>
+				</div>
+				</div>
+			</div>
+			<footer id="footer">
+				<div class="inner">
+					<section>
+						<h2 class="follow-heading">Follow</h2>
+						<ul class="icons">
+							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
 							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-						</section>
-						<ul class="copyright">
-							<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
 						</ul>
-					</div>
-				</footer>
-
+					</section>
+					<ul class="copyright">
+						<p>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					</ul>
+				</div>
+			</footer>
 		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 	</body>
 </html>

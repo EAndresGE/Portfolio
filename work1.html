@@ -1,35 +1,21 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Public participation GIS</title>
+		<title>Public Participation GIS & Spatial Analysis | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		
 		<style>
-			#main {
-				text-align: center;
-			}
-	
-			#main .inner {
-				display: inline-block;
-				text-align: justify;
-			}
-					#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; }
-		
+			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+			#main { flex: 1; text-align: center; }
+			#main .inner { display: inline-block; text-align: left; width: 100%; }
 			html, body { background-color: #1b2030; color: #d8e0f0; }
 			#header { background-color: #1b2030; padding: 0; }
 			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 0.5em; }
+			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
 			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
@@ -37,78 +23,73 @@
 			a:hover { color: #5ba3f5; }
 			p, li { color: #8896b8; }
 			h1, h2, h3, h4 { color: #d8e0f0; }
-			.title { color: #d8e0f0; }
-			.button2 { border-color: #2d3855; color: #d8e0f0; }
 			#header ul.icons a { color: #8896b8; }
+			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
+			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
+			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
+			.outcome-card i { color: #2d7dd2; margin-right: 0.4em; }
+			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #8896b8; margin: 0; }
+			.project-image { width: 100%; border-radius: 8px; margin: 1em 0 1.5em; display: block; }
+			.built-with { margin-top: 2em; padding-top: 1.5em; border-top: 1px solid #2d3855; }
+			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
+			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
+			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #8896b8; text-transform: uppercase; }
 		</style>
-
 	</head>
 	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<a href="index.html">
-					<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px;">
-				  </a>
-				  
-				<!-- Header -->							  
-					<header id="header">
-						<div class="inner">
+		<div id="wrapper">
+			<a href="index.html">
+				<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
+			</a>
+			<header id="header">
+				<div class="inner">
+					<ul class="actions">
+						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-briefcase" style="margin-right:0.45em;"></i>Professional project</span></li>
+					</ul>
+				</div>
+			</header>
+			<div id="main">
+				<div class="inner">
 
-							<!--subtitle-->
-							<ul class="actions">
-								<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-briefcase" style="margin-right:0.45em;"></i>Professional project</span></li>
-							  </ul>
-							</header>
-					
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<h1>Spatial and Statistical Analysis using ArcGIS, R, and Public Participation GIS</h1>
-							<p><span class="image left"><img src="images/professional1.jpg" alt="" /></span>As a spatial analyst, I have had the opportunity to work on a range of professional projects that have helped me hone my technical and conceptual skills. One such project involved using ArcGIS desktop for spatial data analysis and R for statistical analysis to determine the conflict between social use areas and flying squirrel habitats.
-
-								The project was challenging, as it required a series of spatial data analysis tools to obtain the spatial relationship between the conflicting factors in three different municipalities. Spatial interpolation methods such as Getis-Ord and Kernel density were used, and the results were compared across multiple scales. The project also involved statistical methods such as phi coefficient and Bhattacharyya distance to verify the results.
-								
-								What made this project particularly unique was the use of public participation GIS (PPGIS) for data gathering. PPGIS involves engaging stakeholders in the data gathering process, providing valuable insights into the complex problems that arise when managing natural resources. In this case, the engagement of stakeholders helped provide critical data about the use of social areas, which were then analyzed using spatial tools to determine the spatial relationship between social areas and flying squirrel habitats.</p>
-							<p></p>
-							<p></p>
-							<p></p>
-							<p></p>
-							<p></p>
-								<p><span class="image left"><img src="images/preofessional2.jpg" alt="" /></span>Working on this project provided me with an opportunity to gain a deeper understanding of the capabilities of ArcGIS desktop and R software, and their ability to handle large datasets with ease. It also gave me the opportunity to work with PPGIS, an important approach that recognizes the importance of community engagement in decision-making processes.
-
-								The project has also provided me with a better understanding of spatial analysis tools and their ability to provide insights into complex problems. The skills and knowledge gained from this project have been invaluable and will enable me to effectively tackle complex spatial problems in future projects.
-								
-								Overall, working on this project has not only helped me improve my technical and conceptual skills but has also given me a better appreciation for the important role that community engagement plays in spatial data analysis. As a spatial analyst, I recognize the importance of working closely with stakeholders to gather critical data that can inform decision-making processes.</p>
-								<p>To learn more about this project visit LUKE's official project place by <a href="https://www.luke.fi/en/projects/flying-squirrel-life">clicking on this link</a>.</p>
-							</div>
+					<h1>Public Participation GIS & Spatial Analysis</h1>
+					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
+					<p>Determine the spatial conflict between social use areas and flying squirrel habitats across three municipalities in Finland. The analysis needed to quantify overlap at multiple scales and verify results statistically — a complex multi-method problem with real conservation implications.</p>
+					<img src="images/professional1.jpg" alt="Spatial analysis map - flying squirrel habitats Finland" class="project-image"/>
+					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
+					<p>Used ArcGIS Desktop for spatial data analysis — applying Getis-Ord hotspot analysis and Kernel Density Estimation to identify clustering patterns. R was used for statistical verification using phi coefficient and Bhattacharyya distance. Data was gathered through Public Participation GIS (PPGIS), engaging local stakeholders to map social use areas that would otherwise be invisible to conventional data collection.</p>
+					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
+					<div class="outcome-grid">
+						<div class="outcome-card"><p><i class="fas fa-map-marked-alt"></i> Spatial conflict mapped across 3 municipalities using hotspot and kernel density analysis</p></div>
+						<div class="outcome-card"><p><i class="fas fa-users"></i> PPGIS methodology engaged stakeholders to capture social land-use data at scale</p></div>
+						<div class="outcome-card"><p><i class="fas fa-chart-bar"></i> Statistical verification confirmed spatial findings using phi coefficient and Bhattacharyya distance</p></div>
 					</div>
-
-				<!-- Footer -->
-				<footer id="footer">
-					<div class="inner">
-						
-						<section>
-							<h2 class="follow-heading">Follow</h2>
-							<ul class="icons">
-								<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-						</section>
-						<ul class="copyright">
-							<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					<p>To learn more visit LUKE's official project page: <a href="https://www.luke.fi/en/projects/flying-squirrel-life">flying-squirrel-life</a>.</p>
+					<div class="built-with">
+					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
+					<div class="tech-stack"><span class="tech-chip">ArcGIS Desktop</span><span class="tech-chip">R</span><span class="tech-chip">PPGIS</span><span class="tech-chip">Getis-Ord</span><span class="tech-chip">Kernel Density</span><span class="tech-chip">Spatial Interpolation</span><span class="tech-chip">Statistical Analysis</span></div>
+				</div>
+				</div>
+			</div>
+			<footer id="footer">
+				<div class="inner">
+					<section>
+						<h2 class="follow-heading">Follow</h2>
+						<ul class="icons">
+							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
 						</ul>
-					</div>
-				</footer>
-
+					</section>
+					<ul class="copyright">
+						<p>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					</ul>
+				</div>
+			</footer>
 		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 	</body>
 </html>

@@ -1,34 +1,21 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Spatial and statistical analysis</title>
+		<title>Moose-Vehicle Collision Spatial Analysis | Andres Gordon</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-			#main {
-				text-align: center;
-			}
-	
-			#main .inner {
-				display: inline-block;
-				text-align: justify;
-			}
-					#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; }
-		
+			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+			#main { flex: 1; text-align: center; }
+			#main .inner { display: inline-block; text-align: left; width: 100%; }
 			html, body { background-color: #1b2030; color: #d8e0f0; }
 			#header { background-color: #1b2030; padding: 0; }
 			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 0.5em; }
+			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
 			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
@@ -36,70 +23,73 @@
 			a:hover { color: #5ba3f5; }
 			p, li { color: #8896b8; }
 			h1, h2, h3, h4 { color: #d8e0f0; }
-			.title { color: #d8e0f0; }
-			.button2 { border-color: #2d3855; color: #d8e0f0; }
 			#header ul.icons a { color: #8896b8; }
+			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
+			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
+			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
+			.outcome-card i { color: #2d7dd2; margin-right: 0.4em; }
+			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #8896b8; margin: 0; }
+			.project-image { width: 100%; border-radius: 8px; margin: 1em 0 1.5em; display: block; }
+			.built-with { margin-top: 2em; padding-top: 1.5em; border-top: 1px solid #2d3855; }
+			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
+			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
+			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #8896b8; text-transform: uppercase; }
 		</style>
 	</head>
 	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<a href="index.html">
-					<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px;">
-				  </a>
-				  
-				<!-- Header -->							  
-					<header id="header">
-						<div class="inner">
-
-							<!--subtitle-->
-							<ul class="actions">
-								<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-briefcase" style="margin-right:0.45em;"></i>Professional project</span></li>
-							  </ul>
-
-							</header>
-
-				<!-- Main -->
-				<div id="main">
-					<div class="inner">
-						<h1>Exploring Moose-Vehicle Collisions in Finland through Spatial Analysis</h1>
-						<span class="image main"><img src="images/mvc.jpg" alt="" /></span>
-						<p>As part of my professional portfolio, I undertook a project in collaboration with LUKE to investigate the increasing threat of ungulate-vehicle collisions, specifically collisions with moose in Nordic nations. The study focused on exploring the distribution of accidents on different roads and during different seasons, the effect of forest structure on moose-vehicle collisions (MVCs) recorded in two regions of Finland, and the various mitigation measures currently in place.
-						Utilizing finer spatial data resolution, I analyzed the distribution of 1123 collisions obtained from the registry of wildlife damages and accidents in North Karelia and Ostrobothnia, with 78% and 65% of these collisions occurring on highways, respectively. The results revealed that almost 53% of collisions in both regions took place during the hunting season.</p>
-						<p>In addition, the study tested the impact of 18 forest structure variables and the density of moose observations on all recorded MVCs. The findings showed that the density of moose observations and canopy cover were positively related to the variation of MVCs in both regions. The model of Ostrobothnia reported that the volume of spruce trees and deciduous trees is positively related, while the mean height of spruce trees is negatively related to the spatial variation of MVCs. In contrast, the model of North Karelia only indicated a positive relationship between the stem count of deciduous trees and collisions.
-						Based on the research outcomes, the study suggests that efforts to minimize the risk of MVCs require alternative technological advancements, such as using finer spatial data resolution to train systems to detect landscape features and better inform drivers through dynamic warning signs. These findings can serve as valuable insights for professionals, policymakers, and stakeholders involved in traffic safety and wildlife management.</p>
-						<p><strong>The successful completion of this professional project in collaboration with LUKE and the quality of the research conducted has enhanced my professional profile, demonstrating my competence and expertise in the field. It has also given me valuable experience in utilizing advanced technologies and data analysis techniques to develop effective solutions for reducing the risks of ungulate-vehicle collisions.</strong></p>
-						<p>If you are interested in reading the entire thesis, <a href="pdf/thesis.pdf">click on this link</a>.</p>
-
-
-					</div>
+		<div id="wrapper">
+			<a href="index.html">
+				<img src="images/logo.png" alt="Home" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
+			</a>
+			<header id="header">
+				<div class="inner">
+					<ul class="actions">
+						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-briefcase" style="margin-right:0.45em;"></i>Professional project</span></li>
+					</ul>
 				</div>
-				<!-- Footer -->
-				<footer id="footer">
-					<div class="inner">
-						
-						<section>
-							<h2 class="follow-heading">Follow</h2>
-							<ul class="icons">
-								<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-						</section>
-						<ul class="copyright">
-							<p>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
-						</ul>
+			</header>
+			<div id="main">
+				<div class="inner">
+
+					<h1>Moose-Vehicle Collision Spatial Analysis</h1>
+					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
+					<p>Ungulate-vehicle collisions are an increasing safety and ecological problem across Nordic nations. In collaboration with LUKE, this project investigated how forest structure influences the spatial distribution of moose-vehicle collisions across two distinct regions of Finland — Ostrobothnia and North Karelia.</p>
+					<img src="images/mvc.jpg" alt="Moose-vehicle collision distribution map Finland" class="project-image"/>
+					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
+					<p>Spatial analysis mapped accident distributions by road type and season. Regression modelling tested 18 forest structure variables — canopy cover, spruce and deciduous volumes, mean heights, and stem counts — against recorded collision densities. Models were built independently for each region to identify what drives the difference.</p>
+					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
+					<div class="outcome-grid">
+						<div class="outcome-card"><p><i class="fas fa-tree"></i> Canopy cover and moose observation density identified as primary predictors of collision spatial variation</p></div>
+						<div class="outcome-card"><p><i class="fas fa-map"></i> Regional differences quantified — spruce volume significant in Ostrobothnia, deciduous stems in North Karelia</p></div>
+						<div class="outcome-card"><p><i class="fas fa-graduation-cap"></i> Findings published as a thesis — available for review</p></div>
 					</div>
-				</footer>
-
+					<p>Read the complete thesis: <a href="pdf/thesis.pdf">download PDF</a>.</p>
+					<div class="built-with">
+					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
+					<div class="tech-stack"><span class="tech-chip">ArcGIS</span><span class="tech-chip">R</span><span class="tech-chip">Spatial Analysis</span><span class="tech-chip">Statistical Modelling</span><span class="tech-chip">Forest GIS</span><span class="tech-chip">Regression Analysis</span></div>
+				</div>
+				</div>
+			</div>
+			<footer id="footer">
+				<div class="inner">
+					<section>
+						<h2 class="follow-heading">Follow</h2>
+						<ul class="icons">
+							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+					</section>
+					<ul class="copyright">
+						<p>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></p>
+					</ul>
+				</div>
+			</footer>
 		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 	</body>
 </html>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- E: Circuit/node tree — branches as network graph, nodes at junctions -->
+  <defs>
+    <filter id="glowE"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowE2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="300" height="300" rx="20" fill="#0b1a0c"/>
+
+  <!-- Main trunk -->
+  <line x1="150" y1="195" x2="150" y2="38" stroke="#2ea855" stroke-width="3" opacity="0.9"/>
+
+  <!-- Branch level 1 — from y=80 -->
+  <line x1="150" y1="80" x2="90"  y2="55"  stroke="#2ea855" stroke-width="2.5" opacity="0.85"/>
+  <line x1="150" y1="80" x2="210" y2="55"  stroke="#2ea855" stroke-width="2.5" opacity="0.85"/>
+
+  <!-- Branch level 2 — from y=115 -->
+  <line x1="150" y1="115" x2="75"  y2="100" stroke="#4caf50" stroke-width="2" opacity="0.8"/>
+  <line x1="150" y1="115" x2="225" y2="100" stroke="#4caf50" stroke-width="2" opacity="0.8"/>
+  <!-- sub-branches from level 2 -->
+  <line x1="75"  y1="100" x2="48"  y2="80"  stroke="#4caf50" stroke-width="1.5" opacity="0.7"/>
+  <line x1="75"  y1="100" x2="88"  y2="75"  stroke="#4caf50" stroke-width="1.5" opacity="0.7"/>
+  <line x1="225" y1="100" x2="252" y2="80"  stroke="#4caf50" stroke-width="1.5" opacity="0.7"/>
+  <line x1="225" y1="100" x2="212" y2="75"  stroke="#4caf50" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Branch level 3 — from y=150 -->
+  <line x1="150" y1="150" x2="68"  y2="138" stroke="#388e3c" stroke-width="2" opacity="0.75"/>
+  <line x1="150" y1="150" x2="232" y2="138" stroke="#388e3c" stroke-width="2" opacity="0.75"/>
+  <!-- sub-branches level 3 -->
+  <line x1="68"  y1="138" x2="38"  y2="120" stroke="#388e3c" stroke-width="1.5" opacity="0.65"/>
+  <line x1="68"  y1="138" x2="58"  y2="112" stroke="#388e3c" stroke-width="1.5" opacity="0.65"/>
+  <line x1="232" y1="138" x2="262" y2="120" stroke="#388e3c" stroke-width="1.5" opacity="0.65"/>
+  <line x1="232" y1="138" x2="242" y2="112" stroke="#388e3c" stroke-width="1.5" opacity="0.65"/>
+
+  <!-- Nodes at junctions — glowing circles -->
+  <!-- Apex -->
+  <circle cx="150" cy="38"  r="7"   fill="#ff8f00" filter="url(#glowE2)"/>
+  <!-- Level 1 branch tips -->
+  <circle cx="90"  cy="55"  r="5.5" fill="#ffc107" filter="url(#glowE)"/>
+  <circle cx="210" cy="55"  r="5.5" fill="#ffc107" filter="url(#glowE)"/>
+  <!-- Level 1 junction -->
+  <circle cx="150" cy="80"  r="5"   fill="#cddc39" opacity="0.95"/>
+  <!-- Level 2 junctions -->
+  <circle cx="75"  cy="100" r="4.5" fill="#8bc34a" opacity="0.9"/>
+  <circle cx="225" cy="100" r="4.5" fill="#8bc34a" opacity="0.9"/>
+  <circle cx="150" cy="115" r="5"   fill="#66bb6a" opacity="0.95"/>
+  <!-- Level 2 sub tips -->
+  <circle cx="48"  cy="80"  r="3.5" fill="#4caf50" opacity="0.85"/>
+  <circle cx="88"  cy="75"  r="3.5" fill="#4caf50" opacity="0.85"/>
+  <circle cx="252" cy="80"  r="3.5" fill="#4caf50" opacity="0.85"/>
+  <circle cx="212" cy="75"  r="3.5" fill="#4caf50" opacity="0.85"/>
+  <!-- Level 3 junctions -->
+  <circle cx="68"  cy="138" r="4"   fill="#43a047" opacity="0.88"/>
+  <circle cx="232" cy="138" r="4"   fill="#43a047" opacity="0.88"/>
+  <circle cx="150" cy="150" r="5.5" fill="#388e3c" opacity="0.95"/>
+  <!-- Level 3 sub tips -->
+  <circle cx="38"  cy="120" r="3"   fill="#2e7d32" opacity="0.8"/>
+  <circle cx="58"  cy="112" r="3"   fill="#2e7d32" opacity="0.8"/>
+  <circle cx="262" cy="120" r="3"   fill="#2e7d32" opacity="0.8"/>
+  <circle cx="242" cy="112" r="3"   fill="#2e7d32" opacity="0.8"/>
+
+  <!-- Trunk base node -->
+  <circle cx="150" cy="195" r="6" fill="#1b5e20" opacity="0.9"/>
+
+  <!-- Ground roots -->
+  <line x1="150" y1="195" x2="110" y2="215" stroke="#1b5e20" stroke-width="2" opacity="0.6"/>
+  <line x1="150" y1="195" x2="190" y2="215" stroke="#1b5e20" stroke-width="2" opacity="0.6"/>
+  <line x1="150" y1="195" x2="150" y2="218" stroke="#1b5e20" stroke-width="2" opacity="0.6"/>
+  <circle cx="110" cy="215" r="3" fill="#1b5e20" opacity="0.7"/>
+  <circle cx="190" cy="215" r="3" fill="#1b5e20" opacity="0.7"/>
+  <circle cx="150" cy="218" r="3" fill="#1b5e20" opacity="0.7"/>
+
+  <!-- Wordmark -->
+  <text x="150" y="248" fill="#ffffff" font-size="25" font-weight="700" letter-spacing="1.5" text-anchor="middle">TreeForge</text>
+  <text x="150" y="267" fill="#4caf50" font-size="9" font-weight="600" letter-spacing="2.5" text-anchor="middle">FOREST INVENTORY · DRONE POINT CLOUD</text>
+
+  <rect x="1.5" y="1.5" width="297" height="297" rx="19" fill="none" stroke="#2e7d32" stroke-width="1" opacity="0.3"/>
+</svg>
