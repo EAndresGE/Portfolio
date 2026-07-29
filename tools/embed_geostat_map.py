@@ -29,8 +29,14 @@ TARGET = ROOT / "geo.html"
 OLD_KEY = "UuDqdYQZsiCZCO3rPNQt"
 NEW_KEY = "YvOMYo8YmDtoVsNSbaqF"
 
-IDS = ["map-wrap", "map", "panel", "p-head", "p-body", "stats", "loading",
-       "seg-surf", "tg-samples", "op-val", "op", "reset"]
+# source id -> new suffix. "map-wrap" maps to "wrap" so the wrapper element
+# ends up as exactly id="gm-wrap", which is what every scoped selector targets.
+# Mapping it to "map-wrap" produced id="gm-map-wrap" and silently detached all
+# 90 rules from the DOM: the page rendered as unstyled flowing text.
+IDS = {"map-wrap": "wrap", "map": "map", "panel": "panel", "p-head": "p-head",
+       "p-body": "p-body", "stats": "stats", "loading": "loading",
+       "seg-surf": "seg-surf", "tg-samples": "tg-samples", "op-val": "op-val",
+       "op": "op", "reset": "reset"}
 CLASSES = ["row"]          # the only genuine collision found
 WRAP = "gm-wrap"
 
@@ -40,14 +46,14 @@ NO_SCOPE = re.compile(r"^(html|body|\*|:root|#gm-wrap|\.maplibregl-)")
 
 def rename_ids(s):
     out = s
-    for i in IDS:
-        out = re.sub(r'getElementById\("' + re.escape(i) + r'"\)',
-                     f'getElementById("gm-{i}")', out)
-        out = re.sub(r'\bid="' + re.escape(i) + r'"', f'id="gm-{i}"', out)
-        out = re.sub(r'container:\s*"' + re.escape(i) + r'"',
-                     f'container: "gm-{i}"', out)
+    for src, dst in IDS.items():
+        out = re.sub(r'getElementById\("' + re.escape(src) + r'"\)',
+                     f'getElementById("gm-{dst}")', out)
+        out = re.sub(r'\bid="' + re.escape(src) + r'"', f'id="gm-{dst}"', out)
+        out = re.sub(r'container:\s*"' + re.escape(src) + r'"',
+                     f'container: "gm-{dst}"', out)
         # CSS selectors: #id followed by a non-identifier char
-        out = re.sub(r'#' + re.escape(i) + r'(?![\w-])', f'#gm-{i}', out)
+        out = re.sub(r'#' + re.escape(src) + r'(?![\w-])', f'#gm-{dst}', out)
     return out
 
 
@@ -143,8 +149,19 @@ def main():
               f"\t\t\t#{WRAP} p, #{WRAP} li, #{WRAP} h1, #{WRAP} h2, #{WRAP} h3 "
               f"{{ color: inherit; }}\n\t\t\t" + scoped)
 
+    # Every #gm-* selector must correspond to an id that actually exists in the
+    # markup. Without this check a mismatched wrapper id detaches the whole
+    # stylesheet and the page still "passes" a naive substring test.
+    have = set(re.findall(r'id="(gm-[\w-]+)"', body))
+    want = set(re.findall(r"#(gm-[\w-]+)", scoped))
+    orphans = want - have
+    if orphans:
+        raise SystemExit(f"CSS targets ids not present in the markup: {sorted(orphans)}\n"
+                         f"markup has: {sorted(have)}")
+    print(f"  id check         : {len(want)} selectors, all present in markup")
+
     t = TARGET.read_text(encoding="utf-8")
-    if "gm-wrap" in t:
+    if 'id="gm-wrap"' in t:
         raise SystemExit("geo.html already has the map; nothing done")
 
     # maplibre CSS
