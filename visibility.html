@@ -363,6 +363,21 @@
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
+		
+			/* Date / organisation / role, so coursework is never mistaken for
+			   paid work and vice versa. */
+			.project-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em 1.6em;
+				margin: 0.4em 0 1.6em;
+				padding-bottom: 1.2em;
+				border-bottom: 1px solid #2d3855;
+				font-size: 0.78em !important;
+				color: #b8c4dc !important;
+			}
+			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
+			.project-meta i { color: #7db8f0; font-size: 0.95em; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -382,6 +397,7 @@
 				<div class="inner">
 
 					<h1>Visibility Analysis of Wind Turbines</h1>
+					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>Spring 2020</span><span><i class="fas fa-building" aria-hidden="true"></i>University of Eastern Finland</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Advanced GIS coursework</span></p>
 					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
 					<p>A wind power company needed to evaluate the visual impact of proposed turbines across three sites in the Joensuu/Kontiolahti area — Ilvesvaara, Mustavaara, and Kolvananvaara. The task was to map exactly which surface locations would have line-of-sight to the turbine tops, critical information for environmental impact assessment.</p>
 					<!-- Interactive viewshed map -->

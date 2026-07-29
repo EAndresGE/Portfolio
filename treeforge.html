@@ -296,6 +296,38 @@
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
+		
+			/* Date / organisation / role, so coursework is never mistaken for
+			   paid work and vice versa. */
+			.project-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em 1.6em;
+				margin: 0.4em 0 1.6em;
+				padding-bottom: 1.2em;
+				border-bottom: 1px solid #2d3855;
+				font-size: 0.78em !important;
+				color: #b8c4dc !important;
+			}
+			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
+			.project-meta i { color: #7db8f0; font-size: 0.95em; }
+		
+			.gh-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5em;
+				background: #1a2a1c;
+				border: 1.5px solid #2ea855;
+				border-radius: 6px;
+				padding: 0.45em 1em;
+				font-size: 0.8em;
+				font-weight: 700;
+				color: #2ea855 !important;
+				letter-spacing: 0.04em;
+				text-decoration: none;
+				margin: 0.5em 0 1.5em;
+			}
+			.gh-link:hover { background: #2ea855; color: #fff !important; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -319,11 +351,13 @@
 				<div class="inner">
 
 					<h1>TreeForge</h1>
+					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>2026</span><span><i class="fas fa-building" aria-hidden="true"></i>Personal project</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Sole author · published on GitHub</span></p>
 					<p style="font-size:1.05em; color:#d8e0f0; line-height:1.7;">
 						A Python CLI toolkit that takes drone-acquired point clouds and produces a complete forest inventory — Digital Surface Model, Digital Terrain Model, Canopy Height Model, individual tree crown polygons, treetop locations, and a two-page PDF report — all from a single command. No GIS software required.
 					</p>
 
 					<div class="state-badge"><i class="fas fa-flask"></i> Working prototype — tested on real datasets, not yet field-validated</div>
+					<a href="https://github.com/EAndresGE/treeforge" target="_blank" rel="noopener" class="gh-link"><i class="fab fa-github" aria-hidden="true"></i> View source on GitHub</a>
 
 					<!-- Pipeline flow -->
 					<p class="section-label"><i class="fas fa-project-diagram" style="margin-right:0.4em;"></i>Processing pipeline</p>

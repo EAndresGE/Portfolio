@@ -90,6 +90,21 @@
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
+		
+			/* Date / organisation / role, so coursework is never mistaken for
+			   paid work and vice versa. */
+			.project-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em 1.6em;
+				margin: 0.4em 0 1.6em;
+				padding-bottom: 1.2em;
+				border-bottom: 1px solid #2d3855;
+				font-size: 0.78em !important;
+				color: #b8c4dc !important;
+			}
+			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
+			.project-meta i { color: #7db8f0; font-size: 0.95em; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -109,6 +124,7 @@
 				<div class="inner">
 
 					<h1>Public Participation GIS & Spatial Analysis</h1>
+					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>August 2021 – February 2022</span><span><i class="fas fa-building" aria-hidden="true"></i>Luonnonvarakeskus (LUKE)</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Research Assistant, GIS Specialist</span></p>
 					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
 					<p>Determine the spatial conflict between social use areas and flying squirrel habitats across three municipalities in Finland. The analysis needed to quantify overlap at multiple scales and verify results statistically — a complex multi-method problem with real conservation implications.</p>
 					<img src="images/professional1.jpg" alt="Spatial analysis map - flying squirrel habitats Finland" class="project-image"/>

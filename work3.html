@@ -90,6 +90,21 @@
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
+		
+			/* Date / organisation / role, so coursework is never mistaken for
+			   paid work and vice versa. */
+			.project-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em 1.6em;
+				margin: 0.4em 0 1.6em;
+				padding-bottom: 1.2em;
+				border-bottom: 1px solid #2d3855;
+				font-size: 0.78em !important;
+				color: #b8c4dc !important;
+			}
+			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
+			.project-meta i { color: #7db8f0; font-size: 0.95em; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -109,6 +124,7 @@
 				<div class="inner">
 
 					<h1>FME Data Integration at Sharper Shape</h1>
+					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>October 2022 – present</span><span><i class="fas fa-building" aria-hidden="true"></i>Sharper Shape Group</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Geospatial Data Engineer</span></p>
 					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
 					<p>Leading QA of vector delivery and LiDAR classification tiles at Sharper Shape required processing large, heterogeneous geospatial datasets under time pressure. Manual workflows were slow, error-prone, and difficult to audit — a bottleneck in a fast-paced production environment.</p>
 					<img src="images/fme.jpg" alt="FME workflow data integration Sharper Shape" class="project-image"/>
