@@ -183,6 +183,14 @@
 			color: #d8e0f0 !important;
 		  }
 		  .filter-chip .chip-icon { font-size: 0.9em; }
+		  .filter-count {
+			text-align: center;
+			font-size: 0.75em;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #b8c4dc;
+			margin: -1em 0 1.4em;
+		  }
 		  /* Hover */
 		  .filter-chip[data-filter="all"]:hover          { background: #1a2030; border-color: #4a5980; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
 		  .filter-chip[data-filter="professional"]:hover  { background: #2d7dd2; border-color: #2d7dd2; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(45,125,210,0.45); }
@@ -246,20 +254,21 @@
 					<div class="projects-header">
 						<h1 class="section-title">Past projects</h1>
 					</div>
-					<div class="filter-bar">
-						<button class="filter-chip active" data-filter="all">
-							<i class="fas fa-border-all chip-icon"></i> All
+					<div class="filter-bar" role="group" aria-label="Filter projects by type">
+						<button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">
+							<i class="fas fa-border-all chip-icon" aria-hidden="true"></i> All
 						</button>
-						<button class="filter-chip" data-filter="professional">
-							<i class="fas fa-briefcase chip-icon"></i> Professional
+						<button type="button" class="filter-chip" data-filter="professional" aria-pressed="false">
+							<i class="fas fa-briefcase chip-icon" aria-hidden="true"></i> Professional
 						</button>
-						<button class="filter-chip" data-filter="academic">
-							<i class="fas fa-graduation-cap chip-icon"></i> Academic
+						<button type="button" class="filter-chip" data-filter="academic" aria-pressed="false">
+							<i class="fas fa-graduation-cap chip-icon" aria-hidden="true"></i> Academic
 						</button>
-						<button class="filter-chip" data-filter="personal">
-							<i class="fas fa-palette chip-icon"></i> Personal
+						<button type="button" class="filter-chip" data-filter="personal" aria-pressed="false">
+							<i class="fas fa-palette chip-icon" aria-hidden="true"></i> Personal
 						</button>
 					</div>
+					<p class="filter-count" id="filter-count" role="status" aria-live="polite"></p>
 							<section class="tiles">
 								<article class="style5" data-category="professional">
 									<span class="image">
@@ -268,7 +277,7 @@
 									<a href="geoqc.html">
 										<h2>GeoQC Flow</h2>
 										<div class="content">
-											<p>Automated GIS pipeline quality control & reporting tool</p>
+											<p>Python CLI that automates QA across multi-step FileGDB pipelines</p>
 										</div>
 									</a>
 								</article>
@@ -279,7 +288,7 @@
 									<a href="treeforge.html">
 										<h2>TreeForge</h2>
 										<div class="content">
-											<p>Drone point cloud to forest inventory — one command</p>
+											<p>Drone point cloud to a full forest inventory in one command</p>
 										</div>
 									</a>
 								</article>
@@ -290,7 +299,7 @@
 									<a href="powerornah.html">
 										<h2>Power or Nah</h2>
 										<div class="content">
-											<p>M5StickC IoT device — live electricity price at a glance</p>
+											<p>M5StickC device showing the live electricity price at a glance</p>
 										</div>
 									</a>
 								</article>
@@ -299,9 +308,9 @@
 										<img src="images/Quito_paper_cut.jpg" alt="Paper cut cartography of Quito" loading="lazy" decoding="async" />
 									</span>
 									<a href="pp1.html">
-										<h2>Paper cut cartography</h2>
+										<h2>Paper-Cut Cartography of Quito</h2>
 										<div class="content">
-											<p>Personal cartography project</p>
+											<p>Andean topography at 2,850 m as a layered paper-cut map</p>
 										</div>
 									</a>
 								</article>
@@ -310,9 +319,9 @@
 										<img src="images/fme.jpg" alt="FME data integration" loading="lazy" decoding="async" />
 									</span>
 									<a href="work3.html">
-										<h2>FME data integration</h2>
+										<h2>FME Data Integration</h2>
 										<div class="content">
-											<p>Maximizing GIS Workflow Efficiency</p>
+											<p>Automating QA of vector deliveries and LiDAR tiles at Sharper Shape</p>
 										</div>
 									</a>
 								</article>
@@ -321,9 +330,9 @@
 										<img src="images/mvc.jpg" alt="Moose-Vehicle Collisions spatial analysis" loading="lazy" decoding="async" />
 									</span>
 									<a href="work2.html">
-										<h2>Spatial and statistical analysis</h2>
+										<h2>Moose-Vehicle Collision Analysis</h2>
 										<div class="content">
-											<p>Exploring Moose-Vehicle Collisions in Finland through Spatial Analysis</p>
+											<p>18 forest structure variables regressed against collision density</p>
 										</div>
 									</a>
 								</article>
@@ -334,7 +343,7 @@
 									<a href="work1.html">
 										<h2>Public Participation GIS</h2>
 										<div class="content">
-											<p>Conflicts between nature and social gathering spots</p>
+											<p>Social use areas against flying squirrel habitat, three municipalities</p>
 										</div>
 									</a>
 								</article>
@@ -343,9 +352,9 @@
 										<img src="images/r3.png" alt="GIS database administration" loading="lazy" decoding="async" />
 									</span>
 									<a href="work4.html">
-										<h2>GIS database administrator</h2>
+										<h2>GIS Database Administration</h2>
 										<div class="content">
-											<p>Ensuring the accuracy, integrity, and security of the data stored in the geodatabase</p>
+											<p>Pasture digitisation and water sampling site selection for LUKE</p>
 										</div>
 									</a>
 								</article>
@@ -354,9 +363,9 @@
 										<img src="images/visibility.jpg" alt="Visibility analysis" loading="lazy" decoding="async" />
 									</span>
 									<a href="visibility.html">
-										<h2>Visibility analysis</h2>
+										<h2>Wind Turbine Visibility Analysis</h2>
 										<div class="content">
-											<p>Determining the areas that can be seen from a particular location.</p>
+											<p>Interactive viewshed map of three proposed sites near Joensuu</p>
 										</div>
 									</a>
 								</article>
@@ -365,9 +374,9 @@
 										<img src="images/risk.jpg" alt="Avalanche risk modelling" loading="lazy" decoding="async" />
 									</span>
 									<a href="risk.html">
-										<h2>Risk modelling</h2>
+										<h2>Avalanche Risk Modelling</h2>
 										<div class="content">
-											<p>Evaluating potential risk</p>
+											<p>Interactive map ranking Valais settlements by avalanche risk</p>
 										</div>
 									</a>
 								</article>
@@ -376,9 +385,9 @@
 										<img src="images/batch.jpg" alt="Multicriteria Decision Analysis" loading="lazy" decoding="async" />
 									</span>
 									<a href="MCDA.html">
-										<h2>Multicriteria Decision Analysis</h2>
+										<h2>Multi-Criteria Site Selection</h2>
 										<div class="content">
-											<p>ArcGis Pro and model builder</p>
+											<p>Siting a biathlon high school against four competing criteria</p>
 										</div>
 									</a>
 								</article>
@@ -387,9 +396,9 @@
 										<img src="images/pre.jpg" alt="Geostatistics" loading="lazy" decoding="async" />
 									</span>
 									<a href="geo.html">
-										<h2>Geostatistics</h2>
+										<h2>Geostatistical Interpolation</h2>
 										<div class="content">
-											<p>The use of interpolation methods</p>
+											<p>Kriging and IDW compared for precipitation and air quality</p>
 										</div>
 									</a>
 								</article>
@@ -398,9 +407,9 @@
 										<img src="images/batch.jpg" alt="Programming and batch processing" loading="lazy" decoding="async" />
 									</span>
 									<a href="batch.html">
-										<h2>Programming and batch processing</h2>
+										<h2>Batch Processing Forest Data</h2>
 										<div class="content">
-											<p>Improving Open Forest Data for Forest Management</p>
+											<p>Python and R over a 16 x 16 m open forest inventory grid</p>
 										</div>
 									</a>
 								</article>
@@ -409,9 +418,9 @@
 										<img src="images/pro.png" alt="Network analysis" loading="lazy" decoding="async" />
 									</span>
 									<a href="network.html">
-										<h2>Network analysis</h2>
+										<h2>Light Rail Accessibility</h2>
 										<div class="content">
-											<p>Evaluating the accessibility of the proposed stops along the Stage 1 ACT light rail system</p>
+											<p>Walking and driving service areas for every proposed stop, Canberra</p>
 										</div>
 									</a>
 								</article>
@@ -420,9 +429,9 @@
 										<img src="images/remote.jpg" alt="Remote sensing" loading="lazy" decoding="async" />
 									</span>
 									<a href="remote.html">
-										<h2>Remote sensing</h2>
+										<h2>Remote Sensing and Fire Impact</h2>
 										<div class="content">
-											<p>Analyzing Landscape Conditions and Fire Impacts in Australia using Remote Sensing and MATLAB</p>
+											<p>Before and after bushfire analysis in MATLAB, south-west Australia</p>
 										</div>
 									</a>
 								</article>
@@ -463,24 +472,59 @@
 
 		<script>
 			(function () {
-				var chips = document.querySelectorAll('.filter-chip');
-				var tiles = document.querySelectorAll('.tiles article');
+				var chips = Array.prototype.slice.call(document.querySelectorAll('.filter-chip'));
+				var tiles = Array.prototype.slice.call(document.querySelectorAll('.tiles article'));
+				var count = document.getElementById('filter-count');
+				var VALID = chips.map(function (c) { return c.getAttribute('data-filter'); });
+
+				function apply(filter, updateHash) {
+					if (VALID.indexOf(filter) === -1) { filter = 'all'; }
+
+					chips.forEach(function (c) {
+						var on = c.getAttribute('data-filter') === filter;
+						c.classList.toggle('active', on);
+						c.setAttribute('aria-pressed', on ? 'true' : 'false');
+					});
+
+					var shown = 0;
+					tiles.forEach(function (tile) {
+						var match = filter === 'all' || tile.getAttribute('data-category') === filter;
+						tile.classList.toggle('hidden', !match);
+						if (match) { shown++; }
+					});
+
+					if (count) {
+						count.textContent = filter === 'all'
+							? shown + ' projects'
+							: shown + ' of ' + tiles.length + ' projects';
+					}
+
+					// replaceState, not pushState: filtering is not a navigation
+					// step, so it should not fill the back button with clicks.
+					if (updateHash) {
+						var hash = filter === 'all' ? ' ' : '#' + filter;
+						if (history.replaceState) {
+							history.replaceState(null, '',
+								filter === 'all' ? location.pathname + location.search : hash);
+						} else if (filter !== 'all') {
+							location.hash = filter;
+						}
+					}
+				}
 
 				chips.forEach(function (chip) {
 					chip.addEventListener('click', function () {
-						var filter = this.getAttribute('data-filter');
-						chips.forEach(function (c) { c.classList.remove('active'); });
-						this.classList.add('active');
-
-						tiles.forEach(function (tile) {
-							if (filter === 'all' || tile.getAttribute('data-category') === filter) {
-								tile.classList.remove('hidden');
-							} else {
-								tile.classList.add('hidden');
-							}
-						});
+						apply(this.getAttribute('data-filter'), true);
 					});
 				});
+
+				// Back/forward and hand-edited URLs.
+				window.addEventListener('hashchange', function () {
+					apply((location.hash || '').replace(/^#/, ''), false);
+				});
+
+				// Honour a deep link such as index.html#professional on load.
+				apply((location.hash || '').replace(/^#/, ''), false);
 			})();
 		</script>
 
