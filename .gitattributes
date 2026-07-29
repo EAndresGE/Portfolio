@@ -1,0 +1,27 @@
+# Normalise line endings so diffs show real changes only.
+# Without this, core.autocrlf=true made whole files appear rewritten whenever
+# an editor or script saved with LF instead of CRLF.
+* text=auto eol=lf
+
+# Never touch binary assets.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.tif  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+
+# Minified/vendored files: keep them out of diffs and language stats.
+assets/js/jquery.min.js      linguist-vendored
+assets/js/browser.min.js     linguist-vendored
+assets/js/breakpoints.min.js linguist-vendored
+assets/css/fontawesome-all.min.css linguist-vendored
+
+# Map data payloads are generated, not hand-edited.
+maps/**/*_data.js -diff linguist-generated
