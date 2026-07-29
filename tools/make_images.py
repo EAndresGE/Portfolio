@@ -52,7 +52,7 @@ PAGES = [
 
     ("visibility", "Wind Turbine Visibility Analysis", "Viewshed modelling, Joensuu", "academic", "visibility.jpg"),
     ("risk", "Avalanche Risk Modelling", "Valais canton, Switzerland", "academic", "risk.jpg"),
-    ("MCDA", "Multi-Criteria Site Selection", "Weighted overlay in Model Builder", "academic", "batch.jpg"),
+    ("MCDA", "Multi-Criteria Site Selection", "Siting a biathlon high school, Joensuu", "academic", "mcda.png"),
     ("geo", "Geostatistical Interpolation", "Kriging and IDW compared", "academic", "pre.jpg"),
     ("batch", "Batch Processing Forest Data", "Python and R over open inventory", "academic", "batch.jpg"),
     ("network", "Light Rail Accessibility", "Network analysis, Canberra", "academic", "pro.png"),
