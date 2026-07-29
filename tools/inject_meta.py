@@ -143,7 +143,38 @@ def block(slug, title, og_type, desc, alt):
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
 		<meta name="theme-color" content="#1b2030" />
-		{END}"""
+{JSONLD if slug == "index" else ""}		{END}"""
+
+
+# Structured data, index only. Every field is already stated on the site:
+# job title and employer from work.html, degrees from education.html, skills
+# from academic.html. Nothing here is invented.
+JSONLD = """
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Person",
+		  "name": "Andres Gordon",
+		  "jobTitle": "Geospatial Data Engineer",
+		  "worksFor": { "@type": "Organization", "name": "Sharper Shape Group" },
+		  "url": "%(BASE)s/",
+		  "image": "%(BASE)s/images/og/index.jpg",
+		  "sameAs": [
+		    "https://github.com/EAndresGE",
+		    "https://www.linkedin.com/in/andresgordon/"
+		  ],
+		  "alumniOf": [
+		    { "@type": "CollegeOrUniversity", "name": "University of Eastern Finland" },
+		    { "@type": "CollegeOrUniversity", "name": "Australian National University" }
+		  ],
+		  "knowsAbout": [
+		    "Geographic Information Systems", "Spatial analysis", "FME",
+		    "Python", "ArcGIS Pro", "QGIS", "Remote sensing", "LiDAR",
+		    "Geospatial data engineering"
+		  ]
+		}
+		</script>
+""" % {"BASE": BASE}
 
 
 def fix(path):

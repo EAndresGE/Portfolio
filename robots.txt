@@ -1,0 +1,8 @@
+# This site is a GitHub project page served under /Portfolio/.
+# robots.txt is only honoured at the origin root, so this file is INERT until
+# the site moves to a custom domain or a user page. Until then, submit
+# sitemap.xml directly in Google Search Console.
+User-agent: *
+Allow: /
+
+Sitemap: https://eandresge.github.io/Portfolio/sitemap.xml
