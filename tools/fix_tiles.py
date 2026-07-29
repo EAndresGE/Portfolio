@@ -56,7 +56,7 @@ TILES = {
         "Siting a biathlon high school against four competing criteria"),
     "geo.html": (
         "Geostatistical Interpolation",
-        "Kriging and IDW compared for precipitation and air quality"),
+        "Interactive map comparing Kriging and IDW against the source grid"),
     "batch.html": (
         "Batch Processing Forest Data",
         "Python and R over a 16 x 16 m open forest inventory grid"),

@@ -89,8 +89,8 @@ PAGES = {
              "four competing spatial criteria in ArcGIS Pro Model Builder.",
              "Multi-criteria decision analysis site selection"),
     "geo": ("article",
-            "Geostatistical interpolation of Finnish precipitation and European air pollutant "
-            "data, comparing Kriging and IDW against a reference raster surface.",
+            "Interactive map of September 2012 Finnish precipitation: Ordinary Kriging "
+            "reaches RMSE 1.9 mm against the source grid where IDW reaches 5.1 mm.",
             "Geostatistical interpolation surfaces"),
     "batch": ("article",
               "Batch processing Finnish Forest Centre open inventory data in Python and R, "
