@@ -60,12 +60,29 @@
 			}
 		
 			/* ===== Interactive geostatistics map (MapLibre GL) ===== */
-			#gm-wrap { position: relative; width: 100%; height: 620px; margin: 1em 0 0.8em; border-radius: 8px; overflow: hidden; border: 1px solid #2d3855; background: #fff; }
-			@media (max-width: 980px) { #gm-wrap { height: 560px; } }
-			@media (max-width: 640px) { #gm-wrap { height: 470px; } }
+			#gm-wrap { position: relative; width: 100%; height: 820px; margin: 1em 0 0.8em; border-radius: 8px; overflow: hidden; border: 1px solid #2d3855; background: #fff; }
+			@media (max-width: 1200px) { #gm-wrap { height: 740px; } }
+			@media (max-width: 980px) { #gm-wrap { height: 640px; } }
+			@media (max-width: 640px) { #gm-wrap { height: 520px; } }
 			/* This map has light furniture; the site's dark text rules must not
 			   bleed into the white panel. */
 			#gm-wrap p, #gm-wrap li, #gm-wrap h1, #gm-wrap h2, #gm-wrap h3 { color: inherit; }
+			/* Neutralise the template's element-level styles inside the map. */
+			#gm-wrap button { appearance: none; background: transparent; border: 0;
+				border-radius: 0; box-shadow: none; color: inherit !important; cursor: pointer;
+				display: inline-block; font-family: inherit; font-size: inherit;
+				font-weight: inherit; height: auto; letter-spacing: normal;
+				line-height: normal; overflow: visible; padding: 0; text-align: center;
+				text-decoration: none; text-overflow: clip; text-transform: none;
+				white-space: normal; }
+			#gm-wrap label { display: inline; font-size: inherit; font-weight: inherit; margin: 0; }
+			#gm-wrap table { border-collapse: collapse; border-spacing: 0; }
+			#gm-wrap table tbody tr { border: 0; }
+			#gm-wrap table th, #gm-wrap table td { padding: 0; font-size: inherit;
+				font-weight: inherit; text-align: inherit; border: 0; }
+			#gm-wrap dl { margin: 0; }
+			#gm-wrap dl dt { display: block; font-weight: inherit; margin: 0; }
+			#gm-wrap dl dd { margin-left: 0; }
 			#gm-wrap { --page: #1b2030; --frame: #2d3855; --accent: #2d7dd2; --card: #ffffff; --card-2: #f4f6fa; --line: #dbe1ec; --line-2: #c4cddc; --ink: #223047; --ink-2: #5c6b83; --ink-3: #8b98ad; --font: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --mono: ui-monospace, "Cascadia Code", Consolas, monospace; }
 			#gm-wrap * { box-sizing: border-box; }
 			#gm-wrap { position: relative; width: 100%; height: 100%; min-height: 480px; border-radius: 8px; overflow: hidden; border: 1px solid var(--frame); background: #fff; font-family: var(--font); }
@@ -149,6 +166,13 @@
 			#gm-wrap .stats div { flex: 1; padding: 0.4em 0.25em; }
 			#gm-wrap { border-radius: 0; border: none; }
 }
+			/* Only !important beats !important, and the reset above needed it to
+			   defeat the template. */
+			#gm-wrap .seg button { color: var(--ink-2) !important; }
+			#gm-wrap .seg button.on { color: #ffffff !important; }
+			#gm-wrap .btn { color: var(--ink-2) !important; }
+			#gm-wrap .btn:hover { color: var(--accent) !important; }
+			
 		
 			.gm-caption { font-size: 0.72em; color: #b8c4dc; line-height: 1.5; margin: 0 0 1.5em; display: block; }
 			.gm-caption i { color: #2d7dd2; margin-right: 0.4em; }

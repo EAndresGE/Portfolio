@@ -138,12 +138,48 @@ def main():
     body = body.replace("<h1>", "<h2>").replace("</h1>", "</h2>")
     css = css.replace(".gm-p-head h1", ".gm-p-head h2").replace(".p-head h1", ".p-head h2")
 
+    # Phantom styles bare button/label/table/dl globally. The button rule is the
+    # damaging one: color:#ffffff !important made the IDW and Diff labels white
+    # on white, plus text-transform:uppercase, letter-spacing:0.35em,
+    # height:3.5em and overflow:hidden clipped them. Reset first, then re-assert
+    # the map's own button colours with !important, since only !important can
+    # beat !important.
+    reset = f"""/* Neutralise the template's element-level styles inside the map. */
+			#{WRAP} button {{ appearance: none; background: transparent; border: 0;
+				border-radius: 0; box-shadow: none; color: inherit !important; cursor: pointer;
+				display: inline-block; font-family: inherit; font-size: inherit;
+				font-weight: inherit; height: auto; letter-spacing: normal;
+				line-height: normal; overflow: visible; padding: 0; text-align: center;
+				text-decoration: none; text-overflow: clip; text-transform: none;
+				white-space: normal; }}
+			#{WRAP} label {{ display: inline; font-size: inherit; font-weight: inherit; margin: 0; }}
+			#{WRAP} table {{ border-collapse: collapse; border-spacing: 0; }}
+			#{WRAP} table tbody tr {{ border: 0; }}
+			#{WRAP} table th, #{WRAP} table td {{ padding: 0; font-size: inherit;
+				font-weight: inherit; text-align: inherit; border: 0; }}
+			#{WRAP} dl {{ margin: 0; }}
+			#{WRAP} dl dt {{ display: block; font-weight: inherit; margin: 0; }}
+			#{WRAP} dl dd {{ margin-left: 0; }}
+			"""
+
+    # Re-assert button colours over the reset's own !important.
+    override = f"""
+			/* Only !important beats !important, and the reset above needed it to
+			   defeat the template. */
+			#{WRAP} .seg button {{ color: var(--ink-2) !important; }}
+			#{WRAP} .seg button.on {{ color: #ffffff !important; }}
+			#{WRAP} .btn {{ color: var(--ink-2) !important; }}
+			#{WRAP} .btn:hover {{ color: var(--accent) !important; }}
+			"""
+
     scoped = scope_css(css)
-    scoped = (f"#{WRAP} {{ position: relative; width: 100%; height: 620px; "
+    scoped = reset + scoped + override
+    scoped = (f"#{WRAP} {{ position: relative; width: 100%; height: 820px; "
               f"margin: 1em 0 0.8em; border-radius: 8px; overflow: hidden; "
               f"border: 1px solid #2d3855; background: #fff; }}\n"
-              f"\t\t\t@media (max-width: 980px) {{ #{WRAP} {{ height: 560px; }} }}\n"
-              f"\t\t\t@media (max-width: 640px) {{ #{WRAP} {{ height: 470px; }} }}\n"
+              f"\t\t\t@media (max-width: 1200px) {{ #{WRAP} {{ height: 740px; }} }}\n"
+              f"\t\t\t@media (max-width: 980px) {{ #{WRAP} {{ height: 640px; }} }}\n"
+              f"\t\t\t@media (max-width: 640px) {{ #{WRAP} {{ height: 520px; }} }}\n"
               f"\t\t\t/* This map has light furniture; the site's dark text rules must not\n"
               f"\t\t\t   bleed into the white panel. */\n"
               f"\t\t\t#{WRAP} p, #{WRAP} li, #{WRAP} h1, #{WRAP} h2, #{WRAP} h3 "
