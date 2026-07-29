@@ -36,3 +36,12 @@ p, li { color: #d8e0f0; }
 #footer > .inner .copyright,
 #footer > .inner .copyright li { color: #b8c4dc; }
 #footer > .inner .copyright a { color: #7db8f0; }
+
+/* The copyright list marker. Phase 1 replaced an invalid <p> inside
+ * <ul class="copyright"> with <li>, which is correct HTML. But every
+ * list-style:none rule in main.css is scoped to "#footer > .inner .copyright",
+ * and index.html uses <div class="foot"> rather than <footer id="footer">, so
+ * none of them matched and a bullet appeared. Unscoped here so it applies to
+ * both footer structures. */
+.copyright { list-style: none; padding-left: 0; margin-left: 0; }
+.copyright li { list-style: none; }

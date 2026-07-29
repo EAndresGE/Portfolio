@@ -44,14 +44,14 @@ d = ImageDraw.Draw(im)
 pad = 90
 d.rectangle([pad, pad, pad + 80, pad + 8], fill=TEAL)
 
-d.text((pad, pad + 40), "Multi-Criteria Site Selection", font=f(F_B, 62), fill=TEXT)
-d.text((pad, pad + 122), "Finding a site for a biathlon high school, Joensuu",
-       font=f(F_R, 32), fill=MUTED)
+d.text((pad, pad + 34), "FOUR COMPETING CRITERIA", font=f(F_B, 34), fill=TEAL_HI)
 
-# Four criteria rows.
-top = pad + 210
-row_h = 132
-gap = 18
+# Four criteria rows. No project title here: the homepage tile overlays its own
+# label and MCDA.html has an <h1> directly above, so a baked-in title showed up
+# twice on top of itself.
+top = pad + 110
+row_h = 158
+gap = 22
 badge_w = 128
 
 for i, (direction, name, detail) in enumerate(CRITERIA):
@@ -70,8 +70,8 @@ for i, (direction, name, detail) in enumerate(CRITERIA):
     d.text((bx + (badge_w - tw) / 2, by + 9), direction, font=fb, fill=TEAL_HI)
 
     tx = bx + badge_w + 42
-    d.text((tx, y + 34), name, font=f(F_B, 36), fill=TEXT)
-    d.text((tx, y + 82), detail, font=f(F_R, 26), fill=MUTED)
+    d.text((tx, y + 44), name, font=f(F_B, 42), fill=TEXT)
+    d.text((tx, y + 100), detail, font=f(F_R, 29), fill=MUTED)
 
     # Criterion number, right aligned.
     fn = f(F_B, 44)
