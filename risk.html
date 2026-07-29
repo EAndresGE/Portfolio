@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+		<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
 			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
@@ -34,6 +35,303 @@
 			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
 			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
 			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #8896b8; text-transform: uppercase; }
+
+			/* ============================================================
+			   Interactive avalanche risk map (MapLibre GL)
+			   Every class is namespaced av- and every element-level rule is
+			   scoped to #av-wrap. Phantom's main.css owns .row (the grid),
+			   .off, label, button and dl/dt/dd globally, so anything left
+			   unscoped here gets overwritten by the template.
+			   The legend stays light on purpose so the canton reads loudest.
+			   ============================================================ */
+			#av-wrap {
+				--av-frame:  #2d3855;
+				--av-accent: #2d7dd2;
+				--av-card-2: #f4f6fa;
+				--av-line:   #dbe1ec;
+				--av-line-2: #c4cddc;
+				--av-ink:    #223047;
+				--av-ink-2:  #5c6b83;
+				--av-ink-3:  #8b98ad;
+				--av-risk:   #8c1c13;
+				--av-dot:    #d92626;
+				--av-font: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+				position: relative;
+				width: 100%;
+				height: 620px;
+				margin: 1em 0 0.8em;
+				border-radius: 8px;
+				overflow: hidden;
+				border: 1px solid var(--av-frame);
+				background: #fff;
+				font-family: var(--av-font);
+			}
+			#av-wrap *, #av-wrap *::before, #av-wrap *::after { box-sizing: border-box; }
+			#av-map { position: absolute; inset: 0; }
+			#av-map canvas { outline: none; }
+
+			/* Undo Phantom's global form styling inside the map only. */
+			#av-wrap label { display: block; margin: 0; font-size: inherit; font-weight: 400; }
+			#av-wrap button {
+				height: auto; line-height: normal; letter-spacing: normal;
+				overflow: visible; box-shadow: none; text-transform: none;
+				font-weight: 400;
+			}
+
+			/* ---------------- legend card ---------------- */
+			.av-panel {
+				position: absolute;
+				top: 12px; left: 12px;
+				width: 274px;
+				max-height: calc(100% - 24px);
+				display: flex; flex-direction: column;
+				background: rgba(255, 255, 255, 0.96);
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+				border: 1px solid var(--av-line-2);
+				border-top: 3px solid var(--av-accent);
+				border-radius: 8px;
+				box-shadow: 0 6px 24px rgba(24, 34, 54, 0.22);
+				color: var(--av-ink);
+				z-index: 2;
+				overflow: hidden;
+			}
+			.av-panel-head {
+				display: flex; align-items: center; gap: 0.55em;
+				padding: 0.8em 0.95em;
+				cursor: pointer; user-select: none;
+			}
+			.av-panel-head h2 {
+				margin: 0; flex: 1;
+				font-size: 0.75rem; font-weight: 700;
+				letter-spacing: 0.09em; text-transform: uppercase;
+				line-height: 1.35; color: var(--av-ink);
+			}
+			.av-panel-head .av-chev { color: var(--av-ink-3); font-size: 0.68rem; transition: transform 0.2s; }
+			.av-panel.av-collapsed .av-chev { transform: rotate(-90deg); }
+			.av-panel.av-collapsed .av-panel-body { display: none; }
+
+			.av-panel-body { overflow-y: auto; padding: 0 0.95em 0.95em; }
+			.av-panel-body::-webkit-scrollbar { width: 8px; }
+			.av-panel-body::-webkit-scrollbar-thumb { background: var(--av-line-2); border-radius: 4px; }
+
+			.av-label {
+				display: block;
+				font-size: 0.62rem; font-weight: 700;
+				letter-spacing: 0.13em; text-transform: uppercase;
+				color: var(--av-accent);
+				margin: 1.1em 0 0.55em;
+			}
+			.av-label:first-child { margin-top: 0.15em; }
+
+			/* ---------------- toggles ---------------- */
+			#av-wrap .av-row {
+				display: flex; align-items: center; gap: 0.55em;
+				padding: 0.32em 0; margin: 0;
+				font-size: 0.79rem; font-weight: 400; color: var(--av-ink);
+				cursor: pointer;
+			}
+			.av-row input { position: absolute; opacity: 0; pointer-events: none; }
+			.av-row .av-tick {
+				flex: 0 0 auto; width: 14px; height: 14px;
+				border: 1.5px solid var(--av-line-2); border-radius: 3px;
+				background: #fff;
+				display: grid; place-items: center;
+				font-size: 8px; color: #fff;
+			}
+			.av-row input:checked ~ .av-tick { background: var(--av-accent); border-color: var(--av-accent); }
+			.av-row .av-tick::after { content: "\f00c"; font-family: "Font Awesome 5 Free"; font-weight: 900; opacity: 0; }
+			.av-row input:checked ~ .av-tick::after { opacity: 1; }
+			.av-row .av-key { flex: 0 0 auto; width: 16px; height: 12px; border-radius: 2px; }
+			#av-wrap .av-row.av-off { color: var(--av-ink-3); }
+			.av-row.av-off .av-key { opacity: 0.3; }
+			.av-row .av-txt { flex: 1; }
+			.av-row .av-amt { font-size: 0.7rem; color: var(--av-ink-3); font-variant-numeric: tabular-nums; }
+
+			.av-k-risk   { background: var(--av-risk); }
+			.av-k-buf    { background: rgba(45, 125, 210, 0.1); border: 1.4px dashed #2d7dd2; }
+			.av-k-relief { background: linear-gradient(90deg, #b5c4b3, #bcb08a, #a69275, #dedcda); }
+
+			/* ---------------- graduated circle key ---------------- */
+			.av-grad { display: flex; align-items: flex-end; gap: 0.45em; margin: 0.15em 0 0.5em; }
+			.av-grad .av-g { display: flex; flex-direction: column; align-items: center; gap: 0.3em; flex: 1; }
+			.av-grad .av-c {
+				border-radius: 50%; background: var(--av-dot);
+				border: 1.2px solid #fff; box-shadow: 0 0 0 0.7px rgba(90, 20, 20, 0.5);
+			}
+			.av-grad .av-t { font-size: 0.58rem; color: var(--av-ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+			/* ---------------- elevation ramp ---------------- */
+			.av-ramp { height: 9px; border-radius: 2px; border: 1px solid var(--av-line-2); }
+			.av-ramp-ax { display: flex; justify-content: space-between; margin-top: 0.25em;
+			              font-size: 0.58rem; color: var(--av-ink-3); font-variant-numeric: tabular-nums; }
+
+			/* ---------------- most-exposed list ---------------- */
+			.av-top { border: 1px solid var(--av-line); border-radius: 6px; overflow: hidden; }
+			#av-wrap .av-top button {
+				display: flex; align-items: center; gap: 0.5em;
+				width: 100%; padding: 0.34em 0.5em;
+				background: #fff; border: 0; border-top: 1px solid var(--av-line);
+				border-radius: 0;
+				font-family: var(--av-font); font-size: 0.73rem;
+				color: var(--av-ink) !important;
+				cursor: pointer; text-align: left;
+				transition: background 0.12s;
+			}
+			#av-wrap .av-top button:first-child { border-top: 0; }
+			#av-wrap .av-top button:hover { background: var(--av-card-2); }
+			.av-top .av-r {
+				flex: 0 0 auto; width: 17px; height: 17px; border-radius: 50%;
+				background: var(--av-card-2); border: 1px solid var(--av-line-2);
+				display: grid; place-items: center;
+				font-size: 0.6rem; font-weight: 700; color: var(--av-ink-2);
+			}
+			#av-wrap .av-top button:nth-child(-n+3) .av-r { background: var(--av-dot); border-color: var(--av-dot); color: #fff; }
+			.av-top .av-n { flex: 1; font-weight: 600; }
+			.av-top .av-v { font-size: 0.68rem; font-weight: 700; color: var(--av-risk);
+			                font-variant-numeric: tabular-nums; }
+
+			/* ---------------- basemap switch ---------------- */
+			.av-seg { display: flex; border: 1px solid var(--av-line-2); border-radius: 5px; overflow: hidden; }
+			#av-wrap .av-seg button {
+				flex: 1; padding: 0.36em 0.2em;
+				background: #fff; border: 0; border-left: 1px solid var(--av-line);
+				border-radius: 0;
+				font-family: var(--av-font); font-size: 0.62rem; font-weight: 700;
+				letter-spacing: 0.05em; text-transform: uppercase;
+				color: var(--av-ink-2) !important; cursor: pointer; transition: all 0.12s;
+			}
+			#av-wrap .av-seg button:first-child { border-left: 0; }
+			#av-wrap .av-seg button:hover { background: var(--av-card-2); }
+			#av-wrap .av-seg button.av-on { background: var(--av-accent); color: #fff !important; }
+
+			/* ---------------- slider ---------------- */
+			.av-sl { display: flex; align-items: center; gap: 0.6em; margin-top: 0.1em; }
+			#av-wrap input[type=range] {
+				-webkit-appearance: none; appearance: none;
+				flex: 1; height: 4px; border-radius: 2px;
+				background: var(--av-line-2); outline: none; cursor: pointer;
+				padding: 0; margin: 0; border: none;
+			}
+			#av-wrap input[type=range]::-webkit-slider-thumb {
+				-webkit-appearance: none; appearance: none;
+				width: 13px; height: 13px; border-radius: 50%;
+				background: var(--av-accent); border: 2px solid #fff;
+				box-shadow: 0 0 0 1px var(--av-accent);
+			}
+			#av-wrap input[type=range]::-moz-range-thumb {
+				width: 11px; height: 11px; border-radius: 50%;
+				background: var(--av-accent); border: 2px solid #fff;
+			}
+			.av-pct { font-size: 0.68rem; color: var(--av-ink-3); width: 2.6em; text-align: right;
+			          font-variant-numeric: tabular-nums; }
+
+			#av-wrap .av-btn {
+				display: block; width: 100%;
+				margin-top: 0.7em; padding: 0.48em;
+				background: #fff; color: var(--av-ink-2) !important;
+				border: 1px solid var(--av-line-2); border-radius: 5px;
+				font-family: var(--av-font); font-size: 0.63rem; font-weight: 700;
+				letter-spacing: 0.09em; text-transform: uppercase;
+				cursor: pointer; transition: all 0.14s;
+			}
+			#av-wrap .av-btn:hover { color: var(--av-accent) !important; border-color: var(--av-accent); }
+
+			.av-note {
+				margin: 1em 0 0; padding-top: 0.8em;
+				border-top: 1px solid var(--av-line);
+				font-size: 0.645rem; line-height: 1.5; color: var(--av-ink-2);
+			}
+			.av-note b { color: var(--av-ink); font-weight: 700; }
+			.av-note code {
+				font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+				font-size: 0.94em; background: var(--av-card-2);
+				border: 1px solid var(--av-line); border-radius: 3px; padding: 0 0.25em;
+			}
+
+			/* ---------------- stat strip ---------------- */
+			.av-stats {
+				position: absolute; bottom: 12px; right: 12px;
+				display: flex; gap: 1px;
+				background: var(--av-line-2);
+				border: 1px solid var(--av-line-2); border-radius: 7px;
+				overflow: hidden;
+				box-shadow: 0 4px 16px rgba(24, 34, 54, 0.18);
+				z-index: 2;
+			}
+			.av-stats > div { background: rgba(255, 255, 255, 0.96); padding: 0.5em 0.85em; text-align: center; }
+			.av-stats .av-v { font-size: 0.94rem; font-weight: 700; color: var(--av-ink);
+			                  font-variant-numeric: tabular-nums; line-height: 1.1; }
+			.av-stats .av-v small { font-size: 0.6em; font-weight: 600; color: var(--av-ink-3); }
+			.av-stats .av-k { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.09em;
+			                  text-transform: uppercase; color: var(--av-ink-3); margin-top: 0.2em; }
+
+			/* ---------------- popups ---------------- */
+			.maplibregl-popup-content {
+				background: #fff; color: var(--av-ink);
+				border: 1px solid var(--av-line-2); border-radius: 7px;
+				padding: 0.75em 0.9em;
+				font-family: var(--av-font); font-size: 0.78rem;
+				box-shadow: 0 8px 26px rgba(24, 34, 54, 0.24);
+			}
+			.maplibregl-popup-tip { border-top-color: #fff !important; border-bottom-color: #fff !important; }
+			.maplibregl-popup-close-button { color: var(--av-ink-3); font-size: 1.15rem; padding: 0 0.3em;
+			                                 background: none; border: none; box-shadow: none; height: auto; line-height: 1; }
+			.maplibregl-popup-close-button:hover { color: var(--av-ink); background: none; }
+			.av-pop-rank {
+				display: inline-block; padding: 0.1em 0.5em; margin-bottom: 0.4em;
+				border-radius: 3px; background: var(--av-dot); color: #fff;
+				font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+			}
+			.av-pop-rank.av-zero { background: var(--av-ink-3); }
+			.av-pop-title { font-size: 0.9rem; font-weight: 700; margin: 0 1.2em 0.15em 0;
+			                padding-bottom: 0.45em; border-bottom: 1px solid var(--av-line); }
+			.av-pop-grid { display: grid; grid-template-columns: auto auto; gap: 0.26em 1em; margin: 0; }
+			.av-pop-grid dt { display: block; font-size: 0.71rem; font-weight: 400; margin: 0; color: var(--av-ink-2); }
+			.av-pop-grid dd { margin: 0; font-size: 0.71rem; font-weight: 600; text-align: right;
+			                  color: var(--av-ink); font-variant-numeric: tabular-nums; }
+			.av-pop-grid dd.av-hi { color: var(--av-risk); }
+
+			/* ---------------- maplibre chrome ---------------- */
+			.maplibregl-ctrl-group {
+				border: 1px solid var(--av-line-2) !important;
+				box-shadow: 0 3px 12px rgba(24, 34, 54, 0.16) !important;
+			}
+			#av-wrap .maplibregl-ctrl-group button { color: #333 !important; padding: 0; }
+			.maplibregl-ctrl-scale {
+				background: rgba(255, 255, 255, 0.9) !important;
+				border-color: var(--av-line-2) !important; color: var(--av-ink-2) !important;
+				font-family: var(--av-font); font-size: 0.63rem;
+			}
+			.maplibregl-ctrl-attrib { background: rgba(255, 255, 255, 0.85) !important;
+			                          font-family: var(--av-font); }
+			.maplibregl-ctrl-attrib a, .maplibregl-ctrl-attrib { color: var(--av-ink-2) !important; }
+
+			#av-loading {
+				position: absolute; inset: 0; z-index: 3;
+				display: grid; place-items: center;
+				background: #fff; color: var(--av-ink-3);
+				font-family: var(--av-font); font-size: 0.7rem;
+				letter-spacing: 0.14em; text-transform: uppercase;
+				transition: opacity 0.4s; pointer-events: none;
+			}
+			#av-loading.av-hide { opacity: 0; }
+
+			.av-caption {
+				font-size: 0.72em; color: #8896b8; line-height: 1.5;
+				margin: 0 0 1.5em; display: block;
+			}
+			.av-caption i { color: #2d7dd2; margin-right: 0.4em; }
+
+			@media (max-width: 980px) { #av-wrap { height: 540px; } }
+			@media (max-width: 680px) {
+				#av-wrap { height: 470px; }
+				.av-panel { width: calc(100% - 24px); }
+				.av-panel .av-panel-body { max-height: 44vh; }
+				.av-stats { left: 12px; right: 12px; bottom: 10px; }
+				.av-stats > div { flex: 1; padding: 0.45em 0.3em; }
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -53,19 +351,98 @@
 
 					<h1>Avalanche Risk Modelling — Valais, Switzerland</h1>
 					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
-					<p>The authorities of the Valais canton needed a GIS-based analysis to prioritise towns and villages for avalanche risk mitigation measures. The challenge was to translate multiple physical and spatial risk factors into a single ranked risk surface that could directly inform resource allocation decisions.</p>
-					<img src="images/risk.jpg" alt="Avalanche risk model Swiss Alps Valais canton" class="project-image"/>
+					<p>The authorities of the Valais canton needed a GIS-based analysis to prioritise towns and villages for avalanche risk mitigation measures. The challenge was to turn terrain conditions and population exposure into a single ranked figure per settlement that could directly inform where mitigation budget goes first.</p>
+					<!-- Interactive avalanche risk map -->
+					<div id="av-wrap">
+						<div id="av-map"></div>
+
+						<div class="av-panel" id="av-panel">
+							<div class="av-panel-head" id="av-panel-head">
+								<h2>Avalanche risk &mdash; Valais canton</h2>
+								<i class="fas fa-chevron-down av-chev"></i>
+							</div>
+							<div class="av-panel-body">
+
+								<span class="av-label">Avalanche risk index</span>
+								<div class="av-grad" id="av-grad"></div>
+								<label class="av-row" id="av-tg-places">
+									<input type="checkbox" checked /><span class="av-tick"></span>
+									<span class="av-txt">Settlements</span>
+									<span class="av-amt" id="av-amt-places"></span>
+								</label>
+								<label class="av-row" id="av-tg-labels">
+									<input type="checkbox" checked /><span class="av-tick"></span>
+									<span class="av-txt">Place labels</span>
+								</label>
+
+								<span class="av-label">Model output</span>
+								<label class="av-row" id="av-tg-risk">
+									<input type="checkbox" checked /><span class="av-tick"></span>
+									<span class="av-key av-k-risk"></span>
+									<span class="av-txt">High risk of avalanches</span>
+								</label>
+								<label class="av-row" id="av-tg-buf">
+									<input type="checkbox" /><span class="av-tick"></span>
+									<span class="av-key av-k-buf"></span>
+									<span class="av-txt">Population buffers</span>
+								</label>
+
+								<span class="av-label">Terrain</span>
+								<label class="av-row" id="av-tg-relief">
+									<input type="checkbox" checked /><span class="av-tick"></span>
+									<span class="av-key av-k-relief"></span>
+									<span class="av-txt">Shaded relief</span>
+								</label>
+								<div class="av-ramp" id="av-ramp"></div>
+								<div class="av-ramp-ax"><span>372 m</span><span>2 500</span><span>4 557 m</span></div>
+								<div class="av-sl" style="margin-top:0.55em">
+									<input type="range" id="av-op" min="15" max="100" step="5" value="100" aria-label="Shaded relief opacity" />
+									<span class="av-pct" id="av-op-val">100%</span>
+								</div>
+
+								<span class="av-label">Most exposed settlements</span>
+								<div class="av-top" id="av-top"></div>
+
+								<span class="av-label">Basemap</span>
+								<div class="av-seg" id="av-seg">
+									<button type="button" data-bm="light" class="av-on">Light</button>
+									<button type="button" data-bm="white">White</button>
+									<button type="button" data-bm="streets">Streets</button>
+								</div>
+
+								<button class="av-btn" id="av-reset" type="button">
+									<i class="fas fa-compress-arrows-alt" style="margin-right:0.4em"></i>Reset view
+								</button>
+
+								<p class="av-note">
+									A cell is <b>high risk</b> where all three conditions hold:
+									elevation <code>&ge; 1500 m</code>, slope <code>35&ndash;40&deg;</code>,
+									and aspect facing <code>NW&ndash;N&ndash;E</code> (293&deg;&ndash;113&deg;).
+									Each settlement's <b>risk index</b> is the count of high-risk cells inside
+									a population-scaled buffer, <code>ln(pop) &times; 200 m</code>.
+									Grid <b>200 m</b>, modelled in EPSG:21781 (CH1903&thinsp;/&thinsp;LV03).
+								</p>
+							</div>
+						</div>
+
+						<div class="av-stats" id="av-stats"></div>
+						<div id="av-loading">Loading map&hellip;</div>
+					</div>
+					<span class="av-caption"><i class="fas fa-hand-pointer"></i>Toggle the model layers on or off, drag the slider to fade the relief, click any settlement for its figures, or pick one from the most-exposed list to fly there.</span>
+					<noscript>
+						<img src="images/risk.jpg" alt="Avalanche risk model Swiss Alps Valais canton" class="project-image"/>
+					</noscript>
 					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
-					<p>Multiple risk factor layers were prepared and combined using weighted overlay analysis in ArcGIS Pro — including slope angle, aspect, elevation, proximity to known avalanche paths, and population exposure. Each factor was reclassified and weighted by relative importance to produce a composite risk index. Final outputs ranked settlements by risk exposure.</p>
+					<p>A 200 m digital elevation model of the canton was used to derive slope and aspect, and the three terrain criteria known to produce slab avalanches were intersected into a single boolean surface — elevation at or above 1500 m, slope between 35&deg; and 40&deg;, and a north-facing aspect from NW through N to E. Each of the 118 settlements was then buffered by a radius scaled to its population, <em>ln(pop) &times; 200 m</em>, and the high-risk cells falling inside that buffer were counted with zonal statistics. That count became the settlement's risk index, giving the canton a single ranked list to work down.</p>
 					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
 					<div class="outcome-grid">
-						<div class="outcome-card"><p><i class="fas fa-exclamation-triangle"></i> Composite avalanche risk index produced for the Valais canton</p></div>
-						<div class="outcome-card"><p><i class="fas fa-sort-amount-down"></i> Settlements ranked by risk exposure to prioritise mitigation investment</p></div>
-						<div class="outcome-card"><p><i class="fas fa-layer-group"></i> Multi-factor weighted overlay combining terrain, path proximity, and population data</p></div>
+						<div class="outcome-card"><p><i class="fas fa-exclamation-triangle"></i> 192.4 km&sup2; of terrain flagged as high risk — 3.69% of the canton, across 4 810 cells</p></div>
+						<div class="outcome-card"><p><i class="fas fa-sort-amount-down"></i> 44 of 118 settlements carry measurable exposure and are ranked for mitigation priority</p></div>
+						<div class="outcome-card"><p><i class="fas fa-layer-group"></i> Terrain criteria combined with population-scaled buffers to weight risk by who it affects</p></div>
 					</div>
 					<div class="built-with">
 					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
-					<div class="tech-stack"><span class="tech-chip">ArcGIS Pro</span><span class="tech-chip">Raster Analysis</span><span class="tech-chip">Risk Modelling</span><span class="tech-chip">Weighted Overlay</span><span class="tech-chip">Spatial Analysis</span></div>
+					<div class="tech-stack"><span class="tech-chip">ArcGIS Pro</span><span class="tech-chip">Raster Analysis</span><span class="tech-chip">Risk Modelling</span><span class="tech-chip">Zonal Statistics</span><span class="tech-chip">Spatial Analysis</span></div>
 				</div>
 				</div>
 			</div>
@@ -90,5 +467,362 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+
+		<!-- Interactive avalanche risk map -->
+		<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+		<script src="maps/avalanche/avalanche_data.js"></script>
+		<script>
+		(function () {
+			"use strict";
+
+			if (!window.maplibregl || !window.AV_DATA) return;
+
+			var KEY = "UuDqdYQZsiCZCO3rPNQt";
+			var D = window.AV_DATA;
+			var S = D.stats;
+			var GLYPHS = "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=" + KEY;
+			var FONT = ["Noto Sans Bold"];
+
+			// Light basemaps only — the canton has to be the loudest thing on screen.
+			var BASEMAPS = {
+				light: "https://api.maptiler.com/maps/dataviz-light/style.json?key=" + KEY,
+				streets: "https://api.maptiler.com/maps/streets-v2-light/style.json?key=" + KEY,
+				white: {
+					version: 8,
+					glyphs: GLYPHS,
+					sources: {},
+					layers: [{ id: "bg", type: "background", paint: { "background-color": "#ffffff" } }]
+				}
+			};
+
+			// Class breaks and radii carried over from the original ArcMap legend.
+			var CLASSES = [
+				{ lo: 0,  hi: 2,  r: 2.6  },
+				{ lo: 3,  hi: 6,  r: 4.4  },
+				{ lo: 7,  hi: 13, r: 6.4  },
+				{ lo: 14, hi: 19, r: 8.4  },
+				{ lo: 20, hi: 48, r: 11.0 }
+			];
+
+			var SIZE = ["step", ["get", "risk_index"],
+				CLASSES[0].r, 3, CLASSES[1].r, 7, CLASSES[2].r, 14, CLASSES[3].r, 20, CLASSES[4].r];
+
+			// ["zoom"] is only legal as the input to a *top-level* interpolate/step, so the
+			// per-zoom scale factor multiplies inside each stop output rather than wrapping
+			// the interpolate in a ["*"].
+			var RADIUS = ["interpolate", ["linear"], ["zoom"],
+				7,  ["*", 0.80, SIZE],
+				10, ["*", 1.15, SIZE],
+				14, ["*", 1.90, SIZE]];
+
+			// Canton bounds from the border geometry.
+			var bb = [Infinity, Infinity, -Infinity, -Infinity];
+			(function walk(c) {
+				if (typeof c[0] === "number") {
+					bb[0] = Math.min(bb[0], c[0]); bb[1] = Math.min(bb[1], c[1]);
+					bb[2] = Math.max(bb[2], c[0]); bb[3] = Math.max(bb[3], c[1]);
+				} else { c.forEach(walk); }
+			})(D.border.features[0].geometry.coordinates);
+			var BOUNDS = [[bb[0], bb[1]], [bb[2], bb[3]]];
+
+			function fitOpts() {
+				return window.innerWidth <= 680
+					? { padding: 20, duration: 0 }
+					: { padding: { top: 34, bottom: 58, left: 302, right: 34 }, duration: 0 };
+			}
+
+			var map = new maplibregl.Map({
+				container: "av-map",
+				style: BASEMAPS.light,
+				bounds: BOUNDS,
+				fitBoundsOptions: fitOpts(),
+				attributionControl: { compact: true }
+			});
+
+			map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+			map.addControl(new maplibregl.FullscreenControl({
+				container: document.getElementById("av-wrap") }), "top-right");
+			map.addControl(new maplibregl.ScaleControl({ maxWidth: 110, unit: "metric" }), "bottom-left");
+
+			// UI state that has to survive a basemap switch (setStyle wipes all layers).
+			var state = { relief: true, risk: true, buffers: false, places: true, labels: true, opacity: 1 };
+			var built = false;
+
+			var nf = function (n) { return n.toLocaleString("en-US"); };
+
+			function addLayers() {
+				// ---- shaded relief (baked hypsometric tint x hillshade, EPSG:3857) ----
+				map.addSource("relief", {
+					type: "image",
+					url: D.terrain.url,
+					coordinates: D.terrain.coordinates
+				});
+				map.addLayer({
+					id: "relief", type: "raster", source: "relief",
+					paint: { "raster-opacity": state.opacity, "raster-resampling": "linear",
+					         "raster-fade-duration": 0 }
+				});
+
+				// ---- high-risk cells (vectorised, so they stay crisp when zoomed) ----
+				map.addSource("risk", { type: "geojson", data: D.risk });
+				map.addLayer({
+					id: "risk-fill", type: "fill", source: "risk",
+					paint: { "fill-color": "#8c1c13", "fill-opacity": 0.92 }
+				});
+				// A hairline outline keeps single isolated cells visible when zoomed out.
+				map.addLayer({
+					id: "risk-line", type: "line", source: "risk",
+					paint: { "line-color": "#8c1c13",
+					         "line-width": ["interpolate", ["linear"], ["zoom"], 7, 0.9, 11, 0.5, 14, 0] }
+				});
+
+				// ---- population buffers used for the zonal sum ----
+				map.addSource("buffers", { type: "geojson", data: D.buffers });
+				map.addLayer({
+					id: "buf-fill", type: "fill", source: "buffers",
+					paint: { "fill-color": "#2d7dd2", "fill-opacity": 0.07 }
+				});
+				map.addLayer({
+					id: "buf-line", type: "line", source: "buffers",
+					paint: { "line-color": "#2d7dd2", "line-width": 1, "line-dasharray": [2, 2],
+					         "line-opacity": 0.75 }
+				});
+
+				// ---- canton border: soft outer glow + bold crisp edge ----
+				map.addSource("border", { type: "geojson", data: D.border });
+				map.addLayer({
+					id: "border-glow", type: "line", source: "border",
+					paint: {
+						"line-color": "#8795ad",
+						"line-width": ["interpolate", ["linear"], ["zoom"], 7, 9, 11, 16],
+						"line-blur": ["interpolate", ["linear"], ["zoom"], 7, 6, 11, 11],
+						"line-opacity": 0.4
+					}
+				});
+				map.addLayer({
+					id: "border-line", type: "line", source: "border",
+					paint: {
+						"line-color": "#1e2636",
+						"line-width": ["interpolate", ["linear"], ["zoom"], 7, 2.1, 10, 3, 13, 4],
+						"line-opacity": 0.95
+					}
+				});
+
+				// ---- settlements, graduated by risk index ----
+				map.addSource("places", { type: "geojson", data: D.places });
+				map.addLayer({
+					id: "places-circle", type: "circle", source: "places",
+					paint: {
+						"circle-radius": RADIUS,
+						"circle-color": "#d92626",
+						"circle-opacity": ["case", [">", ["get", "risk_index"], 0], 0.95, 0.42],
+						"circle-stroke-width": ["case", [">", ["get", "risk_index"], 0], 1.1, 0.7],
+						"circle-stroke-color": "#ffffff",
+						"circle-stroke-opacity": 0.9
+					}
+				});
+
+				// Collision detection thins these out on its own; sort-key makes sure the
+				// highest-ranked places are the ones that survive.
+				map.addLayer({
+					id: "places-label", type: "symbol", source: "places",
+					layout: {
+						"text-field": ["get", "name"],
+						"text-font": FONT,
+						"text-size": ["interpolate", ["linear"], ["zoom"],
+							7, ["case", ["<=", ["get", "rank"], 6], 12.5, 10],
+							12, ["case", ["<=", ["get", "rank"], 6], 15, 12]],
+						"text-offset": [0, -1.1],
+						"text-anchor": "bottom",
+						"text-allow-overlap": false,
+						"symbol-sort-key": ["get", "rank"],
+						"text-padding": 3
+					},
+					paint: {
+						"text-color": "#1a2334",
+						"text-halo-color": "#ffffff",
+						"text-halo-width": 1.9,
+						"text-halo-blur": 0.4
+					}
+				});
+
+				applyState();
+				wirePopups();
+			}
+
+			function applyState() {
+				var vis = function (ids, on) {
+					ids.forEach(function (id) {
+						if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
+					});
+				};
+				vis(["relief"], state.relief);
+				vis(["risk-fill", "risk-line"], state.risk);
+				vis(["buf-fill", "buf-line"], state.buffers);
+				vis(["places-circle"], state.places);
+				vis(["places-label"], state.labels);
+				if (map.getLayer("relief")) map.setPaintProperty("relief", "raster-opacity", state.opacity);
+			}
+
+			var popup;
+
+			function placeHTML(p) {
+				var zero = +p.risk_index === 0;
+				return '<div class="av-pop-rank' + (zero ? " av-zero" : "") + '">' +
+						(zero ? "No modelled risk" : "Rank " + p.rank + " of " + S.places) + "</div>" +
+					'<div class="av-pop-title">' + p.name + "</div>" +
+					'<dl class="av-pop-grid">' +
+						"<dt>Type</dt><dd>" + p.type + "</dd>" +
+						"<dt>Population</dt><dd>" + nf(+p.population) + "</dd>" +
+						"<dt>Buffer radius</dt><dd>" + Math.round(+p.buffer_m) + " m</dd>" +
+						'<dt>Risk index</dt><dd class="av-hi">' + p.risk_index + " cells</dd>" +
+						'<dt>Risk area</dt><dd class="av-hi">' + (+p.risk_area_km2).toFixed(2) + " km²</dd>" +
+					"</dl>";
+			}
+
+			function showPlace(f) {
+				if (!popup) popup = new maplibregl.Popup({ closeButton: true, maxWidth: "265px", offset: 12 });
+				popup.setLngLat(f.geometry.coordinates.slice())
+				     .setHTML(placeHTML(f.properties)).addTo(map);
+			}
+
+			// Layer-scoped handlers live on the map, not the style, so they survive
+			// setStyle and only ever need wiring once.
+			var wired = false;
+			function wirePopups() {
+				if (wired) return;
+				wired = true;
+				map.on("click", "places-circle", function (e) { showPlace(e.features[0]); });
+				map.on("mouseenter", "places-circle", function () {
+					map.getCanvas().style.cursor = "pointer";
+				});
+				map.on("mouseleave", "places-circle", function () {
+					map.getCanvas().style.cursor = "";
+				});
+			}
+
+			// setStyle wipes every layer we added, so they get rebuilt on each new style.
+			// Idempotent and bound to several events because which one lands first
+			// differs between the initial load and a later setStyle.
+			function ensureLayers() {
+				if (!map.isStyleLoaded() || map.getSource("relief")) return;
+				try {
+					addLayers();
+				} catch (err) {
+					console.error("addLayers failed:", err);
+				}
+				// Clear the loader either way — a partial map beats an indefinite spinner.
+				if (!built) {
+					built = true;
+					buildLegend();
+					document.getElementById("av-loading").classList.add("av-hide");
+				}
+			}
+			map.on("load", ensureLayers);
+			map.on("style.load", ensureLayers);
+			map.on("styledata", ensureLayers);
+
+			map.on("error", function (e) { console.error("map error:", e && e.error); });
+
+			// ------------------------------------------------------------------ legend
+			function buildLegend() {
+				// graduated circle key
+				document.getElementById("av-grad").innerHTML = CLASSES.map(function (c) {
+					var d = (c.r * 2).toFixed(0);
+					return '<span class="av-g"><span class="av-c" style="width:' + d + "px;height:" + d + 'px"></span>' +
+					       '<span class="av-t">' + c.lo + "–" + c.hi + "</span></span>";
+				}).join("");
+
+				// elevation ramp straight from the ramp baked into the PNG
+				document.getElementById("av-ramp").style.background =
+					"linear-gradient(90deg," + S.ramp.map(function (s) {
+						var t = (s[0] - S.ramp[0][0]) / (S.ramp[S.ramp.length - 1][0] - S.ramp[0][0]);
+						return s[1] + " " + (t * 100).toFixed(1) + "%";
+					}).join(",") + ")";
+
+				document.getElementById("av-amt-places").textContent =
+					S.places_at_risk + " of " + S.places + " at risk";
+
+				// stat strip
+				document.getElementById("av-stats").innerHTML =
+					'<div><div class="av-v">' + S.risk_km2 + ' <small>km²</small></div>' +
+						'<div class="av-k">High risk</div></div>' +
+					'<div><div class="av-v">' + S.risk_pct + ' <small>%</small></div>' +
+						'<div class="av-k">Of canton</div></div>' +
+					'<div><div class="av-v">' + nf(S.risk_cells) + '</div>' +
+						'<div class="av-k">Cells</div></div>' +
+					'<div><div class="av-v">' + S.places_at_risk + '</div>' +
+						'<div class="av-k">Places</div></div>';
+
+				// most-exposed list
+				var top = D.places.features
+					.filter(function (f) { return f.properties.risk_index > 0; })
+					.sort(function (a, b) { return a.properties.rank - b.properties.rank; })
+					.slice(0, 10);
+				var host = document.getElementById("av-top");
+				top.forEach(function (f) {
+					var p = f.properties;
+					var b = document.createElement("button");
+					b.type = "button";
+					b.innerHTML = '<span class="av-r">' + p.rank + "</span>" +
+					              '<span class="av-n">' + p.name + "</span>" +
+					              '<span class="av-v">' + p.risk_index + "</span>";
+					b.addEventListener("click", function () {
+						map.flyTo({ center: f.geometry.coordinates, zoom: 12, duration: 900 });
+						showPlace(f);
+					});
+					host.appendChild(b);
+				});
+
+				bind("av-tg-relief", "relief");
+				bind("av-tg-risk", "risk");
+				bind("av-tg-buf", "buffers");
+				bind("av-tg-places", "places");
+				bind("av-tg-labels", "labels");
+			}
+
+			function bind(rowId, key) {
+				var row = document.getElementById(rowId);
+				var cb = row.querySelector("input");
+				cb.checked = state[key];
+				row.classList.toggle("av-off", !cb.checked);
+				cb.addEventListener("change", function () {
+					state[key] = cb.checked;
+					row.classList.toggle("av-off", !cb.checked);
+					applyState();
+				});
+			}
+
+			// opacity
+			var op = document.getElementById("av-op");
+			var opVal = document.getElementById("av-op-val");
+			op.addEventListener("input", function () {
+				state.opacity = +op.value / 100;
+				opVal.textContent = op.value + "%";
+				applyState();
+			});
+
+			// basemap switch
+			document.getElementById("av-seg").addEventListener("click", function (e) {
+				var b = e.target.closest("button[data-bm]");
+				if (!b || b.classList.contains("av-on")) return;
+				this.querySelectorAll("button").forEach(function (x) { x.classList.remove("av-on"); });
+				b.classList.add("av-on");
+				if (popup) popup.remove();
+				map.setStyle(BASEMAPS[b.dataset.bm]);   // style.load re-adds our layers
+			});
+
+			document.getElementById("av-reset").addEventListener("click", function () {
+				map.fitBounds(BOUNDS, Object.assign({}, fitOpts(), { duration: 800 }));
+			});
+
+			var head = document.getElementById("av-panel-head");
+			var panel = document.getElementById("av-panel");
+			head.addEventListener("click", function () { panel.classList.toggle("av-collapsed"); });
+
+			// Start collapsed on small screens so the map is visible first.
+			if (window.innerWidth <= 680) panel.classList.add("av-collapsed");
+		})();
+		</script>
 	</body>
 </html>
