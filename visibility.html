@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+		<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
 			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
@@ -34,6 +35,278 @@
 			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
 			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
 			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #8896b8; text-transform: uppercase; }
+
+			/* ============================================================
+			   Interactive viewshed map (MapLibre GL)
+			   All classes namespaced vm- to avoid collisions with main.css
+			   (Phantom already defines .box, .label and .icon > .label).
+			   ============================================================ */
+			#vm-wrap {
+				--vm-bg:      #1b2030;
+				--vm-panel:   #242d42;
+				--vm-panel-2: #1f2739;
+				--vm-border:  #2d3855;
+				--vm-accent:  #2d7dd2;
+				--vm-text:    #d8e0f0;
+				--vm-muted:   #8896b8;
+				--vm-font: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+				position: relative;
+				width: 100%;
+				height: 600px;
+				margin: 1em 0 0.8em;
+				border-radius: 8px;
+				overflow: hidden;
+				border: 1px solid var(--vm-border);
+				background: var(--vm-bg);
+				font-family: var(--vm-font);
+			}
+			#vm-wrap *, #vm-wrap *::before, #vm-wrap *::after { box-sizing: border-box; }
+			#vm-map { position: absolute; inset: 0; }
+
+			/* ---------- control panel ---------- */
+			.vm-panel {
+				position: absolute;
+				top: 12px; left: 12px;
+				width: 288px;
+				max-height: calc(100% - 24px);
+				display: flex;
+				flex-direction: column;
+				background: rgba(27, 32, 48, 0.94);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+				border: 1px solid var(--vm-border);
+				border-top: 3px solid var(--vm-accent);
+				border-radius: 8px;
+				color: var(--vm-text);
+				box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+				z-index: 2;
+				overflow: hidden;
+			}
+			.vm-panel-head {
+				display: flex; align-items: center; gap: 0.6em;
+				padding: 0.85em 1em;
+				cursor: pointer;
+				user-select: none;
+			}
+			.vm-panel-head h2 {
+				margin: 0; flex: 1;
+				font-size: 0.78rem; font-weight: 700;
+				letter-spacing: 0.1em; text-transform: uppercase;
+				color: var(--vm-text); line-height: 1.35;
+			}
+			.vm-chev { color: var(--vm-muted); font-size: 0.7rem; transition: transform 0.2s; }
+			.vm-panel.vm-collapsed .vm-chev { transform: rotate(-90deg); }
+			.vm-panel.vm-collapsed .vm-panel-body { display: none; }
+
+			.vm-panel-body { overflow-y: auto; padding: 0 1em 1em; }
+			.vm-panel-body::-webkit-scrollbar { width: 8px; }
+			.vm-panel-body::-webkit-scrollbar-thumb { background: var(--vm-border); border-radius: 4px; }
+
+			.vm-label {
+				display: block;
+				font-size: 0.63rem; font-weight: 700;
+				letter-spacing: 0.14em; text-transform: uppercase;
+				color: var(--vm-accent);
+				margin: 1.15em 0 0.6em;
+			}
+			.vm-label:first-child { margin-top: 0.2em; }
+
+			/* ---------- site rows ---------- */
+			.vm-site {
+				display: block;
+				border: 1.5px solid var(--vm-border);
+				border-radius: 6px;
+				background: var(--vm-panel-2);
+				padding: 0.6em 0.7em;
+				margin-bottom: 0.5em;
+				cursor: pointer;
+				transition: border-color 0.15s, background 0.15s;
+			}
+			.vm-site:hover { border-color: #3d4a6e; background: var(--vm-panel); }
+			.vm-site.vm-off { opacity: 0.5; }
+
+			.vm-site-top { display: flex; align-items: center; gap: 0.55em; }
+			.vm-site input { position: absolute; opacity: 0; pointer-events: none; }
+
+			.vm-box {
+				flex: 0 0 auto;
+				width: 15px; height: 15px;
+				border-radius: 3px;
+				border: 1.5px solid currentColor;
+				display: grid; place-items: center;
+				font-size: 9px; color: var(--vm-sc);
+				padding: 0; margin: 0;
+			}
+			.vm-box::after { content: "\f00c"; font-family: "Font Awesome 5 Free"; font-weight: 900; opacity: 1; }
+			.vm-site .vm-box { background: color-mix(in srgb, var(--vm-sc) 30%, transparent); }
+			.vm-site.vm-off .vm-box { background: transparent; }
+			.vm-site.vm-off .vm-box::after { opacity: 0; }
+
+			.vm-site-name { flex: 1; font-size: 0.83rem; font-weight: 600; color: var(--vm-text); }
+			.vm-site-val  { font-size: 0.78rem; font-weight: 700; color: var(--vm-sc); font-variant-numeric: tabular-nums; }
+			.vm-site-val small { font-weight: 600; color: var(--vm-muted); font-size: 0.72em; margin-left: 0.15em; }
+
+			.vm-site-meta {
+				display: flex; gap: 0.9em;
+				margin: 0.45em 0 0 1.9em;
+				font-size: 0.67rem; color: var(--vm-muted);
+				font-variant-numeric: tabular-nums;
+			}
+			.vm-site-meta b { color: #aab6d2; font-weight: 600; }
+
+			/* ---------- generic toggles ---------- */
+			.vm-toggle {
+				display: flex; align-items: center; gap: 0.55em;
+				padding: 0.42em 0;
+				font-size: 0.79rem; color: var(--vm-text);
+				cursor: pointer;
+			}
+			.vm-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+			.vm-swatch { flex: 0 0 auto; width: 15px; height: 15px; border-radius: 3px; }
+			.vm-toggle.vm-off { color: var(--vm-muted); }
+			.vm-toggle.vm-off .vm-swatch { opacity: 0.25; }
+			.vm-sw-pop  { background: rgba(216, 224, 240, 0.18); border: 1.5px solid #d8e0f0; }
+			.vm-sw-site { background: transparent; border: 1.5px solid transparent;
+			              display: grid; place-items: center; color: var(--vm-text); font-size: 11px; }
+
+			/* ---------- slider ---------- */
+			.vm-slider-row { display: flex; align-items: center; gap: 0.7em; margin-top: 0.25em; }
+			#vm-wrap input[type=range] {
+				-webkit-appearance: none; appearance: none;
+				flex: 1; height: 4px; border-radius: 2px;
+				background: var(--vm-border); outline: none; cursor: pointer;
+				padding: 0; margin: 0; border: none;
+			}
+			#vm-wrap input[type=range]::-webkit-slider-thumb {
+				-webkit-appearance: none; appearance: none;
+				width: 14px; height: 14px; border-radius: 50%;
+				background: var(--vm-accent); border: 2px solid #1b2030;
+				box-shadow: 0 0 0 1px var(--vm-accent);
+			}
+			#vm-wrap input[type=range]::-moz-range-thumb {
+				width: 12px; height: 12px; border-radius: 50%;
+				background: var(--vm-accent); border: 2px solid #1b2030;
+			}
+			.vm-pct { font-size: 0.7rem; color: var(--vm-muted); width: 2.6em; text-align: right;
+			          font-variant-numeric: tabular-nums; }
+
+			.vm-note {
+				margin: 1.15em 0 0;
+				padding-top: 0.85em;
+				border-top: 1px solid var(--vm-border);
+				font-size: 0.66rem; line-height: 1.5; color: var(--vm-muted);
+			}
+			.vm-note b { color: #aab6d2; font-weight: 600; }
+
+			.vm-btn {
+				display: block; width: 100%;
+				margin-top: 0.8em; padding: 0.5em;
+				background: var(--vm-panel-2); color: var(--vm-muted);
+				border: 1.5px solid var(--vm-border); border-radius: 5px;
+				font-family: var(--vm-font);
+				font-size: 0.66rem; font-weight: 700;
+				letter-spacing: 0.1em; text-transform: uppercase;
+				cursor: pointer; transition: all 0.15s;
+				height: auto; line-height: normal;
+			}
+			.vm-btn:hover { color: var(--vm-text); border-color: var(--vm-accent); }
+
+			/* ---------- turbine markers ---------- */
+			.vm-turbine { cursor: pointer; }
+			.vm-turbine .vm-pin {
+				width: 15px; height: 15px; border-radius: 50%;
+				background: var(--vm-tc);
+				border: 2.5px solid #131824;
+				box-shadow: 0 0 0 1.5px var(--vm-tc), 0 2px 6px rgba(0, 0, 0, 0.6);
+			}
+			.vm-turbine .vm-tag {
+				position: absolute; top: 50%; left: 21px;
+				transform: translateY(-50%);
+				white-space: nowrap;
+				padding: 0.15em 0.5em;
+				border-radius: 3px;
+				background: rgba(19, 24, 36, 0.85);
+				border-left: 2px solid var(--vm-tc);
+				color: #e8eefc;
+				font-family: var(--vm-font);
+				font-size: 0.68rem; font-weight: 700;
+				letter-spacing: 0.05em;
+				text-shadow: 0 1px 2px #000;
+				pointer-events: none;
+			}
+
+			/* ---------- popups ---------- */
+			.maplibregl-popup-content {
+				background: #242d42; color: #d8e0f0;
+				border: 1.5px solid #2d3855; border-radius: 7px;
+				padding: 0.8em 0.95em;
+				font-family: "Source Sans Pro", Helvetica, Arial, sans-serif; font-size: 0.78rem;
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+			}
+			.maplibregl-popup-tip { display: none; }
+			.maplibregl-popup-close-button {
+				color: #8896b8; font-size: 1.2rem; padding: 0 0.3em;
+				background: none; border: none;
+			}
+			.maplibregl-popup-close-button:hover { color: #d8e0f0; background: none; }
+			.vm-pop-title {
+				font-size: 0.86rem; font-weight: 700; color: #d8e0f0;
+				margin: 0 1em 0.15em 0; padding-bottom: 0.5em;
+				border-bottom: 1px solid #2d3855;
+			}
+			.vm-pop-sub {
+				font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+				text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.55em;
+			}
+			.vm-pop-grid { display: grid; grid-template-columns: auto auto; gap: 0.28em 1.1em; margin: 0; }
+			.vm-pop-grid dt { font-size: 0.71rem; color: #8896b8; }
+			.vm-pop-grid dd { margin: 0; font-size: 0.71rem; font-weight: 600; color: #d8e0f0;
+			                  text-align: right; font-variant-numeric: tabular-nums; }
+
+			/* ---------- maplibre chrome ---------- */
+			.maplibregl-ctrl-group {
+				background: rgba(27, 32, 48, 0.94) !important;
+				border: 1px solid #2d3855 !important;
+				box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+			}
+			.maplibregl-ctrl-group button + button { border-top: 1px solid #2d3855 !important; }
+			.maplibregl-ctrl-group button .maplibregl-ctrl-icon { filter: invert(88%) hue-rotate(180deg); }
+			.maplibregl-ctrl-group button:hover { background: #242d42 !important; }
+			.maplibregl-ctrl-scale {
+				background: rgba(27, 32, 48, 0.85) !important;
+				border-color: #2d3855 !important;
+				color: #8896b8 !important;
+				font-family: "Source Sans Pro", Helvetica, Arial, sans-serif; font-size: 0.65rem;
+			}
+			.maplibregl-ctrl-attrib {
+				background: rgba(27, 32, 48, 0.85) !important;
+				font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+			}
+			.maplibregl-ctrl-attrib a, .maplibregl-ctrl-attrib { color: #8896b8 !important; }
+
+			#vm-loading {
+				position: absolute; inset: 0; z-index: 3;
+				display: grid; place-items: center;
+				background: var(--vm-bg); color: var(--vm-muted);
+				font-family: var(--vm-font); font-size: 0.72rem;
+				letter-spacing: 0.14em; text-transform: uppercase;
+				transition: opacity 0.4s; pointer-events: none;
+			}
+			#vm-loading.vm-hide { opacity: 0; }
+
+			.vm-caption {
+				font-size: 0.72em; color: #8896b8; line-height: 1.5;
+				margin: 0 0 1.5em; display: block;
+			}
+			.vm-caption i { color: #2d7dd2; margin-right: 0.4em; }
+
+			@media (max-width: 980px) { #vm-wrap { height: 520px; } }
+			@media (max-width: 640px) {
+				#vm-wrap { height: 440px; }
+				.vm-panel { width: calc(100% - 24px); }
+				.vm-panel .vm-panel-body { max-height: 45vh; }
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -54,7 +327,58 @@
 					<h1>Visibility Analysis of Wind Turbines</h1>
 					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
 					<p>A wind power company needed to evaluate the visual impact of proposed turbines across three sites in the Joensuu/Kontiolahti area — Ilvesvaara, Mustavaara, and Kolvananvaara. The task was to map exactly which surface locations would have line-of-sight to the turbine tops, critical information for environmental impact assessment.</p>
-					<img src="images/visibility.jpg" alt="Viewshed visibility analysis wind turbines Joensuu Finland" class="project-image"/>
+					<!-- Interactive viewshed map -->
+					<div id="vm-wrap">
+						<div id="vm-map"></div>
+
+						<div class="vm-panel" id="vm-panel">
+							<div class="vm-panel-head" id="vm-panel-head">
+								<h2>Turbine visibility &mdash; Joensuu / Kontiolahti</h2>
+								<i class="fas fa-chevron-down vm-chev"></i>
+							</div>
+							<div class="vm-panel-body">
+
+								<span class="vm-label">Visible open land</span>
+								<div id="vm-sites"></div>
+
+								<span class="vm-label">Reference layers</span>
+								<label class="vm-toggle" id="vm-tg-pop">
+									<input type="checkbox" checked />
+									<span class="vm-swatch vm-sw-pop"></span>
+									<span>Populated areas</span>
+								</label>
+								<label class="vm-toggle" id="vm-tg-turb">
+									<input type="checkbox" checked />
+									<span class="vm-swatch vm-sw-site"><i class="fas fa-map-marker-alt"></i></span>
+									<span>Turbine sites</span>
+								</label>
+
+								<span class="vm-label">Overlay opacity</span>
+								<div class="vm-slider-row">
+									<input type="range" id="vm-opacity" min="10" max="100" step="5" value="65" aria-label="Overlay opacity" />
+									<span class="vm-pct" id="vm-opacity-val">65%</span>
+								</div>
+
+								<button class="vm-btn" id="vm-reset" type="button">
+									<i class="fas fa-compress-arrows-alt" style="margin-right:0.45em"></i>Reset view
+								</button>
+
+								<p class="vm-note">
+									Viewshed computed from a DEM with observer points at each proposed turbine
+									apex (<b>160&nbsp;m</b> hub-to-tip). Shaded cells are <b>open land</b> with
+									direct line of sight &mdash; forest-screened ground is excluded, so these
+									areas are smaller than the raw viewshed. Grid <b>16&nbsp;m</b>,
+									ETRS-TM35FIN.
+								</p>
+							</div>
+						</div>
+
+						<div id="vm-loading">Loading map&hellip;</div>
+					</div>
+					<span class="vm-caption"><i class="fas fa-hand-pointer"></i>Toggle each site on or off, drag the opacity slider, click a turbine or a populated area for figures, double-click a legend row to zoom to that site.</span>
+					<noscript>
+						<img src="images/visibility.jpg" alt="Viewshed visibility analysis wind turbines Joensuu Finland" class="project-image"/>
+					</noscript>
 					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
 					<p>Viewshed analysis was performed in ArcGIS Pro using Digital Elevation Model data for each of the three sites. Observer points were placed at each proposed turbine location, and visibility surfaces were generated showing areas from which the turbine apex would be visible. Results were presented as three separate maps suitable for inclusion in a planning report.</p>
 					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
@@ -90,5 +414,239 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+
+		<!-- Interactive viewshed map -->
+		<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+		<script src="maps/visibility/visibility_data.js"></script>
+		<script>
+		(function () {
+			"use strict";
+
+			if (!window.maplibregl || !window.VIS_DATA) return;
+
+			var KEY = "UuDqdYQZsiCZCO3rPNQt";
+			var STYLE = "https://api.maptiler.com/maps/hybrid-v4/style.json?key=" + KEY;
+			var D = window.VIS_DATA;
+
+			// Site order drives the legend; colors match the baked-in PNG overlays.
+			var SITES = D.turbines.features.map(function (f) {
+				return {
+					key: f.properties.key,
+					name: f.properties.name,
+					color: f.properties.color,
+					props: f.properties,
+					lngLat: f.geometry.coordinates
+				};
+			});
+
+			// Study-area extent, taken from the shared raster footprint.
+			var c = D.overlays[SITES[0].key].coordinates;
+			var BOUNDS = [
+				[Math.min(c[0][0], c[3][0]), Math.min(c[2][1], c[3][1])],
+				[Math.max(c[1][0], c[2][0]), Math.max(c[0][1], c[1][1])]
+			];
+			var FIT = { padding: { top: 40, bottom: 40, left: 316, right: 40 }, duration: 0 };
+			var FIT_SM = { padding: 24, duration: 0 };
+
+			function fitOpts() {
+				return window.innerWidth <= 640 ? FIT_SM : FIT;
+			}
+
+			var map = new maplibregl.Map({
+				container: "vm-map",
+				style: STYLE,
+				bounds: BOUNDS,
+				fitBoundsOptions: fitOpts(),
+				attributionControl: { compact: true }
+			});
+
+			map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+			map.addControl(new maplibregl.FullscreenControl({ container: document.getElementById("vm-wrap") }), "top-right");
+			map.addControl(new maplibregl.ScaleControl({ maxWidth: 110, unit: "metric" }), "bottom-left");
+
+			var fmt = function (n, d) { return n == null ? "—" : n.toFixed(d == null ? 1 : d); };
+
+			map.on("load", function () {
+				document.getElementById("vm-loading").classList.add("vm-hide");
+
+				// Keep basemap place labels above the overlays.
+				var layers = map.getStyle().layers;
+				var firstLabel;
+				for (var i = 0; i < layers.length; i++) {
+					if (layers[i].type === "symbol") { firstLabel = layers[i].id; break; }
+				}
+
+				// --- viewshed overlays (reprojected PNGs as image sources) ---
+				SITES.forEach(function (s) {
+					var ov = D.overlays[s.key];
+					map.addSource("vis-" + s.key, {
+						type: "image",
+						url: ov.url,
+						coordinates: ov.coordinates
+					});
+					map.addLayer({
+						id: "vis-" + s.key,
+						type: "raster",
+						source: "vis-" + s.key,
+						paint: {
+							"raster-opacity": 0.65,
+							"raster-resampling": "linear",
+							"raster-fade-duration": 0
+						}
+					}, firstLabel);
+				});
+
+				// --- populated areas ---
+				map.addSource("populated", { type: "geojson", data: D.populated });
+				map.addLayer({
+					id: "pop-fill",
+					type: "fill",
+					source: "populated",
+					paint: { "fill-color": "#d8e0f0", "fill-opacity": 0.1 }
+				}, firstLabel);
+				map.addLayer({
+					id: "pop-line",
+					type: "line",
+					source: "populated",
+					paint: {
+						"line-color": "#e8eefc",
+						"line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.8, 13, 2],
+						"line-opacity": 0.85
+					}
+				}, firstLabel);
+
+				var popPopup = new maplibregl.Popup({ closeButton: true, maxWidth: "260px" });
+				map.on("click", "pop-fill", function (e) {
+					var p = e.features[0].properties;
+					popPopup.setLngLat(e.lngLat).setHTML(
+						'<div class="vm-pop-sub">Populated area</div>' +
+						'<div class="vm-pop-title">' + p.name + "</div>" +
+						'<dl class="vm-pop-grid">' +
+							"<dt>Municipality</dt><dd>" + (p.municipality || "—") + "</dd>" +
+							"<dt>Area</dt><dd>" + fmt(+p.area_km2, 3) + " km²</dd>" +
+							"<dt>Nearest place</dt><dd>" + (p.nearest_place || "—") + "</dd>" +
+							"<dt>Distance</dt><dd>" + (p.nearest_place_dist_m != null
+									? (+p.nearest_place_dist_m / 1000).toFixed(1) + " km" : "—") + "</dd>" +
+						"</dl>"
+					).addTo(map);
+				});
+				map.on("mouseenter", "pop-fill", function () { map.getCanvas().style.cursor = "pointer"; });
+				map.on("mouseleave", "pop-fill", function () { map.getCanvas().style.cursor = ""; });
+
+				// --- turbine markers (HTML, so no glyph dependency) ---
+				SITES.forEach(function (s) {
+					var el = document.createElement("div");
+					el.className = "vm-turbine";
+					el.style.setProperty("--vm-tc", s.color);
+					el.innerHTML = '<div class="vm-pin"></div><div class="vm-tag">' + s.name + "</div>";
+
+					var p = s.props;
+					var html =
+						'<div class="vm-pop-sub">Proposed turbine</div>' +
+						'<div class="vm-pop-title">' + s.name + "</div>" +
+						'<dl class="vm-pop-grid">' +
+							"<dt>Ground elevation</dt><dd>" + fmt(p.ground_elev_m) + " m</dd>" +
+							"<dt>Turbine height</dt><dd>" + fmt(p.turbine_height_m, 0) + " m</dd>" +
+							"<dt>Apex elevation</dt><dd>" + fmt(p.SPOT, 0) + " m</dd>" +
+							"<dt>Visible area</dt><dd>" + fmt(p.visible_area_km2, 2) + " km²</dd>" +
+							"<dt>Visible open land</dt><dd>" + fmt(p.visible_open_land_km2, 2) + " km²</dd>" +
+						"</dl>";
+
+					s.marker = new maplibregl.Marker({ element: el, anchor: "center" })
+						.setLngLat(s.lngLat)
+						.setPopup(new maplibregl.Popup({ closeButton: true, offset: 16, maxWidth: "260px" }).setHTML(html))
+						.addTo(map);
+				});
+
+				buildLegend();
+			});
+
+			map.on("error", function (e) {
+				console.error("map error:", e && e.error);
+			});
+
+			// ---------- legend / controls ----------
+			function buildLegend() {
+				var host = document.getElementById("vm-sites");
+
+				SITES.forEach(function (s) {
+					var p = s.props;
+					var row = document.createElement("label");
+					row.className = "vm-site";
+					row.style.setProperty("--vm-sc", s.color);
+					row.innerHTML =
+						'<input type="checkbox" checked />' +
+						'<span class="vm-site-top">' +
+							'<span class="vm-box"></span>' +
+							'<span class="vm-site-name">' + s.name + "</span>" +
+							'<span class="vm-site-val">' + fmt(p.visible_open_land_km2, 1) +
+								"<small>km²</small></span>" +
+						"</span>" +
+						'<span class="vm-site-meta">' +
+							"<span>viewshed <b>" + fmt(p.visible_area_km2, 0) + " km²</b></span>" +
+							"<span>apex <b>" + fmt(p.SPOT, 0) + " m</b></span>" +
+						"</span>";
+
+					var cb = row.querySelector("input");
+					cb.addEventListener("change", function () {
+						row.classList.toggle("vm-off", !cb.checked);
+						map.setLayoutProperty("vis-" + s.key, "visibility", cb.checked ? "visible" : "none");
+					});
+
+					// Double-click a row to zoom to that site.
+					row.addEventListener("dblclick", function (ev) {
+						ev.preventDefault();
+						map.flyTo({ center: s.lngLat, zoom: 11.5, duration: 900 });
+					});
+
+					host.appendChild(row);
+				});
+
+				bindToggle("vm-tg-pop", function (on) {
+					["pop-fill", "pop-line"].forEach(function (id) {
+						map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
+					});
+				});
+
+				bindToggle("vm-tg-turb", function (on) {
+					SITES.forEach(function (s) {
+						s.marker.getElement().style.display = on ? "" : "none";
+					});
+				});
+			}
+
+			function bindToggle(id, fn) {
+				var row = document.getElementById(id);
+				var cb = row.querySelector("input");
+				cb.addEventListener("change", function () {
+					row.classList.toggle("vm-off", !cb.checked);
+					fn(cb.checked);
+				});
+			}
+
+			var slider = document.getElementById("vm-opacity");
+			var sliderVal = document.getElementById("vm-opacity-val");
+			slider.addEventListener("input", function () {
+				var v = +slider.value;
+				sliderVal.textContent = v + "%";
+				SITES.forEach(function (s) {
+					if (map.getLayer("vis-" + s.key)) {
+						map.setPaintProperty("vis-" + s.key, "raster-opacity", v / 100);
+					}
+				});
+			});
+
+			document.getElementById("vm-reset").addEventListener("click", function () {
+				map.fitBounds(BOUNDS, Object.assign({}, fitOpts(), { duration: 800 }));
+			});
+
+			var head = document.getElementById("vm-panel-head");
+			var panel = document.getElementById("vm-panel");
+			head.addEventListener("click", function () { panel.classList.toggle("vm-collapsed"); });
+
+			// Start collapsed on small screens so the map is visible first.
+			if (window.innerWidth <= 640) panel.classList.add("vm-collapsed");
+		})();
+		</script>
 	</body>
 </html>
