@@ -69,7 +69,17 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
 			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#wrapper { background-color: #1b2030; }
+			/* Sticky footer: #main grows so .foot-wrap is pushed to the bottom of the
+			   viewport when a filter leaves only a few tiles on screen. Requires #main
+			   and .foot-wrap to be siblings of the header, which they now are. */
+			#wrapper {
+			background-color: #1b2030;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		  }
+			#main { flex: 1 0 auto; }
+			.foot-wrap { flex-shrink: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
 			#main p { color: #d8e0f0; }
 			h1, h2, h3 { color: #d8e0f0; }
@@ -166,11 +176,6 @@
 			transform: translateY(-2px);
 			box-shadow: 0 4px 14px rgba(45,125,210,0.35) !important;
 		  }
-			.cv-btn {
-			border-color: #2d7dd2 !important;
-			color: #7db8f0 !important;
-		  }
-			.cv-btn i { margin-right: 0.5em; }
 			.projects-header { text-align: center; margin-bottom: 0.4em; }
 			.filter-bar {
 			display: flex;
@@ -236,7 +241,10 @@
 								<p>Six years turning spatial questions into answers, from moose-vehicle collision modelling to avalanche risk surfaces to automated pipeline QA at production scale.</p>
 							  </div>
 							</div>
-							
+
+						</div>
+					</header>
+
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
@@ -254,7 +262,6 @@
 
 					<li><a href="work.html" class="button fit nav-btn">Professional experience</a></li>
 
-					<li><a href="pdf/cv.pdf" class="button fit nav-btn cv-btn" download><i class="fas fa-file-pdf" aria-hidden="true"></i> Download CV</a></li>
 
 				</ul>
 
@@ -453,7 +460,9 @@
 					</div>
 
 				<!-- Footer -->
-				<div class="foot" style="background-image: url('images/banner.jpg');">
+				<div class="foot-wrap">
+					<div class="inner">
+					<div class="foot" style="background-image: url('images/banner.jpg');">
 					<div class="foot-foot">
 							<section>
 								<h3>Follow</h3>
@@ -470,9 +479,8 @@
 							</ul>
 						</div>
 					</div>
-
-			</div>
-			</header>
+					</div>
+				</div>
 
 		</div>
 
