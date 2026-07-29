@@ -38,8 +38,8 @@ PAGES = {
                   "of Eastern Finland, and BSc Resource and Environmental Management, ANU.",
                   "Education of Andres Gordon"),
     "academic": ("website",
-                 "Technical skills: ArcGIS Pro, QGIS, FME, Python, R, MATLAB, point cloud and "
-                 "remote sensing work, with the projects that demonstrate each one.",
+                 "Technical skills with evidence: FME, Dagster on Kubernetes, Python, AWS, "
+                 "PostgreSQL, Mapbox vector tiling, ArcGIS Pro, QGIS, R, spatial modelling.",
                  "Technical skills of Andres Gordon"),
 
     "geoqc": ("article",
@@ -68,9 +68,9 @@ PAGES = {
               "structure variables against collision density in Ostrobothnia and North Karelia.",
               "Moose-vehicle collision spatial analysis in Finland"),
     "work3": ("article",
-              "FME data integration at Sharper Shape: automating QA of vector deliveries and "
-              "LiDAR classification tiles into repeatable, auditable production workflows.",
-              "FME data integration workflow at Sharper Shape"),
+              "Geospatial data engineering at Sharper Shape: Dagster on Kubernetes, FME, "
+              "Python delivery pipelines to AWS S3, and Mapbox vector tiling.",
+              "Geospatial data engineering at Sharper Shape"),
     "work4": ("article",
               "GIS database administration on LUKE's Rantalaidun project: digitising pasture "
               "areas, multi-criteria water sampling site selection, and geodatabase management.",

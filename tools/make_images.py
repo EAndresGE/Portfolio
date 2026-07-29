@@ -47,7 +47,7 @@ PAGES = [
 
     ("work1", "Public Participation GIS", "Social use vs flying squirrel habitat", "professional", "professional1.jpg"),
     ("work2", "Moose-Vehicle Collision Analysis", "Forest structure and collision density", "professional", "mvc.jpg"),
-    ("work3", "FME Data Integration", "Automated QA at production scale", "professional", "fme.jpg"),
+    ("work3", "Geospatial Data Engineering", "Dagster, Kubernetes, FME, Python", "professional", "fme.jpg"),
     ("work4", "GIS Database Administration", "LUKE Rantalaidun project", "professional", "r3.png"),
 
     ("visibility", "Wind Turbine Visibility Analysis", "Viewshed modelling, Joensuu", "academic", "visibility.jpg"),
