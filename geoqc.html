@@ -39,6 +39,7 @@
 		<!-- meta:end -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/portfolio.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
@@ -46,23 +47,14 @@
 			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 			#main { flex: 1; text-align: center; }
 			#main .inner { display: inline-block; text-align: left; width: 100%; }
-
 			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#header { background-color: #1b2030; padding: 0; }
-			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
 			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
-			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
 			a { color: #2d7dd2; }
 			a:hover { color: #5ba3f5; }
-			p, li { color: #d8e0f0; }
-			h1, h2, h3, h4 { color: #d8e0f0; }
 			.title { color: #d8e0f0; }
-			#header ul.icons a { color: #b8c4dc; }
-
-			/* ── Section headings ── */
 			.section-label {
 				font-size: 0.7em;
 				font-weight: 700;
@@ -71,8 +63,6 @@
 				color: #2d7dd2;
 				margin-bottom: 0.4em;
 			}
-
-			/* ── Pipeline flow diagram ── */
 			.pipeline-flow {
 				display: flex;
 				align-items: center;
@@ -143,8 +133,6 @@
 			.output-chip.docx-chip { border-color: #1a9ea6; color: #1a9ea6; }
 			.output-chip.json-chip { border-color: #ffc300; color: #ffc300; }
 			.output-chip.csv-chip  { border-color: #2ea855; color: #2ea855; }
-
-			/* ── Feature cards ── */
 			.feature-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -177,8 +165,6 @@
 				color: #d8e0f0;
 				margin: 0;
 			}
-
-			/* ── Mock report preview ── */
 			.report-preview {
 				background: #111827;
 				border: 1.5px solid #2d3855;
@@ -231,7 +217,6 @@
 				letter-spacing: 0.08em;
 				margin-top: 0.3em;
 			}
-			/* Remarks panel */
 			.remarks-panel {
 				padding: 1em 1.5em;
 				border-top: 1px solid #2d3855;
@@ -267,8 +252,6 @@
 			.remark.info .remark-icon    { color: #5ba3f5; }
 			.remark-text { color: #d8e0f0; }
 			.remark-step { font-weight: 700; color: #d8e0f0; }
-
-			/* Severity legend */
 			.sev-legend {
 				display: flex;
 				flex-wrap: wrap;
@@ -292,8 +275,6 @@
 			.sev-light    { background: rgba(255,195,0,0.15);  color: #ffc300; }
 			.sev-moderate { background: rgba(253,126,20,0.15); color: #fd7e14; }
 			.sev-major    { background: rgba(220,53,69,0.15);  color: #dc3545; }
-
-			/* ── Tech stack ── */
 			.tech-stack {
 				display: flex;
 				flex-wrap: wrap;
@@ -311,8 +292,6 @@
 				color: #b8c4dc;
 				text-transform: uppercase;
 			}
-
-			/* ── CLI block ── */
 			.cli-block {
 				background: #0d1117;
 				border: 1.5px solid #2d3855;
@@ -328,57 +307,14 @@
 			.cli-block .cli-cmd     { color: #7ee787; }
 			.cli-block .cli-flag    { color: #ffa657; }
 			.cli-block .cli-val     { color: #a5d6ff; }
-
 			@media (max-width: 700px) {
 				.pipeline-flow { flex-direction: column; align-items: stretch; }
 				.flow-arrow { transform: rotate(90deg); text-align: center; }
 				.flow-outputs { flex-direction: row; flex-wrap: wrap; }
 			}
-		
-			/* Visible back navigation. The logo alone was the only way home. */
-			.back-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5em;
-				padding: 0.4em 0.95em;
-				border: 1.5px solid #2d3855;
-				border-radius: 4px;
-				background: #242d42;
-				color: #b8c4dc !important;
-				font-size: 0.72em;
-				font-weight: 700;
-				letter-spacing: 0.09em;
-				text-transform: uppercase;
-				text-decoration: none;
-				transition: background 0.18s, border-color 0.18s, color 0.18s;
-			}
-			.back-link:hover {
-				background: #2d7dd2;
-				border-color: #2d7dd2;
-				color: #ffffff !important;
-			}
-			.home-logo { transition: width 0.2s, height 0.2s; }
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
-		
-			/* Date / organisation / role, so coursework is never mistaken for
-			   paid work and vice versa. */
-			.project-meta {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5em 1.6em;
-				margin: 0.4em 0 1.6em;
-				padding-bottom: 1.2em;
-				border-bottom: 1px solid #2d3855;
-				font-size: 0.78em !important;
-				color: #b8c4dc !important;
-			}
-			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
-			.project-meta i { color: #7db8f0; font-size: 0.95em; }
-		
-			/* Says plainly why there is no repo link, rather than leaving a
-			   detailed technical claim with nothing to check. */
 			.ip-note {
 				display: flex;
 				align-items: flex-start;

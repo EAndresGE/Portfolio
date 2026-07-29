@@ -39,6 +39,7 @@
 		<!-- meta:end -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/portfolio.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
@@ -46,22 +47,13 @@
 			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 			#main { flex: 1; text-align: center; }
 			#main .inner { display: inline-block; text-align: left; width: 100%; }
-
 			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#header { background-color: #1b2030; padding: 0; }
-			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
 			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
-			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
 			a { color: #2ea855; }
 			a:hover { color: #69f0ae; }
-			p, li { color: #d8e0f0; }
-			h1, h2, h3, h4 { color: #d8e0f0; }
-			#header ul.icons a { color: #b8c4dc; }
-
-			/* ── Section labels ── */
 			.section-label {
 				font-size: 0.7em;
 				font-weight: 700;
@@ -70,8 +62,6 @@
 				color: #2ea855;
 				margin-bottom: 0.4em;
 			}
-
-			/* ── Pipeline flow ── */
 			.pipeline-flow {
 				display: flex;
 				align-items: center;
@@ -117,8 +107,6 @@
 			.output-chip.tif  { border-color: #2ea855; color: #69f0ae; }
 			.output-chip.json { border-color: #ffc300; color: #ffc300; }
 			.output-chip.pdf  { border-color: #ff6d00; color: #ff9800; }
-
-			/* ── Feature cards ── */
 			.feature-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -135,8 +123,6 @@
 			.feature-card .fc-icon { font-size: 1.4em; color: #2ea855; margin-bottom: 0.55em; }
 			.feature-card h4 { font-size: 0.83em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #d8e0f0; margin: 0 0 0.45em 0; }
 			.feature-card p { font-size: 0.8em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-
-			/* ── CHM mock preview ── */
 			.chm-preview {
 				background: #0d1f0e;
 				border: 1.5px solid #2d4a2f;
@@ -156,7 +142,6 @@
 			}
 			.chm-title { font-size: 0.88em; font-weight: 700; color: #d8e0f0; }
 			.chm-sub { font-size: 0.68em; color: #69f0ae; letter-spacing: 0.08em; text-transform: uppercase; }
-			/* KPI strip */
 			.kpi-strip {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -170,8 +155,6 @@
 			}
 			.kpi-val { font-size: 1.5em; font-weight: 700; color: #69f0ae; line-height: 1; }
 			.kpi-label { font-size: 0.62em; color: #7aadcc; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.25em; }
-
-			/* Output stages table */
 			.stages-table {
 				width: 100%;
 				border-collapse: collapse;
@@ -197,8 +180,6 @@
 			.stages-table tr:nth-child(even) td { background: #141f15; }
 			.stages-table .stage-name { color: #d8e0f0; font-weight: 600; white-space: nowrap; }
 			.stages-table .out-fmt { color: #ffc300; font-size: 0.85em; font-weight: 600; }
-
-			/* ── Use case list ── */
 			.usecase-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -216,8 +197,6 @@
 			}
 			.usecase-card i { color: #2ea855; font-size: 1em; margin-top: 0.15em; flex-shrink: 0; }
 			.usecase-card p { font-size: 0.78em; line-height: 1.5; color: #d8e0f0; margin: 0; }
-
-			/* ── Tech stack ── */
 			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 1em 0; }
 			.tech-chip {
 				background: #1a2a1c;
@@ -230,8 +209,6 @@
 				color: #b8c4dc;
 				text-transform: uppercase;
 			}
-
-			/* ── CLI block ── */
 			.cli-block {
 				background: #060f07;
 				border: 1.5px solid #2d4a2f;
@@ -246,8 +223,6 @@
 			.cli-block .cli-comment { color: #4a6b4c; }
 			.cli-block .cli-flag    { color: #ffa657; }
 			.cli-block .cli-val     { color: #a5d6ff; }
-
-			/* State badge */
 			.state-badge {
 				display: inline-flex;
 				align-items: center;
@@ -263,55 +238,14 @@
 				text-transform: uppercase;
 				margin-bottom: 1em;
 			}
-
 			@media (max-width: 700px) {
 				.pipeline-flow { flex-direction: column; align-items: stretch; }
 				.flow-arrow { transform: rotate(90deg); text-align: center; }
 				.flow-outputs { flex-direction: row; flex-wrap: wrap; }
 			}
-		
-			/* Visible back navigation. The logo alone was the only way home. */
-			.back-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5em;
-				padding: 0.4em 0.95em;
-				border: 1.5px solid #2d3855;
-				border-radius: 4px;
-				background: #242d42;
-				color: #b8c4dc !important;
-				font-size: 0.72em;
-				font-weight: 700;
-				letter-spacing: 0.09em;
-				text-transform: uppercase;
-				text-decoration: none;
-				transition: background 0.18s, border-color 0.18s, color 0.18s;
-			}
-			.back-link:hover {
-				background: #2d7dd2;
-				border-color: #2d7dd2;
-				color: #ffffff !important;
-			}
-			.home-logo { transition: width 0.2s, height 0.2s; }
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
-		
-			/* Date / organisation / role, so coursework is never mistaken for
-			   paid work and vice versa. */
-			.project-meta {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5em 1.6em;
-				margin: 0.4em 0 1.6em;
-				padding-bottom: 1.2em;
-				border-bottom: 1px solid #2d3855;
-				font-size: 0.78em !important;
-				color: #b8c4dc !important;
-			}
-			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
-			.project-meta i { color: #7db8f0; font-size: 0.95em; }
-		
 			.gh-link {
 				display: inline-flex;
 				align-items: center;

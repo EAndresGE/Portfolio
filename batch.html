@@ -34,6 +34,7 @@
 		<!-- meta:end -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/portfolio.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
@@ -41,68 +42,21 @@
 			#main { flex: 1; text-align: center; }
 			#main .inner { display: inline-block; text-align: left; width: 100%; }
 			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#header { background-color: #1b2030; padding: 0; }
-			#header .inner { padding: 0; }
 			#main { background-color: #1b2030; color: #d8e0f0; }
 			#main .inner { padding: 0 2.5em 2em; }
 			#footer { background-color: #141820 !important; }
-			#footer h2, #footer p, #footer ul { color: #d8e0f0; }
 			.follow-heading { color: #d8e0f0; }
 			a { color: #2d7dd2; }
 			a:hover { color: #5ba3f5; }
-			p, li { color: #d8e0f0; }
-			h1, h2, h3, h4 { color: #d8e0f0; }
-			#header ul.icons a { color: #b8c4dc; }
 			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
 			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
 			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
-			.outcome-card i { color: #2d7dd2; margin-right: 0.4em; }
 			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-			.project-image { width: 100%; border-radius: 8px; margin: 1em 0 1.5em; display: block; }
-			.built-with { margin-top: 2em; padding-top: 1.5em; border-top: 1px solid #2d3855; }
-			.built-with-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin-bottom: 0.7em; }
 			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
 			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #b8c4dc; text-transform: uppercase; }
-		
-			/* Visible back navigation. The logo alone was the only way home. */
-			.back-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5em;
-				padding: 0.4em 0.95em;
-				border: 1.5px solid #2d3855;
-				border-radius: 4px;
-				background: #242d42;
-				color: #b8c4dc !important;
-				font-size: 0.72em;
-				font-weight: 700;
-				letter-spacing: 0.09em;
-				text-transform: uppercase;
-				text-decoration: none;
-				transition: background 0.18s, border-color 0.18s, color 0.18s;
-			}
-			.back-link:hover {
-				background: #2d7dd2;
-				border-color: #2d7dd2;
-				color: #ffffff !important;
-			}
-			.home-logo { transition: width 0.2s, height 0.2s; }
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
-		
-			.project-meta {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5em 1.6em;
-				margin: 0.4em 0 1.6em;
-				padding-bottom: 1.2em;
-				border-bottom: 1px solid #2d3855;
-				font-size: 0.78em !important;
-				color: #b8c4dc !important;
-			}
-			.project-meta span { display: inline-flex; align-items: center; gap: 0.5em; }
-			.project-meta i { color: #7db8f0; font-size: 0.95em; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -122,7 +76,7 @@
 				<div class="inner">
 
 					<h1>Batch Processing Open Forest Data for Management Planning</h1>
-					<p class="project-meta"><span><i class="fas fa-building" aria-hidden="true"></i>University of Eastern Finland</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>MSc coursework</span></p>
+					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>Spring 2020</span><span><i class="fas fa-building" aria-hidden="true"></i>University of Eastern Finland</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Advanced GIS coursework</span></p>
 					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
 					<p>The Finnish Forest Centre provides open forest inventory data in GeoPackage format at 16x16 m grid resolution. Processing this data for practical management planning is time-consuming and requires programming skills — a barrier for many forest managers who need the information most.</p>
 					<img src="images/batch.jpg" alt="Forest data batch processing spatial analysis Finland" class="project-image"/>

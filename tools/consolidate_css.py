@@ -1,0 +1,179 @@
+"""Lift CSS duplicated across pages into one shared stylesheet.
+
+Every page carries its own <style> block, so the dark palette and the shared
+components (.section-label, .tech-chip, .outcome-card, .project-meta,
+.back-link ...) are copy-pasted 15-19 times. Changing one colour meant 90
+edits, and drift is already visible: treeforge.html had a blue .kpi-label in an
+all-green page.
+
+Output goes to a NEW file, assets/css/portfolio.css, rather than into
+main.css. main.css is vendor code (HTML5 UP Phantom) and there are two copies
+of it (main.css and main2.css) used by different pages. One new file layered on
+top serves both and survives a template update.
+
+Cascade safety. portfolio.css is linked after main*.css and before each page's
+inline <style>. Moving a rule from inline to portfolio.css cannot change the
+result provided:
+  - specificity is unchanged (same selector), and
+  - no rule left behind in that page's inline block targets the same selector.
+Both are asserted. Any selector that varies between pages is left alone.
+
+Run with --apply to write. Default is a dry run.
+"""
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(".")
+APPLY = "--apply" in sys.argv
+MIN_PAGES = 8            # only lift rules shared this widely
+OUT = ROOT / "assets" / "css" / "portfolio.css"
+LINK = '<link rel="stylesheet" href="assets/css/portfolio.css" />'
+
+STYLE_RE = re.compile(r"(<style>)(.*?)(</style>)", re.S)
+
+
+def split_rules(css):
+    """Ordered [(raw, selector, declarations)] for top-level rules.
+
+    At-rules (@media, @supports) are returned whole and never lifted, since
+    their nesting makes naive extraction unsafe.
+    """
+    # Strip comments first, otherwise a comment preceding a rule gets glued
+    # onto its selector and the same rule looks different between pages.
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    rules, i, n = [], 0, len(css)
+    while i < n:
+        at = css.find("@", i)
+        brace = css.find("{", i)
+        if brace == -1:
+            break
+        if at != -1 and at < brace:
+            depth, j = 0, css.find("{", at)
+            if j == -1:
+                break
+            k = j
+            while k < n:
+                if css[k] == "{":
+                    depth += 1
+                elif css[k] == "}":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                k += 1
+            rules.append((css[at:k + 1], None, None))
+            i = k + 1
+            continue
+        end = css.find("}", brace)
+        if end == -1:
+            break
+        sel = re.sub(r"\s+", " ", css[i:brace]).strip()
+        decl = re.sub(r"\s+", " ", css[brace + 1:end]).strip()
+        rules.append((css[i:end + 1], sel, decl))
+        i = end + 1
+    return rules
+
+
+def main():
+    pages = sorted(p for p in ROOT.glob("*.html"))
+    parsed = {}
+    for p in pages:
+        m = STYLE_RE.search(p.read_text(encoding="utf-8"))
+        parsed[p.name] = split_rules(m.group(2)) if m else []
+
+    # selector -> {declarations -> set(pages)}
+    variants = {}
+    for name, rules in parsed.items():
+        for _, sel, decl in rules:
+            if sel is None:
+                continue
+            variants.setdefault(sel, {}).setdefault(decl, set()).add(name)
+
+    liftable, skipped = {}, []
+    for sel, decls in variants.items():
+        pages_with = set().union(*decls.values())
+        if len(pages_with) < MIN_PAGES:
+            continue
+        if len(decls) > 1:
+            skipped.append((sel, len(decls), len(pages_with)))
+            continue
+        decl = next(iter(decls))
+        # A page may declare the same selector twice in its own block; leave those.
+        dup = [n for n, rules in parsed.items()
+               if sum(1 for _, s, _ in rules if s == sel) > 1]
+        if dup:
+            skipped.append((sel, f"repeated within {len(dup)} page(s)", len(pages_with)))
+            continue
+        liftable[sel] = (decl, pages_with)
+
+    print(f"pages scanned: {len(pages)}")
+    print(f"distinct selectors in inline blocks: {len(variants)}")
+    print(f"\nLIFTABLE (identical in >= {MIN_PAGES} pages): {len(liftable)}")
+    for sel, (decl, pw) in sorted(liftable.items(), key=lambda x: -len(x[1][1])):
+        print(f"  {len(pw):3} pages  {sel[:62]}")
+    print(f"\nSKIPPED (varies between pages, so page-specific): {len(skipped)}")
+    for sel, why, pw in sorted(skipped, key=lambda x: -x[2])[:14]:
+        print(f"  {pw:3} pages  {str(why):22} {sel[:52]}")
+
+    total_removed = sum(len(pw) for _, pw in liftable.values())
+    print(f"\nrule instances that would leave the HTML: {total_removed}")
+
+    if not APPLY:
+        print("\nDRY RUN. Re-run with --apply to write.")
+        return
+
+    header = """/* portfolio.css
+ *
+ * Shared styles for this portfolio, layered on top of the HTML5 UP Phantom
+ * template. Kept separate from main.css / main2.css because those are vendor
+ * files, and because two copies of the template exist; one overlay serves both.
+ *
+ * Generated by tools/consolidate_css.py from rules that were duplicated
+ * across pages. Page-specific styles stay in each page's own <style> block.
+ */
+
+"""
+    body = ["/* ---------- shared components ---------- */\n"]
+    for sel, (decl, pw) in sorted(liftable.items()):
+        props = "; ".join(x.strip() for x in decl.split(";") if x.strip())
+        body.append(f"{sel} {{ {props}; }}\n")
+
+    fix = """
+/* ---------- corrections ---------- */
+
+/* main.css sets #footer > .inner .copyright to rgba(88,88,88,0.5), specificity
+ * (1,2,0), which beat each page's inline "#footer ul" at (1,0,1). On the dark
+ * #141820 footer that composited to #36383c: 1.51:1 contrast, effectively
+ * invisible. That line carries the HTML5 UP attribution the CCA 3.0 licence
+ * requires to be visible. Matched specificity here to restore it. */
+#footer > .inner .copyright,
+#footer > .inner .copyright li { color: #b8c4dc; }
+#footer > .inner .copyright a { color: #7db8f0; }
+"""
+    OUT.write_text(header + "".join(body) + fix, encoding="utf-8", newline="\n")
+    print(f"\nwrote {OUT}  ({OUT.stat().st_size} bytes, {len(liftable)} rules)")
+
+    for p in pages:
+        t = p.read_text(encoding="utf-8")
+        m = STYLE_RE.search(t)
+        if not m:
+            continue
+        kept = []
+        for raw, sel, _ in split_rules(m.group(2)):
+            if sel is not None and sel in liftable:
+                continue
+            kept.append(raw)
+        new_block = "\n\t\t\t" + "\n\t\t\t".join(x.strip() for x in kept) + "\n\t\t" if kept else "\n\t\t"
+        t = t[:m.start(2)] + new_block + t[m.end(2):]
+
+        if LINK not in t:
+            # After the last main*.css link, before the inline block.
+            t = re.sub(r'(<link rel="stylesheet" href="assets/css/main2?\.css" />)',
+                       r"\1\n\t\t" + LINK, t, count=1)
+        p.write_text(t, encoding="utf-8", newline="")
+
+    print(f"stripped lifted rules from {len(pages)} pages and linked portfolio.css")
+
+
+if __name__ == "__main__":
+    main()

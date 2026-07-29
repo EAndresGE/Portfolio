@@ -39,13 +39,12 @@
 		<!-- meta:end -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main2.css" />
+		<link rel="stylesheet" href="assets/css/portfolio.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
 			html, body { background-color: #1b2030; height: 100%; }
 			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#header { background-color: #1b2030; padding: 0; }
-			#header .inner { padding: 0; }
 			#main {
 			  background-color: #1b2030;
 			  color: #d8e0f0;
@@ -58,8 +57,6 @@
 			}
 			#footer { background-color: #141820; }
 			.follow-heading { color: white; }
-
-			/* Skills layout */
 			.skills-grid {
 			  display: grid;
 			  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -86,7 +83,6 @@
 			  border-bottom: 1px solid #2d3855;
 			}
 			.skill-group-title i { font-size: 1.1em; color: #7db8f0; }
-
 			.skill-row {
 			  padding: 0.7em 0;
 			  border-bottom: 1px solid #1f2739;
@@ -102,8 +98,6 @@
 			.skill-ev { font-size: 0.76em; margin-top: 0.25em; color: #b8c4dc; }
 			.skill-ev a { color: #7db8f0; }
 			.skill-ev i { font-size: 0.85em; margin-right: 0.35em; opacity: 0.8; }
-
-			/* Tier chips. Three honest bands beat a fabricated percentage. */
 			.tier {
 			  flex-shrink: 0;
 			  font-size: 0.62em;
@@ -117,7 +111,6 @@
 			.tier-prod    { background: rgba(45,125,210,0.16);  color: #7db8f0; border: 1px solid #2d7dd2; }
 			.tier-strong  { background: rgba(26,158,166,0.16);  color: #5ed6dc; border: 1px solid #1a9ea6; }
 			.tier-working { background: rgba(136,150,184,0.14); color: #b8c4dc; border: 1px solid #4a5980; }
-
 			.tier-legend {
 			  display: flex;
 			  flex-wrap: wrap;
@@ -131,7 +124,6 @@
 			}
 			.tier-legend div { display: flex; align-items: center; gap: 0.6em; }
 			.tier-legend span.lab { color: #b8c4dc; }
-
 			.lang-list { display: flex; flex-wrap: wrap; gap: 0.8em; margin-top: 0.4em; }
 			.lang-item {
 			  background: #242d42;
@@ -141,29 +133,6 @@
 			}
 			.lang-item strong { color: #d8e0f0; display: block; font-size: 0.95em; }
 			.lang-item span { color: #b8c4dc; font-size: 0.8em; }
-			/* Visible back navigation. The logo alone was the only way home. */
-			.back-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5em;
-				padding: 0.4em 0.95em;
-				border: 1.5px solid #2d3855;
-				border-radius: 4px;
-				background: #242d42;
-				color: #b8c4dc !important;
-				font-size: 0.72em;
-				font-weight: 700;
-				letter-spacing: 0.09em;
-				text-transform: uppercase;
-				text-decoration: none;
-				transition: background 0.18s, border-color 0.18s, color 0.18s;
-			}
-			.back-link:hover {
-				background: #2d7dd2;
-				border-color: #2d7dd2;
-				color: #ffffff !important;
-			}
-			.home-logo { transition: width 0.2s, height 0.2s; }
 			@media screen and (max-width: 736px) {
 				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
 			}
