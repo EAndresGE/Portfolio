@@ -174,12 +174,12 @@ def main():
 
     scoped = scope_css(css)
     scoped = reset + scoped + override
-    scoped = (f"#{WRAP} {{ position: relative; width: 100%; height: 820px; "
+    scoped = (f"#{WRAP} {{ position: relative; width: 100%; "
+              f"height: 88vh; min-height: 680px; max-height: 1100px; "
               f"margin: 1em 0 0.8em; border-radius: 8px; overflow: hidden; "
               f"border: 1px solid #2d3855; background: #fff; }}\n"
-              f"\t\t\t@media (max-width: 1200px) {{ #{WRAP} {{ height: 740px; }} }}\n"
-              f"\t\t\t@media (max-width: 980px) {{ #{WRAP} {{ height: 640px; }} }}\n"
-              f"\t\t\t@media (max-width: 640px) {{ #{WRAP} {{ height: 520px; }} }}\n"
+              f"\t\t\t@media (max-width: 980px) {{ #{WRAP} {{ height: 78vh; min-height: 560px; }} }}\n"
+              f"\t\t\t@media (max-width: 640px) {{ #{WRAP} {{ height: 72vh; min-height: 460px; }} }}\n"
               f"\t\t\t/* This map has light furniture; the site's dark text rules must not\n"
               f"\t\t\t   bleed into the white panel. */\n"
               f"\t\t\t#{WRAP} p, #{WRAP} li, #{WRAP} h1, #{WRAP} h2, #{WRAP} h3 "
