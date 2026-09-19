@@ -1,181 +1,171 @@
-"""Generate favicons and 1200x630 Open Graph cards for the portfolio.
+"""Generate favicons and 1200x630 Open Graph cards.
 
-Favicons come from images/logo.png. OG cards are built from each page's own
-hero image where one exists, cropped to fill 1200x630, darkened, with a bottom
-scrim and the page title. Pages with no usable photo (SVG-only logos) get a
-flat card in the site palette.
+Rendered with ImageMagick rather than Pillow: Pillow is not installed on every
+machine this repo gets cloned to, and `magick` is.
 
-Category accent colours match the site's existing system:
-  professional #2d7dd2   academic #1a9ea6   personal #2ea855
+Fonts: the site's own faces, looked for in tools/fonts/ first, then on the
+system, then falling back to Noto. They are not vendored because 1.1 MB of
+TTF to regenerate nineteen JPEGs is a poor trade. To match the committed
+cards exactly, drop these into tools/fonts/:
+
+    SourceSerif4Display-Semibold.ttf   adobe-fonts/source-serif  (Desktop zip)
+    SourceSans3-Regular.ttf            adobe-fonts/source-sans   (TTF zip)
+    SourceSans3-Semibold.ttf           adobe-fonts/source-sans   (TTF zip)
 
 Re-runnable: overwrites its outputs, touches nothing else.
 """
+import shutil
+import subprocess
+import sys
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG = ROOT / "images"
 OG = IMG / "og"
 ICONS = IMG / "icons"
+FONTDIR = Path(__file__).resolve().parent / "fonts"
 
 W, H = 1200, 630
-BG = (14, 15, 17)          # #0e0f11
-TEXT = (255, 255, 255)
-MUTED = (136, 150, 184)    # #8896b8
+BG = "#0e0f11"
+TEXT = "#f2efe9"
+MUTED = "#a9a49c"
+FAINT = "#8d8882"
+ACCENT = "#d08b4f"
 
-ACCENT = {
-    "professional": (45, 125, 210),   # #2d7dd2
-    "academic": (26, 158, 166),       # #1a9ea6
-    "personal": (46, 168, 85),        # #2ea855
-}
+MAGICK = shutil.which("magick") or shutil.which("convert")
 
-FONTS = Path("C:/Windows/Fonts")
-F_BOLD = FONTS / "segoeuib.ttf"
-F_REG = FONTS / "segoeui.ttf"
 
-# page, title, subtitle, category, source image (None = flat card)
+def font(*candidates):
+    """First of the named faces that actually exists, else a Noto fallback."""
+    for name in candidates:
+        local = FONTDIR / name
+        if local.exists():
+            return str(local)
+    for name in candidates:
+        stem = Path(name).stem
+        out = subprocess.run(["fc-match", "-f", "%{file}", stem],
+                             capture_output=True, text=True).stdout.strip()
+        if out and Path(out).exists() and stem.split("-")[0].lower() in Path(out).stem.lower():
+            return out
+    fallback = "Noto Serif" if "Serif" in candidates[0] else "Noto Sans"
+    return subprocess.run(["fc-match", "-f", "%{file}", fallback],
+                          capture_output=True, text=True).stdout.strip()
+
+
+F_TITLE = font("SourceSerif4Display-Semibold.ttf")
+F_SUB = font("SourceSans3-Regular.ttf")
+F_BY = font("SourceSans3-Semibold.ttf")
+
+# page, title, subtitle, source image (None = flat card)
 PAGES = [
-    ("index", "Andres Gordon", "Geospatial Data Engineer", "professional", "banner.jpg"),
-    ("work", "Professional Experience", "Sharper Shape / LUKE / UEF", "professional", "banner.jpg"),
-    ("education", "Education", "MSc Environmental Informatics, UEF", "professional", "banner.jpg"),
-    ("academic", "Technical Skills", "ArcGIS Pro / QGIS / FME / Python / R", "professional", "banner.jpg"),
+    ("index", "Andres Gordon", "Geospatial data engineer", "banner.jpg"),
+    ("work", "Professional Experience", "Sharper Shape / LUKE / UEF", "banner.jpg"),
+    ("education", "Education", "MSc Environmental Informatics, UEF", "banner.jpg"),
+    ("academic", "Technical Skills", "ArcGIS Pro / QGIS / FME / Python / R", "banner.jpg"),
 
-    ("geoqc", "GeoQC Flow", "Automated pipeline QC and reporting", "professional", None),
-    ("treeforge", "TreeForge", "Drone point cloud to forest inventory", "personal", None),
-    ("powerornah", "Power or Nah", "Live electricity price at a glance", "personal", "powerornah.jpg"),
-    ("pp1", "Paper-Cut Cartography of Quito", "Andean topography as layered paper", "personal", "Quito_paper_cut.jpg"),
+    ("geoqc", "GeoQC Flow", "Automated pipeline QC and reporting", "geoqc_preview.svg"),
+    ("treeforge", "TreeForge", "Drone point cloud to forest inventory", "treeforge_tile.jpg"),
+    ("powerornah", "Power or Nah", "Live electricity price at a glance", "powerornah.jpg"),
+    ("pp1", "Paper-Cut Cartography of Quito", "Andean topography as layered paper", "Quito_paper_cut.jpg"),
 
-    ("work1", "Public Participation GIS", "Social use vs flying squirrel habitat", "professional", "professional1.jpg"),
-    ("work2", "Moose-Vehicle Collision Analysis", "Forest structure and collision density", "professional", "mvc.jpg"),
-    ("work3", "Geospatial Data Engineering", "Dagster, Kubernetes, FME, Python", "professional", "fme.jpg"),
-    ("work4", "GIS Database Administration", "LUKE Rantalaidun project", "professional", "r3.png"),
+    ("work1", "Public Participation GIS", "Social use vs flying squirrel habitat", "professional1.jpg"),
+    ("work2", "Moose-Vehicle Collision Analysis", "Forest structure and collision density", "mvc.jpg"),
+    ("work3", "Geospatial Data Engineering", "Dagster, Kubernetes, FME, Python", "fme.jpg"),
+    ("work4", "Geodatabase Administration for Rantalaidun", "LUKE, pasture digitisation", "r3.png"),
 
-    ("visibility", "Wind Turbine Visibility Analysis", "Viewshed modelling, Joensuu", "academic", "visibility.jpg"),
-    ("risk", "Avalanche Risk Modelling", "Valais canton, Switzerland", "academic", "risk.jpg"),
-    ("MCDA", "Multi-Criteria Site Selection", "Siting a biathlon high school, Joensuu", "academic", "mcda.png"),
-    ("geo", "Geostatistical Interpolation", "Kriging and IDW compared", "academic", "pre.jpg"),
-    ("batch", "Batch Processing Forest Data", "Python and R over open inventory", "academic", "batch.jpg"),
-    ("network", "Light Rail Accessibility", "Network analysis, Canberra", "academic", "pro.png"),
-    ("remote", "Remote Sensing and Fire Impact", "MATLAB over NCI NetCDF, Australia", "academic", "remote.jpg"),
+    ("visibility", "Visibility Analysis of Wind Turbines", "Viewshed modelling, Joensuu", "visibility.jpg"),
+    ("risk", "Avalanche Risk Modelling in Valais", "Valais canton, Switzerland", "risk.jpg"),
+    ("MCDA", "Multi-Criteria Site Selection", "Siting a biathlon high school, Joensuu", "mcda.png"),
+    ("geo", "Interpolating Precipitation and Air Pollution", "Kriging and IDW compared", "pre.jpg"),
+    ("batch", "Batch Processing Forest Data", "Python and R over open inventory", "batch.jpg"),
+    ("network", "Light Rail Accessibility in Canberra", "Network analysis, Canberra", "pro.png"),
+    ("remote", "Remote Sensing of Fire Impact in Australia", "MATLAB over NCI NetCDF", "remote.jpg"),
 ]
 
-
-def font(path, size):
-    return ImageFont.truetype(str(path), size)
+PAD = 72
 
 
-def crop_fill(im, w, h):
-    """Scale and centre-crop to exactly w x h."""
-    im = im.convert("RGB")
-    s = max(w / im.width, h / im.height)
-    im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
-                   Image.LANCZOS)
-    left, top = (im.width - w) // 2, (im.height - h) // 2
-    return im.crop((left, top, left + w, top + h))
+def run(args):
+    subprocess.run([MAGICK] + args, check=True)
 
 
-def wrap(draw, text, fnt, max_w):
-    words, lines, cur = text.split(), [], ""
-    for word in words:
-        trial = f"{cur} {word}".strip()
-        if draw.textlength(trial, font=fnt) <= max_w:
-            cur = trial
-        else:
-            if cur:
-                lines.append(cur)
-            cur = word
-    if cur:
-        lines.append(cur)
-    return lines
-
-
-def make_card(slug, title, subtitle, category, src):
-    accent = ACCENT[category]
-
-    if src and (IMG / src).exists():
-        base = crop_fill(Image.open(IMG / src), W, H)
-        # Darken so text always reads.
-        base = Image.blend(base, Image.new("RGB", (W, H), BG), 0.55)
-    else:
-        base = Image.new("RGB", (W, H), BG)
-
-    # Bottom scrim, strongest at the very bottom.
-    scrim = Image.new("L", (1, H))
-    for y in range(H):
-        t = max(0.0, (y - H * 0.35) / (H * 0.65))
-        scrim.putpixel((0, y), int(235 * (t ** 1.5)))
-    base = Image.composite(Image.new("RGB", (W, H), BG),
-                           base, scrim.resize((W, H)))
-
-    d = ImageDraw.Draw(base)
-    pad = 72
-
-    # Accent bar, top left.
-    d.rectangle([pad, pad, pad + 64, pad + 7], fill=accent)
-
-    # Title, wrapped, sitting above the subtitle.
-    size = 76 if len(title) <= 22 else (62 if len(title) <= 34 else 54)
-    f_title = font(F_BOLD, size)
-    lines = wrap(d, title, f_title, W - 2 * pad)
-    f_sub = font(F_REG, 30)
-
-    line_h = int(size * 1.18)
-    block_h = len(lines) * line_h + 46
-    y = H - pad - block_h
-
-    for ln in lines:
-        d.text((pad, y), ln, font=f_title, fill=TEXT)
-        y += line_h
-    d.text((pad, y + 8), subtitle, font=f_sub, fill=MUTED)
-
-    # Byline, top right. Skipped where the title is already the name.
-    if title != "Andres Gordon":
-        f_by = font(F_BOLD, 26)
-        label = "ANDRES GORDON"
-        d.text((W - pad - d.textlength(label, font=f_by), pad - 4),
-               label, font=f_by, fill=(216, 224, 240))
-
-    OG.mkdir(parents=True, exist_ok=True)
-    # JPEG: these are photographic and get fetched by every crawler that sees
-    # the page, so size matters more than lossless text edges.
+def make_card(slug, title, subtitle, src):
     out = OG / f"{slug}.jpg"
-    base.save(out, "JPEG", quality=85, optimize=True, progressive=True)
+    OG.mkdir(parents=True, exist_ok=True)
+
+    size = 68 if len(title) <= 22 else (56 if len(title) <= 34 else 46)
+    # The title block sits on the baseline of the card, subtitle under it.
+    title_w = W - 2 * PAD
+
+    args = []
+    photo = IMG / src if src else None
+    if photo and photo.exists():
+        args += [str(photo), "-resize", f"{W}x{H}^", "-gravity", "center",
+                 "-extent", f"{W}x{H}", "-colorspace", "sRGB"]
+    else:
+        args += ["-size", f"{W}x{H}", f"xc:{BG}"]
+
+    args += [
+        # Darken the photo so type always reads, then a bottom scrim.
+        "(", "-size", f"{W}x{H}", f"xc:{BG}", ")",
+        "-compose", "blend", "-define", "compose:args=62", "-composite",
+        "(", "-size", f"{W}x{H}", f"gradient:none-{BG}", "-function", "polynomial", "2.2,-1.2,0.05", ")",
+        "-compose", "over", "-composite",
+        # Accent rule, top left.
+        "-fill", ACCENT, "-draw", f"rectangle {PAD},{PAD} {PAD+64},{PAD+7}",
+        # Title, auto-wrapped, anchored bottom left above the subtitle.
+        # -gravity west inside the parens: left-align the wrapped lines,
+        # otherwise caption: centres them within its box.
+        "(", "-background", "none", "-fill", TEXT, "-font", F_TITLE,
+        "-pointsize", str(size), "-size", f"{title_w}x", "-interline-spacing", "6",
+        "-gravity", "west", f"caption:{title}", ")",
+        "-gravity", "southwest", "-geometry", f"+{PAD}+{PAD+52}", "-composite",
+        # Subtitle.
+        "-font", F_SUB, "-pointsize", "28", "-fill", MUTED,
+        "-annotate", f"+{PAD}+{PAD}", subtitle,
+    ]
+    if title != "Andres Gordon":
+        args += ["-gravity", "northeast", "-font", F_BY, "-pointsize", "24",
+                 "-fill", FAINT, "-annotate", f"+{PAD}+{PAD}", "ANDRES GORDON"]
+
+    args += ["-quality", "85", "-interlace", "Plane", "-strip", str(out)]
+    run(args)
     return out
 
 
 def make_favicons():
     ICONS.mkdir(parents=True, exist_ok=True)
-    logo = Image.open(IMG / "logo.png").convert("RGBA")
-
+    logo = IMG / "logo.png"
     made = []
-    for size, name in [(32, "favicon-32.png"), (192, "favicon-192.png"),
-                       (180, "apple-touch-icon.png")]:
-        im = logo.resize((size, size), Image.LANCZOS)
-        if name == "apple-touch-icon.png":
-            # iOS ignores transparency and composites on black, so flatten.
-            flat = Image.new("RGB", (size, size), BG)
-            flat.paste(im, (0, 0), im)
-            im = flat
+    for px, name in [(32, "favicon-32.png"), (192, "favicon-192.png")]:
         p = ICONS / name
-        im.save(p, "PNG", optimize=True)
+        run([str(logo), "-resize", f"{px}x{px}", "-strip", str(p)])
         made.append(p)
-
+    # iOS ignores transparency and composites on black, so flatten onto the
+    # page colour instead.
+    p = ICONS / "apple-touch-icon.png"
+    run([str(logo), "-resize", "180x180", "-background", BG,
+         "-flatten", "-strip", str(p)])
+    made.append(p)
     ico = ROOT / "favicon.ico"
-    logo.save(ico, sizes=[(16, 16), (32, 32), (48, 48)])
+    run([str(logo), "-define", "icon:auto-resize=48,32,16", str(ico)])
     made.append(ico)
     return made
 
 
 if __name__ == "__main__":
-    print("favicons")
+    if not MAGICK:
+        sys.exit("ImageMagick not found: install it, or use `magick -version` to check.")
+    print(f"title    {Path(F_TITLE).name}\nsubtitle {Path(F_SUB).name}\nbyline   {Path(F_BY).name}\n")
+
     for p in make_favicons():
         print(f"  {p.relative_to(ROOT)}  {p.stat().st_size / 1024:.1f} KB")
 
     print(f"\nOG cards ({W}x{H})")
     total = 0
-    for slug, title, sub, cat, src in PAGES:
-        p = make_card(slug, title, sub, cat, src)
+    for slug, title, sub, src in PAGES:
+        p = make_card(slug, title, sub, src)
         kb = p.stat().st_size / 1024
         total += kb
-        print(f"  {p.name:22} {cat:12} {kb:6.1f} KB  <- {src or 'flat'}")
-    print(f"\n  {len(PAGES)} cards, {total / 1024:.2f} MB total")
+        print(f"  {p.name:18} {kb:6.1f} KB  <- {src or 'flat'}")
+    print(f"\n  {len(PAGES)} cards, {total / 1024:.2f} MB")
