@@ -47,9 +47,10 @@ PAGES = {
               "classifying geometry changes by severity and generating HTML and DOCX reports.",
               "GeoQC Flow, automated pipeline QC and reporting"),
     "treeforge": ("article",
-                  "TreeForge: a Python CLI that turns drone point clouds into a forest inventory, "
-                  "producing DSM, DTM, canopy height model, tree crowns, treetops and a PDF report.",
-                  "TreeForge, drone point cloud to forest inventory"),
+                  "TreeForge: a browser UI and Python CLI that turn drone point clouds into a forest "
+                  "inventory, producing DSM, DTM, canopy height model, tree crowns, treetops, "
+                  "GeoPackage and a PDF report. No GDAL required.",
+                  "The TreeForge interface, crowns and treetops on an aerial map"),
     "powerornah": ("article",
                    "Power or Nah: an M5StickC IoT device that pulls Finnish ENTSO-E spot prices "
                    "and shows at a glance whether electricity is cheap right now.",
