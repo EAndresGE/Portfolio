@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html lang="en">
 	<head>
 		<title>Andres Gordon | Geospatial Data Engineer</title>
@@ -35,7 +30,7 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
-		<meta name="theme-color" content="#1b2030" />
+		<meta name="theme-color" content="#0e0f11" />
 
 		<script type="application/ld+json">
 		{
@@ -62,492 +57,234 @@
 		}
 		</script>
 		<!-- meta:end -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/portfolio.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<link rel="stylesheet" href="assets/css/site.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<style>
-			html, body { background-color: #1b2030; color: #d8e0f0; }
-			/* Sticky footer: #main grows so .foot-wrap is pushed to the bottom of the
-			   viewport when a filter leaves only a few tiles on screen. Requires #main
-			   and .foot-wrap to be siblings of the header, which they now are. */
-			#wrapper {
-			background-color: #1b2030;
-			display: flex;
-			flex-direction: column;
-			min-height: 100vh;
-		  }
-			#main { flex: 1 0 auto; }
-			.foot-wrap { flex-shrink: 0; }
-			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main p { color: #d8e0f0; }
-			h1, h2, h3 { color: #d8e0f0; }
-			a { color: #2d7dd2; }
-			a:hover { color: #5ba3f5 !important; }
-			hr { border-color: #2d3855; }
-			.banner {
-			position: relative;
-			height: 400px;
-			background-size: cover;
-			border-radius: 10px;
-		  }
-			.banner::before {
-			content: "";
-			position: absolute;
-			top: 0; left: 0;
-			width: 100%; height: 100%;
-			background-color: rgba(10, 14, 30, 0.55);
-			transition: opacity 0.5s ease;
-			opacity: 1;
-		  }
-			.banner-text {
-			position: absolute;
-			top: 50%; left: 50%;
-			transform: translate(-50%, -50%);
-			color: #ffffff;
-			text-align: center;
-			font-size: 24px;
-		  }
-			.banner-text h1 { margin-bottom: 4px; font-size: 60px; color: #fff; }
-			.banner-text p  { margin: 0; font-size: 24px; color: #d8e0f0; }
-			.banner-role {
-			font-size: 15px !important;
-			font-weight: 700;
-			letter-spacing: 0.22em;
-			text-transform: uppercase;
-			color: #7db8f0 !important;
-			margin: 0 0 14px !important;
-		  }
-			.banner-text p:last-child {
-			font-size: 19px;
-			line-height: 1.55;
-			max-width: 30em;
-			margin: 0 auto;
-		  }
-			.section-title  { text-align: center; margin: 10px auto 0; font-size: 50px; color: #d8e0f0; }
-			.foot {
-			position: relative;
-			height: 300px;
-			background-size: cover;
-			border-radius: 10px;
-		  }
-			.foot::before {
-			content: "";
-			position: absolute;
-			top: 0; left: 0;
-			width: 100%; height: 100%;
-			background-color: rgba(10, 14, 30, 0.55);
-			transition: opacity 0.5s ease;
-			opacity: 1;
-		  }
-			.foot-foot {
-			position: absolute;
-			top: 60%; left: 50%;
-			transform: translate(-50%, -50%);
-			color: #d8e0f0;
-			text-align: center;
-			font-size: 24px;
-		  }
-			@media screen and (max-width: 767px) {
-			.banner-text h1 { font-size: 36px; }
-			.banner-text p  { font-size: 18px; }
-			.banner-role    { font-size: 12px !important; letter-spacing: 0.16em; margin-bottom: 10px !important; }
-			.banner-text p:last-child { font-size: 15px; line-height: 1.5; }
-			.foot-foot      { font-size: 16px; }
-		  }
-			.tiles article > .image { height: 220px; }
-			.tiles article > .image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-			.tiles article > .image:after { display: none; }
-			.tiles article:before { display: none !important; }
-			.tiles article.style3 > .image:before { background-color: #2ea855 !important; }
-			.tiles article.style5 > .image:before { background-color: #2d7dd2 !important; }
-			.tiles article.style6 > .image:before { background-color: #1a9ea6 !important; }
-			.nav-btn {
-			background: #242d42 !important;
-			color: #d8e0f0 !important;
-			border-color: #2d3855 !important;
-			transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s !important;
-		  }
-			.nav-btn:hover {
-			background: #2d7dd2 !important;
-			border-color: #2d7dd2 !important;
-			color: #fff !important;
-			transform: translateY(-2px);
-			box-shadow: 0 4px 14px rgba(45,125,210,0.35) !important;
-		  }
-			.projects-header { text-align: center; margin-bottom: 0.4em; }
-			.filter-bar {
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
-			gap: 0.6em;
-			margin: 0.8em 0 1.6em;
-		  }
-			.filter-chip {
-			display: inline-flex;
-			align-items: center;
-			gap: 0.45em;
-			padding: 0.45em 1.1em;
-			border-radius: 8px;
-			border: 2px solid #2d3855;
-			font-family: inherit;
-			font-size: 0.78em;
-			font-weight: 600;
-			letter-spacing: 0.08em;
-			text-transform: uppercase;
-			cursor: pointer;
-			transition: background 0.22s, color 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.15s;
-			background: #242d42;
-			color: #d8e0f0 !important;
-		  }
-			.filter-chip .chip-icon { font-size: 0.9em; }
-			.filter-count {
-			text-align: center;
-			font-size: 0.75em;
-			letter-spacing: 0.08em;
-			text-transform: uppercase;
-			color: #b8c4dc;
-			margin: -1em 0 1.4em;
-		  }
-			.filter-chip[data-filter="all"]:hover          { background: #1a2030; border-color: #4a5980; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-			.filter-chip[data-filter="professional"]:hover  { background: #2d7dd2; border-color: #2d7dd2; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(45,125,210,0.45); }
-			.filter-chip[data-filter="academic"]:hover      { background: #1a9ea6; border-color: #1a9ea6; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(26,158,166,0.45); }
-			.filter-chip[data-filter="personal"]:hover      { background: #2ea855; border-color: #2ea855; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(46,168,85,0.45); }
-			.filter-chip[data-filter="all"].active          { background: #1a2030; border-color: #4a5980; color: #fff !important; box-shadow: 0 4px 14px rgba(0,0,0,0.4); }
-			.filter-chip[data-filter="professional"].active  { background: #2d7dd2; border-color: #2d7dd2; color: #fff !important; box-shadow: 0 4px 14px rgba(45,125,210,0.5); }
-			.filter-chip[data-filter="academic"].active      { background: #1a9ea6; border-color: #1a9ea6; color: #fff !important; box-shadow: 0 4px 14px rgba(26,158,166,0.5); }
-			.filter-chip[data-filter="personal"].active      { background: #2ea855; border-color: #2ea855; color: #fff !important; box-shadow: 0 4px 14px rgba(46,168,85,0.5); }
-			.tiles article { transition: opacity 0.25s; }
-			.tiles article.hidden { display: none; }
-		</style>
 	</head>
-	<body class="is-preload">
-		<!--Transition-->
-	
-		
-		<!-- Wrapper -->
-			<div id="wrapper">
+	<body class="home">
+		<div class="page">
 
-				<!-- Header -->
-					<header id="header">
-						<div class="inner">
-						
-							<!-- Banner -->
-							<div class="banner" style="background-image: url('images/banner.jpg');">
-							  <div class="banner-text">
-								<h1>Andres Gordon</h1>
-								<p class="banner-role">Geospatial Data Engineer</p>
-								<p>Six years turning spatial questions into answers, from moose-vehicle collision modelling to avalanche risk surfaces to automated pipeline QA at production scale.</p>
-							  </div>
-							</div>
-
-						</div>
-					</header>
-
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-					
-							<hr />
-							<p>I work across the full geospatial stack: modelling, automation, and the data engineering that holds it together. Currently at <strong>Sharper Shape</strong>, building QA and integration tooling for large geodatabases. Before that, two years of spatial research at the Natural Resources Institute Finland (LUKE).</p>
-							<p>Below are 15 projects &mdash; professional, academic and personal &mdash; each with the method and the outcome.</p>
-				<!-- buttons -->
-
-				<ul class="actions fit">
-
-					<li><a href="academic.html" class="button fit nav-btn">Technical skills</a></li>
-
-					<li><a href="education.html" class="button fit nav-btn">Academic preparation</a></li>
-
-					<li><a href="work.html" class="button fit nav-btn">Professional experience</a></li>
-
-
-				</ul>
-
-				<hr />
-
-				
-					<!-- Main continues  -->
-					
-
-					<div class="projects-header">
-						<h1 class="section-title">Past projects</h1>
-					</div>
-					<div class="filter-bar" role="group" aria-label="Filter projects by type">
-						<button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">
-							<i class="fas fa-border-all chip-icon" aria-hidden="true"></i> All
-						</button>
-						<button type="button" class="filter-chip" data-filter="professional" aria-pressed="false">
-							<i class="fas fa-briefcase chip-icon" aria-hidden="true"></i> Professional
-						</button>
-						<button type="button" class="filter-chip" data-filter="academic" aria-pressed="false">
-							<i class="fas fa-graduation-cap chip-icon" aria-hidden="true"></i> Academic
-						</button>
-						<button type="button" class="filter-chip" data-filter="personal" aria-pressed="false">
-							<i class="fas fa-palette chip-icon" aria-hidden="true"></i> Personal
-						</button>
-					</div>
-					<p class="filter-count" id="filter-count" role="status" aria-live="polite"></p>
-							<section class="tiles">
-								<article class="style5" data-category="professional">
-									<span class="image">
-										<img src="images/geoqc_preview.svg" alt="GeoQC Flow pipeline QC tool" />
-									</span>
-									<a href="geoqc.html">
-										<h2>GeoQC Flow</h2>
-										<div class="content">
-											<p>Python CLI that automates QA across multi-step FileGDB pipelines</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3" data-category="personal">
-									<span class="image">
-										<img src="images/logo_tf_E.svg" alt="TreeForge drone forest inventory tool" style="object-fit: contain; padding: 1em; background: #0b1a0c;" />
-									</span>
-									<a href="treeforge.html">
-										<h2>TreeForge</h2>
-										<div class="content">
-											<p>Drone point cloud to a full forest inventory in one command</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3" data-category="personal">
-									<span class="image">
-										<img src="images/powerornah.jpg" alt="Power or Nah electricity price indicator device" />
-									</span>
-									<a href="powerornah.html">
-										<h2>Power or Nah</h2>
-										<div class="content">
-											<p>M5StickC device showing the live electricity price at a glance</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3" data-category="personal">
-									<span class="image">
-										<img src="images/Quito_paper_cut.jpg" alt="Paper cut cartography of Quito" loading="lazy" decoding="async" />
-									</span>
-									<a href="pp1.html">
-										<h2>Paper-Cut Cartography of Quito</h2>
-										<div class="content">
-											<p>Andean topography at 2,850 m as a layered paper-cut map</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5" data-category="professional">
-									<span class="image">
-										<img src="images/fme.jpg" alt="FME data integration" loading="lazy" decoding="async" />
-									</span>
-									<a href="work3.html">
-										<h2>Geospatial Data Engineering</h2>
-										<div class="content">
-											<p>Dagster on Kubernetes, FME, and Python delivery pipelines</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5" data-category="professional">
-									<span class="image">
-										<img src="images/mvc.jpg" alt="Moose-Vehicle Collisions spatial analysis" loading="lazy" decoding="async" />
-									</span>
-									<a href="work2.html">
-										<h2>Moose-Vehicle Collision Analysis</h2>
-										<div class="content">
-											<p>18 forest structure variables regressed against collision density</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5" data-category="professional">
-									<span class="image">
-										<img src="images/professional1.jpg" alt="Public Participation GIS" loading="lazy" decoding="async" />
-									</span>
-									<a href="work1.html">
-										<h2>Public Participation GIS</h2>
-										<div class="content">
-											<p>Social use areas against flying squirrel habitat, three municipalities</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5" data-category="professional">
-									<span class="image">
-										<img src="images/r3.png" alt="GIS database administration" loading="lazy" decoding="async" />
-									</span>
-									<a href="work4.html">
-										<h2>GIS Database Administration</h2>
-										<div class="content">
-											<p>Pasture digitisation and water sampling site selection for LUKE</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/visibility.jpg" alt="Visibility analysis" loading="lazy" decoding="async" />
-									</span>
-									<a href="visibility.html">
-										<h2>Wind Turbine Visibility Analysis</h2>
-										<div class="content">
-											<p>Interactive viewshed map of three proposed sites near Joensuu</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/risk.jpg" alt="Avalanche risk modelling" loading="lazy" decoding="async" />
-									</span>
-									<a href="risk.html">
-										<h2>Avalanche Risk Modelling</h2>
-										<div class="content">
-											<p>Interactive map ranking Valais settlements by avalanche risk</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/mcda.png" alt="Multi-criteria site selection: the four competing criteria" loading="lazy" decoding="async" />
-									</span>
-									<a href="MCDA.html">
-										<h2>Multi-Criteria Site Selection</h2>
-										<div class="content">
-											<p>Siting a biathlon high school against four competing criteria</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/pre.jpg" alt="Geostatistics" loading="lazy" decoding="async" />
-									</span>
-									<a href="geo.html">
-										<h2>Geostatistical Interpolation</h2>
-										<div class="content">
-											<p>Interactive map comparing Kriging and IDW against the source grid</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/batch.jpg" alt="Programming and batch processing" loading="lazy" decoding="async" />
-									</span>
-									<a href="batch.html">
-										<h2>Batch Processing Forest Data</h2>
-										<div class="content">
-											<p>Python and R over a 16 x 16 m open forest inventory grid</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/pro.png" alt="Network analysis" loading="lazy" decoding="async" />
-									</span>
-									<a href="network.html">
-										<h2>Light Rail Accessibility</h2>
-										<div class="content">
-											<p>Walking and driving service areas for every proposed stop, Canberra</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6" data-category="academic">
-									<span class="image">
-										<img src="images/remote.jpg" alt="Remote sensing" loading="lazy" decoding="async" />
-									</span>
-									<a href="remote.html">
-										<h2>Remote Sensing and Fire Impact</h2>
-										<div class="content">
-											<p>Before and after bushfire analysis in MATLAB, south-west Australia</p>
-										</div>
-									</a>
-								</article>
-							</section>
-						</div>
-					</div>
-
-				<!-- Footer -->
-				<div class="foot-wrap">
-					<div class="inner">
-					<div class="foot" style="background-image: url('images/banner.jpg');">
-					<div class="foot-foot">
-							<section>
-								<h3>Follow</h3>
-								<ul class="icons">
-								
-									<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>Copyright © 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</div>
-					</div>
+			<header class="masthead">
+				<img class="masthead-img" src="images/banner.jpg" alt="" fetchpriority="high" />
+				<div class="shell">
+					<h1>Andres Gordon</h1>
+					<p class="masthead-role">Geospatial data engineer</p>
+					<p class="masthead-line">Six years turning spatial questions into answers: from moose-vehicle collision modelling to avalanche risk surfaces to automated pipeline QA at production scale.</p>
 				</div>
+			</header>
+
+			<main>
+
+				<section class="intro">
+					<div class="shell">
+						<div class="prose">
+							<p>I work across the full geospatial stack: modelling, automation, and the data engineering that holds it together. Currently at <strong>Sharper Shape</strong>, building QA and integration tooling for large geodatabases. Before that, two years of spatial research at the Natural Resources Institute Finland (LUKE).</p>
+						</div>
+						<ul class="section-links">
+							<li><a class="section-link" href="academic.html">Technical skills <span class="arr" aria-hidden="true">&rarr;</span></a></li>
+							<li><a class="section-link" href="education.html">Education <span class="arr" aria-hidden="true">&rarr;</span></a></li>
+							<li><a class="section-link" href="work.html">Professional experience <span class="arr" aria-hidden="true">&rarr;</span></a></li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="work">
+					<div class="shell">
+
+						<div class="work-head">
+							<h2>Selected work</h2>
+							<div class="filters" role="group" aria-label="Filter projects by type">
+								<button type="button" class="filter" data-filter="all" aria-pressed="true">All</button>
+								<button type="button" class="filter" data-filter="professional" aria-pressed="false">Professional</button>
+								<button type="button" class="filter" data-filter="academic" aria-pressed="false">Academic</button>
+								<button type="button" class="filter" data-filter="personal" aria-pressed="false">Personal</button>
+								<span class="filter-count" id="work-count" role="status" aria-live="polite">15 projects</span>
+							</div>
+						</div>
+
+						<div class="grid" id="work-grid">
+						<a class="card reveal" href="geoqc.html" data-kind="professional">
+							<span class="card-figure">
+								<img src="images/geoqc_preview.svg" alt="GeoQC Flow pipeline QC report" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">GeoQC Flow</span>
+								<span class="card-blurb">Python CLI that automates QA across multi-step FileGDB pipelines</span>
+								<span class="card-kind">Professional</span>
+							</span>
+						</a>
+						<a class="card reveal" href="treeforge.html" data-kind="personal">
+							<span class="card-figure is-contain">
+								<img src="images/logo_tf_E.svg" alt="TreeForge drone forest inventory tool" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">TreeForge</span>
+								<span class="card-blurb">Drone point cloud to a full forest inventory in one command</span>
+								<span class="card-kind">Personal</span>
+							</span>
+						</a>
+						<a class="card reveal" href="powerornah.html" data-kind="personal">
+							<span class="card-figure">
+								<img src="images/powerornah.jpg" alt="Power or Nah electricity price device" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Power or Nah</span>
+								<span class="card-blurb">M5StickC device showing the live electricity price at a glance</span>
+								<span class="card-kind">Personal</span>
+							</span>
+						</a>
+						<a class="card reveal" href="pp1.html" data-kind="personal">
+							<span class="card-figure">
+								<img src="images/Quito_paper_cut.jpg" alt="Paper-cut cartography of Quito"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Paper-Cut Cartography of Quito</span>
+								<span class="card-blurb">Andean topography at 2,850 m as a layered paper-cut map</span>
+								<span class="card-kind">Personal</span>
+							</span>
+						</a>
+						<a class="card reveal" href="work3.html" data-kind="professional">
+							<span class="card-figure">
+								<img src="images/fme.jpg" alt="FME data integration workspace"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Geospatial Data Engineering</span>
+								<span class="card-blurb">Dagster on Kubernetes, FME, and Python delivery pipelines</span>
+								<span class="card-kind">Professional</span>
+							</span>
+						</a>
+						<a class="card reveal" href="work2.html" data-kind="professional">
+							<span class="card-figure">
+								<img src="images/mvc.jpg" alt="Moose-vehicle collision analysis"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Moose-Vehicle Collision Analysis</span>
+								<span class="card-blurb">18 forest structure variables regressed against collision density</span>
+								<span class="card-kind">Professional</span>
+							</span>
+						</a>
+						<a class="card reveal" href="work1.html" data-kind="professional">
+							<span class="card-figure">
+								<img src="images/professional1.jpg" alt="Public participation GIS"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Public Participation GIS</span>
+								<span class="card-blurb">Social use areas against flying squirrel habitat, three municipalities</span>
+								<span class="card-kind">Professional</span>
+							</span>
+						</a>
+						<a class="card reveal" href="work4.html" data-kind="professional">
+							<span class="card-figure">
+								<img src="images/r3.png" alt="GIS database administration"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">GIS Database Administration</span>
+								<span class="card-blurb">Pasture digitisation and water sampling site selection for LUKE</span>
+								<span class="card-kind">Professional</span>
+							</span>
+						</a>
+						<a class="card reveal" href="visibility.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/visibility.jpg" alt="Wind turbine viewshed analysis"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Wind Turbine Visibility Analysis</span>
+								<span class="card-blurb">Interactive viewshed map of three proposed sites near Joensuu</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						<a class="card reveal" href="risk.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/risk.jpg" alt="Avalanche risk surface, Valais"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Avalanche Risk Modelling</span>
+								<span class="card-blurb">Interactive map ranking Valais settlements by avalanche risk</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						<a class="card reveal" href="MCDA.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/mcda.png" alt="Multi-criteria site selection surfaces"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Multi-Criteria Site Selection</span>
+								<span class="card-blurb">Siting a biathlon high school against four competing criteria</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						<a class="card reveal" href="geo.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/pre.jpg" alt="Geostatistical interpolation surface"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Geostatistical Interpolation</span>
+								<span class="card-blurb">Interactive map comparing Kriging and IDW against the source grid</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						<a class="card reveal" href="batch.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/batch.jpg" alt="Batch processing forest inventory data"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Batch Processing Forest Data</span>
+								<span class="card-blurb">Python and R over a 16 x 16 m open forest inventory grid</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						<a class="card reveal" href="network.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/pro.png" alt="Light rail network accessibility, Canberra"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Light Rail Accessibility</span>
+								<span class="card-blurb">Walking and driving service areas for every proposed stop, Canberra</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						<a class="card reveal" href="remote.html" data-kind="academic">
+							<span class="card-figure">
+								<img src="images/remote.jpg" alt="Bushfire impact remote sensing"
+								loading="lazy" decoding="async" />
+							</span>
+							<span class="card-body">
+								<span class="card-title">Remote Sensing and Fire Impact</span>
+								<span class="card-blurb">Before and after bushfire analysis in MATLAB, south-west Australia</span>
+								<span class="card-kind">Academic</span>
+							</span>
+						</a>
+						</div>
+
+					</div>
+				</section>
+
+			</main>
+
+			<footer class="site-footer">
+				<div class="shell">
+					<p class="colophon">&copy; 2026 Andres Gordon &middot; Built with <a href="http://html5up.net">HTML5 UP</a></p>
+					<ul class="social">
+						<li><a href="https://github.com/EAndresGE" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/andresgordon/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+			</footer>
 
 		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-		<script>
-			(function () {
-				var chips = Array.prototype.slice.call(document.querySelectorAll('.filter-chip'));
-				var tiles = Array.prototype.slice.call(document.querySelectorAll('.tiles article'));
-				var count = document.getElementById('filter-count');
-				var VALID = chips.map(function (c) { return c.getAttribute('data-filter'); });
-
-				function apply(filter, updateHash) {
-					if (VALID.indexOf(filter) === -1) { filter = 'all'; }
-
-					chips.forEach(function (c) {
-						var on = c.getAttribute('data-filter') === filter;
-						c.classList.toggle('active', on);
-						c.setAttribute('aria-pressed', on ? 'true' : 'false');
-					});
-
-					var shown = 0;
-					tiles.forEach(function (tile) {
-						var match = filter === 'all' || tile.getAttribute('data-category') === filter;
-						tile.classList.toggle('hidden', !match);
-						if (match) { shown++; }
-					});
-
-					if (count) {
-						count.textContent = filter === 'all'
-							? shown + ' projects'
-							: shown + ' of ' + tiles.length + ' projects';
-					}
-
-					// replaceState, not pushState: filtering is not a navigation
-					// step, so it should not fill the back button with clicks.
-					if (updateHash) {
-						var hash = filter === 'all' ? ' ' : '#' + filter;
-						if (history.replaceState) {
-							history.replaceState(null, '',
-								filter === 'all' ? location.pathname + location.search : hash);
-						} else if (filter !== 'all') {
-							location.hash = filter;
-						}
-					}
-				}
-
-				chips.forEach(function (chip) {
-					chip.addEventListener('click', function () {
-						apply(this.getAttribute('data-filter'), true);
-					});
-				});
-
-				// Back/forward and hand-edited URLs.
-				window.addEventListener('hashchange', function () {
-					apply((location.hash || '').replace(/^#/, ''), false);
-				});
-
-				// Honour a deep link such as index.html#professional on load.
-				apply((location.hash || '').replace(/^#/, ''), false);
-			})();
-		</script>
-
+		<script src="assets/js/site.js" defer></script>
 	</body>
 </html>

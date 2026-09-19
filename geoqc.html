@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html lang="en">
 	<head>
 		<title>GeoQC Flow | Andres Gordon</title>
@@ -35,512 +30,176 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
-		<meta name="theme-color" content="#1b2030" />
+		<meta name="theme-color" content="#0e0f11" />
 		<!-- meta:end -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/portfolio.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<link rel="stylesheet" href="assets/css/site.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-		<style>
-			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; text-align: center; }
-			#main .inner { display: inline-block; text-align: left; width: 100%; }
-			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 2em; }
-			#footer { background-color: #141820 !important; }
-			.follow-heading { color: #d8e0f0; }
-			a { color: #2d7dd2; }
-			a:hover { color: #5ba3f5; }
-			.title { color: #d8e0f0; }
-			.section-label {
-				font-size: 0.7em;
-				font-weight: 700;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
-				color: #2d7dd2;
-				margin-bottom: 0.4em;
-			}
-			.pipeline-flow {
-				display: flex;
-				align-items: center;
-				flex-wrap: wrap;
-				gap: 0;
-				margin: 2em 0;
-				justify-content: center;
-			}
-			.flow-node {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 0.8em 1.2em;
-				text-align: center;
-				min-width: 90px;
-			}
-			.flow-node.engine {
-				background: #1a2d4a;
-				border-color: #2d7dd2;
-				border-width: 2px;
-				padding: 1em 1.6em;
-			}
-			.flow-node .node-icon {
-				font-size: 1.4em;
-				margin-bottom: 0.3em;
-				color: #2d7dd2;
-			}
-			.flow-node.engine .node-icon { color: #5ba3f5; font-size: 1.8em; }
-			.flow-node .node-label {
-				font-size: 0.72em;
-				font-weight: 600;
-				letter-spacing: 0.05em;
-				color: #d8e0f0;
-				text-transform: uppercase;
-			}
-			.flow-node .node-sub {
-				font-size: 0.62em;
-				color: #b8c4dc;
-				margin-top: 0.15em;
-			}
-			.flow-arrow {
-				color: #2d3855;
-				font-size: 1.1em;
-				padding: 0 0.3em;
-				flex-shrink: 0;
-			}
-			.flow-outputs {
-				display: flex;
-				flex-direction: column;
-				gap: 0.4em;
-			}
-			.output-chip {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 4px;
-				padding: 0.25em 0.7em;
-				font-size: 0.65em;
-				font-weight: 700;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				color: #b8c4dc;
-				display: flex;
-				align-items: center;
-				gap: 0.4em;
-			}
-			.output-chip i { font-size: 0.9em; }
-			.output-chip.html-chip { border-color: #2d7dd2; color: #5ba3f5; }
-			.output-chip.docx-chip { border-color: #1a9ea6; color: #1a9ea6; }
-			.output-chip.json-chip { border-color: #ffc300; color: #ffc300; }
-			.output-chip.csv-chip  { border-color: #2ea855; color: #2ea855; }
-			.feature-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-				gap: 1em;
-				margin: 1.5em 0;
-			}
-			.feature-card {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1.4em 1.2em;
-				border-top: 3px solid #2d7dd2;
-			}
-			.feature-card .fc-icon {
-				font-size: 1.5em;
-				color: #2d7dd2;
-				margin-bottom: 0.6em;
-			}
-			.feature-card h4 {
-				font-size: 0.85em;
-				font-weight: 700;
-				letter-spacing: 0.04em;
-				text-transform: uppercase;
-				color: #d8e0f0;
-				margin: 0 0 0.5em 0;
-			}
-			.feature-card p {
-				font-size: 0.82em;
-				line-height: 1.55;
-				color: #d8e0f0;
-				margin: 0;
-			}
-			.report-preview {
-				background: #111827;
-				border: 1.5px solid #2d3855;
-				border-radius: 10px;
-				overflow: hidden;
-				margin: 1.5em 0;
-			}
-			.report-header {
-				background: linear-gradient(135deg, #003049 0%, #004b6b 100%);
-				padding: 1em 1.5em;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				flex-wrap: wrap;
-				gap: 0.5em;
-			}
-			.report-header-title {
-				font-size: 0.9em;
-				font-weight: 700;
-				color: #ffffff;
-				letter-spacing: 0.04em;
-			}
-			.report-header-sub {
-				font-size: 0.7em;
-				color: #ffc300;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-			}
-			.report-metrics {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-				gap: 1px;
-				background: #2d3855;
-			}
-			.report-metric {
-				background: #1a2235;
-				padding: 1em;
-				text-align: center;
-			}
-			.report-metric .rm-val {
-				font-size: 1.8em;
-				font-weight: 700;
-				color: #ffc300;
-				line-height: 1;
-			}
-			.report-metric .rm-label {
-				font-size: 0.65em;
-				color: #b8c4dc;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				margin-top: 0.3em;
-			}
-			.remarks-panel {
-				padding: 1em 1.5em;
-				border-top: 1px solid #2d3855;
-			}
-			.remarks-title {
-				font-size: 0.7em;
-				font-weight: 700;
-				letter-spacing: 0.1em;
-				text-transform: uppercase;
-				color: #b8c4dc;
-				margin-bottom: 0.7em;
-			}
-			.remarks-list {
-				display: flex;
-				flex-direction: column;
-				gap: 0.5em;
-			}
-			.remark {
-				display: flex;
-				align-items: flex-start;
-				gap: 0.6em;
-				padding: 0.6em 0.9em;
-				border-radius: 6px;
-				font-size: 0.75em;
-				line-height: 1.5;
-			}
-			.remark.alert   { background: rgba(220,53,69,0.12); border-left: 3px solid #dc3545; }
-			.remark.warning { background: rgba(253,126,20,0.12); border-left: 3px solid #fd7e14; }
-			.remark.info    { background: rgba(45,125,210,0.12); border-left: 3px solid #2d7dd2; }
-			.remark-icon { font-size: 1em; flex-shrink: 0; margin-top: 0.1em; }
-			.remark.alert .remark-icon   { color: #dc3545; }
-			.remark.warning .remark-icon { color: #fd7e14; }
-			.remark.info .remark-icon    { color: #5ba3f5; }
-			.remark-text { color: #d8e0f0; }
-			.remark-step { font-weight: 700; color: #d8e0f0; }
-			.sev-legend {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5em;
-				margin: 1em 0;
-			}
-			.sev-badge {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.35em;
-				padding: 0.25em 0.75em;
-				border-radius: 999px;
-				font-size: 0.72em;
-				font-weight: 700;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-			}
-			.sev-dot { width: 8px; height: 8px; border-radius: 50%; }
-			.sev-none     { background: rgba(173,181,189,0.15); color: #adb5bd; }
-			.sev-stable   { background: rgba(45,198,83,0.15);  color: #2dc653; }
-			.sev-light    { background: rgba(255,195,0,0.15);  color: #ffc300; }
-			.sev-moderate { background: rgba(253,126,20,0.15); color: #fd7e14; }
-			.sev-major    { background: rgba(220,53,69,0.15);  color: #dc3545; }
-			.tech-stack {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5em;
-				margin: 1em 0;
-			}
-			.tech-chip {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 5px;
-				padding: 0.3em 0.8em;
-				font-size: 0.72em;
-				font-weight: 600;
-				letter-spacing: 0.05em;
-				color: #b8c4dc;
-				text-transform: uppercase;
-			}
-			.cli-block {
-				background: #0d1117;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1em 1.4em;
-				font-family: 'Courier New', monospace;
-				font-size: 0.82em;
-				color: #58a6ff;
-				margin: 1em 0;
-				overflow-x: auto;
-			}
-			.cli-block .cli-comment { color: #b8c4dc; }
-			.cli-block .cli-cmd     { color: #7ee787; }
-			.cli-block .cli-flag    { color: #ffa657; }
-			.cli-block .cli-val     { color: #a5d6ff; }
-			@media (max-width: 700px) {
-				.pipeline-flow { flex-direction: column; align-items: stretch; }
-				.flow-arrow { transform: rotate(90deg); text-align: center; }
-				.flow-outputs { flex-direction: row; flex-wrap: wrap; }
-			}
-			@media screen and (max-width: 736px) {
-				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
-			}
-			.ip-note {
-				display: flex;
-				align-items: flex-start;
-				gap: 0.7em;
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-left: 3px solid #2d7dd2;
-				border-radius: 6px;
-				padding: 0.9em 1.1em;
-				margin: 0.2em 0 1.6em;
-				font-size: 0.8em;
-				line-height: 1.55;
-				color: #b8c4dc !important;
-			}
-			.ip-note i { color: #7db8f0; margin-top: 0.2em; flex-shrink: 0; }
-			.ip-note strong { color: #d8e0f0; }
-		</style>
 	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<a href="index.html">
-				<img src="images/logo.png" alt="Home" class="home-logo" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
-			</a>
+	<body class="reading">
+		<div class="page">
 
-			<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<ul class="actions">
-						<li><a href="index.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All projects</a></li>
-						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-briefcase" style="margin-right:0.45em;"></i>Professional project</span></li>
-					</ul>
-				</div>
-			</header>
-
-			<!-- Main -->
-			<div id="main">
-				<div class="inner">
-
-					<h1>GeoQC Flow</h1>
-					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>Sharper Shape Group</span><span><i class="fas fa-building" aria-hidden="true"></i>Geospatial Data Engineer</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Internal production tooling</span></p>
-					<div class="ip-note"><i class="fas fa-lock" aria-hidden="true"></i><span><strong>Source code is not public.</strong> GeoQC Flow is internal tooling built for Sharper Shape production use, so the repository stays private. The implementation details below are described rather than linked for that reason. Happy to walk through the architecture in conversation.</span></div>
-					<p style="font-size:1.05em; color:#d8e0f0; line-height:1.7;">
-						A Python CLI tool that automates quality control across multi-step FileGDB pipelines — comparing layers step by step, classifying geometry changes by severity, detecting real attribute edits versus system noise, and generating professional interactive HTML and DOCX reports from a single command.
-					</p>
-
-					<!-- Pipeline flow diagram -->
-					<p class="section-label"><i class="fas fa-project-diagram" style="margin-right:0.4em;"></i>How it works</p>
-
-					<div class="pipeline-flow">
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-database"></i></div>
-							<div class="node-label">Step 1</div>
-							<div class="node-sub">.gdb</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-database"></i></div>
-							<div class="node-label">Step 2</div>
-							<div class="node-sub">.gdb</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-database"></i></div>
-							<div class="node-label">Step N</div>
-							<div class="node-sub">.gdb</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node engine">
-							<div class="node-icon"><i class="fas fa-cogs"></i></div>
-							<div class="node-label">GeoQC Flow</div>
-							<div class="node-sub">Auto-compare &amp; analyse</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-outputs">
-							<div class="output-chip html-chip"><i class="fas fa-chart-bar"></i> HTML Report</div>
-							<div class="output-chip docx-chip"><i class="fas fa-file-word"></i> DOCX Report</div>
-							<div class="output-chip json-chip"><i class="fas fa-code"></i> JSON Data</div>
-							<div class="output-chip csv-chip"><i class="fas fa-table"></i> CSV Export</div>
-						</div>
-					</div>
-
-					<!-- CLI usage -->
-					<p class="section-label" style="margin-top:1.5em;"><i class="fas fa-terminal" style="margin-right:0.4em;"></i>Usage</p>
-					<div class="cli-block">
-						<span class="cli-comment"># Activate environment and run</span><br>
-						conda activate geoqcflow<br>
-						<span class="cli-cmd">geo-qc-flow</span> run
-						<span class="cli-flag">--pipeline-folder</span> <span class="cli-val">"C:\path\to\pipeline"</span>
-						<span class="cli-flag">--output</span> <span class="cli-val">"C:\path\to\reports"</span>
-					</div>
-
-					<!-- Feature cards -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-star" style="margin-right:0.4em;"></i>Key capabilities</p>
-					<div class="feature-grid">
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-search-location"></i></div>
-							<h4>Auto-discovery</h4>
-							<p>Detects numbered step folders and FileGDB files automatically. No hardcoded filenames — just point it at a pipeline folder and run.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-link"></i></div>
-							<h4>Smart feature matching</h4>
-							<p>Auto-detects unique ID fields (≥90% uniqueness). Falls back to index-based matching for layers without structured IDs.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-filter"></i></div>
-							<h4>Real change detection</h4>
-							<p>Distinguishes genuine edits from system noise — whitespace normalisation, null handling, and case differences are filtered out before flagging.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-bell"></i></div>
-							<h4>Smart remarks engine</h4>
-							<p>Rule-based system auto-generates colour-coded alerts, warnings, and info notices flagging high-change layers, identical steps, and derived layers.</p>
-						</div>
-					</div>
-
-					<!-- Mock report preview -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-eye" style="margin-right:0.4em;"></i>Report output preview</p>
-					<div class="report-preview">
-						<div class="report-header">
-							<div>
-								<div class="report-header-title">GeoQC Pipeline Report</div>
-								<div class="report-header-sub">QA_pipeline — 6-step comparison</div>
-							</div>
-							<div style="font-size:0.68em; color:#b8c4dc;">Generated by GeoQC Flow</div>
-						</div>
-						<div class="report-metrics">
-							<div class="report-metric">
-								<div class="rm-val">6</div>
-								<div class="rm-label">Steps compared</div>
-							</div>
-							<div class="report-metric">
-								<div class="rm-val">14</div>
-								<div class="rm-label">Layers analysed</div>
-							</div>
-							<div class="report-metric">
-								<div class="rm-val">1 248</div>
-								<div class="rm-label">Attribute changes</div>
-							</div>
-							<div class="report-metric">
-								<div class="rm-val">312</div>
-								<div class="rm-label">Geometry edits</div>
-							</div>
-							<div class="report-metric">
-								<div class="rm-val">8</div>
-								<div class="rm-label">Smart remarks</div>
-							</div>
-						</div>
-						<div class="remarks-panel">
-							<div class="remarks-title"><i class="fas fa-flag" style="margin-right:0.4em;"></i>Smart remarks</div>
-							<div class="remarks-list">
-								<div class="remark alert">
-									<span class="remark-icon"><i class="fas fa-exclamation-triangle"></i></span>
-									<span class="remark-text"><span class="remark-step">2-QA → 3-IC:</span> <strong>MAJOR</strong> geometry severity — 312 real geometry edits detected (28.5% of features). Detailed review recommended.</span>
-								</div>
-								<div class="remark warning">
-									<span class="remark-icon"><i class="fas fa-circle"></i></span>
-									<span class="remark-text"><span class="remark-step">4-IC → 5-Final:</span> Feature count change of <strong>+14%</strong> detected in <em>CableLine</em>. Possible splits or additions.</span>
-								</div>
-								<div class="remark info">
-									<span class="remark-icon"><i class="fas fa-info-circle"></i></span>
-									<span class="remark-text"><span class="remark-step">Pipeline-wide:</span> <em>StructurePoint</em> drives <strong>31%</strong> of all attribute changes. Busiest layer across all steps.</span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Severity legend -->
-					<p class="section-label" style="margin-top:1.5em;"><i class="fas fa-layer-group" style="margin-right:0.4em;"></i>Geometry severity classification</p>
-					<p style="font-size:0.85em; margin-bottom:0.8em;">Every layer comparison is assigned a geometry severity band based on the percentage of features with real spatial displacement:</p>
-					<div class="sev-legend">
-						<span class="sev-badge sev-none">    <span class="sev-dot" style="background:#adb5bd;"></span> None — 0%</span>
-						<span class="sev-badge sev-stable">  <span class="sev-dot" style="background:#2dc653;"></span> Stable — &lt;2%</span>
-						<span class="sev-badge sev-light">   <span class="sev-dot" style="background:#ffc300;"></span> Light — 2–10%</span>
-						<span class="sev-badge sev-moderate"><span class="sev-dot" style="background:#fd7e14;"></span> Moderate — 10–25%</span>
-						<span class="sev-badge sev-major">   <span class="sev-dot" style="background:#dc3545;"></span> Major — &gt;25%</span>
-					</div>
-
-					<!-- Context -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-briefcase" style="margin-right:0.4em;"></i>Context</p>
-					<p>Developed during my work at <strong style="color:#d8e0f0;">Sharper Shape</strong> to address a real gap in our GIS pipeline QA process. Geospatial datasets pass through multiple processing steps — digitisation, QA review, independent check, final delivery — and tracking what actually changed between steps was previously a manual, time-consuming task.</p>
-					<p>GeoQC Flow automates that process entirely. It handles heterogeneous layer structures, variable ID field naming conventions, and mixed geometry types (points, lines, polygons) within the same pipeline run. The HTML output replicates Sharper Shape's internal design system, making reports immediately familiar to the team.</p>
-
-					<!-- Tech stack -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</p>
-					<div class="tech-stack">
-						<span class="tech-chip">Python 3.10+</span>
-						<span class="tech-chip">GeoPandas</span>
-						<span class="tech-chip">Fiona</span>
-						<span class="tech-chip">Shapely</span>
-						<span class="tech-chip">Plotly</span>
-						<span class="tech-chip">python-docx</span>
-						<span class="tech-chip">Pandas</span>
-						<span class="tech-chip">NumPy</span>
-						<span class="tech-chip">Click CLI</span>
-						<span class="tech-chip">Conda</span>
-						<span class="tech-chip">FileGDB / ArcGIS</span>
-					</div>
-
+			<div class="shell">
+				<div class="topbar">
+					<a class="backlink" href="index.html"><span class="arr" aria-hidden="true">&larr;</span> All projects</a>
+					<span class="kind">Professional project</span>
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<section>
-						<h2 class="follow-heading">Follow</h2>
-						<ul class="icons">
-							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+			<main>
+
+				<header class="project-head">
+					<div class="shell">
+						<h1>GeoQC Flow</h1>
+						<p class="meta-line"><span>Sharper Shape Group</span><span>Geospatial Data Engineer</span><span>Internal production tooling</span></p>
+					</div>
+				</header>
+
+				<div class="shell">
+
+					<section class="section reveal">
+						<div class="prose">
+							<p>A Python CLI that automates quality control across multi-step FileGDB pipelines. It compares layers step by step, classifies geometry changes by severity, separates real attribute edits from system noise, and generates interactive HTML and DOCX reports from a single command.</p>
+						</div>
+						<p class="callout"><span><strong>Source code is not public.</strong> GeoQC Flow is internal tooling built for Sharper Shape production use, so the repository stays private. The implementation details below are described rather than linked for that reason. Happy to walk through the architecture in conversation.</span></p>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">How it works</p>
+						<div class="flow">
+							<div class="flow-step"><b>Step 1</b><span>.gdb</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step"><b>Step 2</b><span>.gdb</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step"><b>Step N</b><span>.gdb</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step is-engine"><b>GeoQC Flow</b><span>compare &amp; analyse</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<ul class="flow-out">
+								<li>HTML report</li>
+								<li>DOCX report</li>
+								<li>JSON data</li>
+								<li>CSV export</li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Usage</p>
+						<pre class="cli"><span class="c"># Activate environment and run</span>
+conda activate geoqcflow
+<span class="k">geo-qc-flow</span> run --pipeline-folder "C:\path\to\pipeline" --output "C:\path\to\reports"</pre>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Key capabilities</p>
+						<dl class="defs">
+							<div>
+								<dt>Auto-discovery</dt>
+								<dd>Detects numbered step folders and FileGDB files automatically. No hardcoded filenames: point it at a pipeline folder and run.</dd>
+							</div>
+							<div>
+								<dt>Smart feature matching</dt>
+								<dd>Auto-detects unique ID fields at 90% uniqueness or better, and falls back to index-based matching for layers without structured IDs.</dd>
+							</div>
+							<div>
+								<dt>Real change detection</dt>
+								<dd>Distinguishes genuine edits from system noise. Whitespace normalisation, null handling and case differences are filtered out before anything is flagged.</dd>
+							</div>
+							<div>
+								<dt>Smart remarks engine</dt>
+								<dd>A rule-based system generates alerts, warnings and notices flagging high-change layers, identical steps and derived layers.</dd>
+							</div>
+						</dl>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Report output</p>
+						<div class="sample">
+							<div class="sample-head">
+								<b>GeoQC Pipeline Report</b>
+								<span>Sample output, 6-step comparison</span>
+							</div>
+							<dl class="figures">
+								<div><dt>6</dt><dd>Steps compared</dd></div>
+								<div><dt>14</dt><dd>Layers analysed</dd></div>
+								<div><dt>1 248</dt><dd>Attribute changes</dd></div>
+								<div><dt>312</dt><dd>Geometry edits</dd></div>
+								<div><dt>8</dt><dd>Smart remarks</dd></div>
+							</dl>
+							<ul class="remarks">
+								<li class="sev-major">
+									<span class="tag">Major &middot; 2-QA to 3-IC</span>
+									Major geometry severity. 312 real geometry edits detected, 28.5% of features. Detailed review recommended.
+								</li>
+								<li class="sev-mod">
+									<span class="tag">Change &middot; 4-IC to 5-Final</span>
+									Feature count change of <strong>+14%</strong> detected in <em>CableLine</em>. Possible splits or additions.
+								</li>
+								<li class="sev-note">
+									<span class="tag">Note &middot; Pipeline-wide</span>
+									<em>StructurePoint</em> drives <strong>31%</strong> of all attribute changes, the busiest layer across all steps.
+								</li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Geometry severity classification</p>
+						<div class="prose">
+							<p>Every layer comparison is assigned a severity band from the percentage of features with real spatial displacement.</p>
+						</div>
+						<ul class="scale">
+							<li><i class="s0" aria-hidden="true"></i><b>None</b> <span>0%</span></li>
+							<li><i class="s1" aria-hidden="true"></i><b>Stable</b> <span>under 2%</span></li>
+							<li><i class="s2" aria-hidden="true"></i><b>Light</b> <span>2 to 10%</span></li>
+							<li><i class="s3" aria-hidden="true"></i><b>Moderate</b> <span>10 to 25%</span></li>
+							<li><i class="s4" aria-hidden="true"></i><b>Major</b> <span>over 25%</span></li>
 						</ul>
 					</section>
-					<ul class="copyright">
-						<li>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></li>
+
+					<section class="section reveal">
+						<p class="eyebrow">Context</p>
+						<div class="prose">
+							<p>Developed during my work at <strong>Sharper Shape</strong> to address a real gap in our GIS pipeline QA process. Geospatial datasets pass through multiple processing steps (digitisation, QA review, independent check, final delivery), and tracking what actually changed between steps was previously a manual, time-consuming task.</p>
+							<p>GeoQC Flow automates that process entirely. It handles heterogeneous layer structures, variable ID field naming conventions, and mixed geometry types within the same pipeline run. The HTML output replicates Sharper Shape's internal design system, so reports are immediately familiar to the team.</p>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Built with</p>
+						<ul class="chips">
+							<li class="chip">Python 3.10+</li>
+							<li class="chip">GeoPandas</li>
+							<li class="chip">Fiona</li>
+							<li class="chip">Shapely</li>
+							<li class="chip">Plotly</li>
+							<li class="chip">python-docx</li>
+							<li class="chip">Pandas</li>
+							<li class="chip">NumPy</li>
+							<li class="chip">Click CLI</li>
+							<li class="chip">Conda</li>
+							<li class="chip">FileGDB / ArcGIS</li>
+						</ul>
+					</section>
+
+				</div>
+
+			</main>
+
+			<footer class="site-footer">
+				<div class="shell">
+					<p class="colophon">&copy; 2026 Andres Gordon</p>
+					<ul class="social">
+						<li><a href="https://github.com/EAndresGE" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/andresgordon/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 			</footer>
 
 		</div>
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		<script src="assets/js/site.js" defer></script>
 	</body>
 </html>

@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html lang="en">
 	<head>
 		<title>Power or Nah | Andres Gordon</title>
@@ -35,411 +30,165 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
-		<meta name="theme-color" content="#1b2030" />
+		<meta name="theme-color" content="#0e0f11" />
 		<!-- meta:end -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/portfolio.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<link rel="stylesheet" href="assets/css/site.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-		<style>
-			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; text-align: center; }
-			#main .inner { display: inline-block; text-align: left; width: 100%; }
-			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 2em; }
-			#footer { background-color: #141820 !important; }
-			.follow-heading { color: #d8e0f0; }
-			a { color: #2d7dd2; }
-			a:hover { color: #5ba3f5; }
-			.section-label {
-				font-size: 0.7em;
-				font-weight: 700;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
-				color: #2d7dd2;
-				margin-bottom: 0.4em;
-				display: block;
-			}
-			.device-photo {
-				width: 100%;
-				max-width: 600px;
-				border-radius: 10px;
-				display: block;
-				margin: 1.5em auto;
-				border: 1.5px solid #1a2d4a;
-			}
-			.price-display {
-				background: #0d1117;
-				border: 1.5px solid #2d3855;
-				border-radius: 10px;
-				overflow: hidden;
-				margin: 1.5em 0;
-				max-width: 680px;
-			}
-			.price-display-header {
-				background: #003049;
-				padding: 0.75em 1.2em;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				border-bottom: 1px solid #2d3855;
-			}
-			.price-display-header .pd-title { font-size: 0.82em; font-weight: 700; color: #d8e0f0; }
-			.price-display-header .pd-sub { font-size: 0.65em; color: #b8c4dc; letter-spacing: 0.08em; text-transform: uppercase; }
-			.price-levels {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-				gap: 1px;
-				background: #2d3855;
-			}
-			.price-level {
-				padding: 0.85em 0.6em;
-				text-align: center;
-			}
-			.price-level .pl-face { font-size: 1.4em; line-height: 1; margin-bottom: 0.3em; }
-			.price-level .pl-label { font-size: 0.68em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-			.price-level .pl-note  { font-size: 0.6em; color: #b8c4dc; margin-top: 0.2em; }
-			.price-level.lv-neg  { background: #1a0b2e; }
-			.price-level.lv-neg  .pl-label { color: #ce93d8; }
-			.price-level.lv-good { background: #003049; }
-			.price-level.lv-good .pl-label { color: #5ba3f5; }
-			.price-level.lv-okay { background: #0a1020; }
-			.price-level.lv-okay .pl-label { color: #b8c4dc; }
-			.price-level.lv-high { background: #1a1000; }
-			.price-level.lv-high .pl-label { color: #ffa726; }
-			.price-level.lv-pain { background: #1a0800; }
-			.price-level.lv-pain .pl-label { color: #ef5350; }
-			.pipeline-flow {
-				display: flex;
-				align-items: center;
-				flex-wrap: wrap;
-				gap: 0;
-				margin: 1.5em 0;
-				justify-content: center;
-			}
-			.flow-node {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 0.7em 1em;
-				text-align: center;
-				min-width: 80px;
-			}
-			.flow-node.engine {
-				background: #1a2d4a;
-				border-color: #2d7dd2;
-				border-width: 2px;
-				padding: 0.9em 1.4em;
-			}
-			.flow-node .node-icon { font-size: 1.3em; margin-bottom: 0.25em; color: #2d7dd2; }
-			.flow-node.engine .node-icon { color: #5ba3f5; font-size: 1.7em; }
-			.flow-node .node-label { font-size: 0.68em; font-weight: 700; letter-spacing: 0.05em; color: #d8e0f0; text-transform: uppercase; }
-			.flow-node .node-sub { font-size: 0.6em; color: #b8c4dc; margin-top: 0.1em; }
-			.flow-arrow { color: #2d3855; font-size: 1em; padding: 0 0.3em; flex-shrink: 0; }
-			.feature-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-				gap: 1em;
-				margin: 1.5em 0;
-			}
-			.feature-card {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1.3em 1.1em;
-				border-top: 3px solid #2d7dd2;
-			}
-			.feature-card .fc-icon { font-size: 1.4em; color: #2d7dd2; margin-bottom: 0.55em; }
-			.feature-card h4 { font-size: 0.83em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #d8e0f0; margin: 0 0 0.45em 0; }
-			.feature-card p { font-size: 0.8em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-			.outcome-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-				gap: 1em;
-				margin: 1.5em 0;
-			}
-			.outcome-card {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1.2em 1.1em;
-			}
-			.outcome-card h4 { font-size: 0.82em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #2d7dd2; margin: 0 0 0.4em 0; }
-			.outcome-card p { font-size: 0.8em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-			.code-block {
-				background: #0d1117;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1em 1.4em;
-				font-family: 'Courier New', monospace;
-				font-size: 0.8em;
-				color: #5ba3f5;
-				margin: 1em 0;
-				overflow-x: auto;
-				line-height: 1.7;
-			}
-			.code-block .c-comment { color: #b8c4dc; }
-			.code-block .c-kw { color: #ffa657; }
-			.code-block .c-val { color: #a5d6ff; }
-			.code-block .c-str { color: #ce9178; }
-			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 1em 0; }
-			.tech-chip {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 5px;
-				padding: 0.3em 0.8em;
-				font-size: 0.72em;
-				font-weight: 600;
-				letter-spacing: 0.05em;
-				color: #b8c4dc;
-				text-transform: uppercase;
-			}
-			.state-badge {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.4em;
-				background: rgba(46,168,85,0.10);
-				border: 1.5px solid #2d7dd2;
-				border-radius: 5px;
-				padding: 0.3em 0.8em;
-				font-size: 0.75em;
-				font-weight: 700;
-				color: #2d7dd2;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				margin-bottom: 1em;
-			}
-			.gh-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5em;
-				background: #242d42;
-				border: 1.5px solid #2d7dd2;
-				border-radius: 6px;
-				padding: 0.45em 1em;
-				font-size: 0.8em;
-				font-weight: 700;
-				color: #2d7dd2 !important;
-				letter-spacing: 0.04em;
-				text-decoration: none;
-				margin: 0.5em 0 1.5em;
-			}
-			.gh-link:hover { background: #2d7dd2; color: #fff !important; }
-			@media (max-width: 700px) {
-				.pipeline-flow { flex-direction: column; align-items: stretch; }
-				.flow-arrow { transform: rotate(90deg); text-align: center; }
-			}
-			@media screen and (max-width: 736px) {
-				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
-			}
-		</style>
 	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<a href="index.html">
-				<img src="images/logo.png" alt="Home" class="home-logo" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
-			</a>
+	<body class="reading">
+		<div class="page">
 
-			<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<ul class="actions">
-						<li><a href="index.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All projects</a></li>
-						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-bolt" style="margin-right:0.45em;"></i>Personal project</span></li>
-					</ul>
-				</div>
-			</header>
-
-			<!-- Main -->
-			<div id="main">
-				<div class="inner">
-
-					<h1>Power or Nah</h1>
-					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>2026</span><span><i class="fas fa-building" aria-hidden="true"></i>Personal project</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Sole author · published on GitHub</span></p>
-					<p style="font-size:1.05em; color:#d8e0f0; line-height:1.7;">
-						A pocket-sized IoT device that shows whether electricity is cheap or expensive — right now. Built on an M5StickC Plus 2, it pulls Finnish spot prices directly from the ENTSO-E API, classifies them against the day's own distribution using percentile thresholds, and glows green, blue, orange, or red accordingly. No app, no subscription, no friction.
-					</p>
-
-					<div class="state-badge"><i class="fas fa-check-circle"></i> Working device — running daily</div>
-
-					<a href="https://github.com/EAndresGE/power-or-nah" target="_blank" class="gh-link"><i class="fab fa-github"></i> View on GitHub</a>
-
-					<!-- Device photo -->
-					<span class="section-label"><i class="fas fa-camera" style="margin-right:0.4em;"></i>The device</span>
-					<img src="images/powerornah.jpg" alt="Power or Nah device showing 2.55 c/kWh CHEAP" class="device-photo" />
-
-					<!-- The challenge -->
-					<span class="section-label" style="margin-top:2em;"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
-					<p>Finnish electricity prices swing dramatically throughout the day — a price of 3 c/kWh at 2 am might be rock-bottom cheap, while the same 3 c/kWh at 6 pm could be one of the cheapest hours available. Absolute numbers are meaningless without context. Most electricity apps require unlocking a phone, opening a tab, and mentally comparing against remembered averages. The goal was a device that answers one question — <em>is now a good time to use electricity?</em> — at a glance, from across the room.</p>
-
-					<!-- System flow -->
-					<span class="section-label" style="margin-top:1.5em;"><i class="fas fa-project-diagram" style="margin-right:0.4em;"></i>How it works</span>
-					<div class="pipeline-flow">
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-bolt"></i></div>
-							<div class="node-label">ENTSO-E</div>
-							<div class="node-sub">Day-ahead XML</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-wifi"></i></div>
-							<div class="node-label">HTTP fetch</div>
-							<div class="node-sub">Every 60 s</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node engine">
-							<div class="node-icon"><i class="fas fa-sliders-h"></i></div>
-							<div class="node-label">Percentile classify</div>
-							<div class="node-sub">vs. today's range</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-tv"></i></div>
-							<div class="node-label">TFT display</div>
-							<div class="node-sub">Color + label</div>
-						</div>
-					</div>
-
-					<!-- Price levels -->
-					<span class="section-label" style="margin-top:1.5em;"><i class="fas fa-palette" style="margin-right:0.4em;"></i>Price levels</span>
-					<div class="price-display">
-						<div class="price-display-header">
-							<div class="pd-title">Relative classification — dynamic per day</div>
-							<div class="pd-sub">Percentile thresholds recalculate every fetch</div>
-						</div>
-						<div class="price-levels">
-							<div class="price-level lv-neg">
-								<div class="pl-face">:D</div>
-								<div class="pl-label">Free Power</div>
-								<div class="pl-note">Price &lt; 0</div>
-							</div>
-							<div class="price-level lv-good">
-								<div class="pl-face">:)</div>
-								<div class="pl-label">Cheap</div>
-								<div class="pl-note">≤ 30th pct</div>
-							</div>
-							<div class="price-level lv-okay">
-								<div class="pl-face">:|</div>
-								<div class="pl-label">Okay</div>
-								<div class="pl-note">≤ 55th pct</div>
-							</div>
-							<div class="price-level lv-high">
-								<div class="pl-face">:/</div>
-								<div class="pl-label">High</div>
-								<div class="pl-note">≤ 80th pct</div>
-							</div>
-							<div class="price-level lv-pain">
-								<div class="pl-face">&gt;:[</div>
-								<div class="pl-label">Don't Use</div>
-								<div class="pl-note">&gt; 95th pct</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- The approach -->
-					<span class="section-label" style="margin-top:2em;"><i class="fas fa-code" style="margin-right:0.4em;"></i>The approach</span>
-					<p>The firmware fetches the ENTSO-E day-ahead price XML for the Finnish bidding zone (10YFI-1--------U) each minute, parses all 15-minute intervals for the current day, and sorts them to compute four percentile thresholds on the fly. The current price is classified against those thresholds — not against a fixed table. This means a day where all prices are high still shows CHEAP for the cheapest hours, and a day with very low prices does not mislead you into thinking 2 c/kWh is expensive.</p>
-
-					<div class="code-block">
-<span class="c-comment">// Dynamic thresholds — recalculated from today's sorted prices</span><br>
-tCheap     = percentile(todayPrices, count, <span class="c-val">0.30</span>);<br>
-tOkay      = percentile(todayPrices, count, <span class="c-val">0.55</span>);<br>
-tExpensive = percentile(todayPrices, count, <span class="c-val">0.80</span>);<br>
-tPain      = percentile(todayPrices, count, <span class="c-val">0.95</span>);<br><br>
-<span class="c-comment">// Classify current price relative to today</span><br>
-<span class="c-kw">if</span> (c &lt; <span class="c-val">0.0</span>)         <span class="c-kw">return</span> NEGATIVE;<br>
-<span class="c-kw">if</span> (c &lt;= tCheap)    <span class="c-kw">return</span> CHEAP;<br>
-<span class="c-kw">if</span> (c &lt;= tOkay)     <span class="c-kw">return</span> OKAY;<br>
-<span class="c-kw">if</span> (c &lt;= tExpensive) <span class="c-kw">return</span> EXPENSIVE;<br>
-<span class="c-kw">return</span> PAIN;
-					</div>
-
-					<!-- Feature cards -->
-					<span class="section-label" style="margin-top:2em;"><i class="fas fa-star" style="margin-right:0.4em;"></i>Key capabilities</span>
-					<div class="feature-grid">
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-chart-bar"></i></div>
-							<h4>Relative pricing</h4>
-							<p>Thresholds are recalculated each fetch from the day's own prices — cheap means cheap <em>today</em>, not against a fixed baseline that becomes outdated as the energy market shifts.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-forward"></i></div>
-							<h4>Cheapest hour ahead</h4>
-							<p>Button A shows the single cheapest upcoming price and its time window — useful when you can defer running the dishwasher or charging an EV by a couple of hours.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-table"></i></div>
-							<h4>Today's context</h4>
-							<p>Button B shows the day's price range and the exact threshold values — so you can see at a glance whether today is generally a cheap or expensive day.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-plug"></i></div>
-							<h4>No cloud middleman</h4>
-							<p>The device talks directly to the ENTSO-E public API — no third-party server, no account, no subscription. It just needs a WiFi connection and a free API token.</p>
-						</div>
-					</div>
-
-					<!-- Key outcomes -->
-					<span class="section-label" style="margin-top:2em;"><i class="fas fa-trophy" style="margin-right:0.4em;"></i>Key outcomes</span>
-					<div class="outcome-grid">
-						<div class="outcome-card">
-							<h4>Always-on awareness</h4>
-							<p>Sitting on a shelf, the device communicates electricity price context passively — no phone, no app, no action required to stay informed.</p>
-						</div>
-						<div class="outcome-card">
-							<h4>Smarter consumption habits</h4>
-							<p>A quick glance before running a high-load appliance is enough. Over time it shifts energy use toward off-peak hours without any planning effort.</p>
-						</div>
-						<div class="outcome-card">
-							<h4>End-to-end ownership</h4>
-							<p>From API parsing and XML manipulation on an ESP32 to percentile maths in C++ — every part of the stack was written and debugged from scratch.</p>
-						</div>
-					</div>
-
-					<!-- Tech stack -->
-					<span class="section-label" style="margin-top:2em;"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</span>
-					<div class="tech-stack">
-						<span class="tech-chip">M5StickC Plus 2</span>
-						<span class="tech-chip">ESP32</span>
-						<span class="tech-chip">Arduino / C++</span>
-						<span class="tech-chip">ENTSO-E API</span>
-						<span class="tech-chip">WiFi / HTTPClient</span>
-						<span class="tech-chip">NTP time sync</span>
-						<span class="tech-chip">XML parsing</span>
-						<span class="tech-chip">Percentile stats</span>
-						<span class="tech-chip">TFT display</span>
-					</div>
-
+			<div class="shell">
+				<div class="topbar">
+					<a class="backlink" href="index.html"><span class="arr" aria-hidden="true">&larr;</span> All projects</a>
+					<span class="kind">Personal project</span>
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<section>
-						<h2 class="follow-heading">Follow</h2>
-						<ul class="icons">
-							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+			<main>
+
+				<header class="project-head">
+					<div class="shell">
+						<h1>Power or Nah</h1>
+						<p class="meta-line"><span>2026</span><span>Personal project</span><span>Sole author, published on GitHub</span></p>
+					</div>
+				</header>
+
+				<div class="shell">
+
+					<section class="section reveal">
+						<div class="prose">
+							<p>A pocket-sized IoT device that shows whether electricity is cheap or expensive right now. Built on an M5StickC Plus 2, it pulls Finnish spot prices directly from the ENTSO-E API, classifies them against the day's own distribution using percentile thresholds, and glows green, blue, orange or red accordingly. No app, no subscription, no friction.</p>
+						</div>
+						<p class="status">Working device, running daily</p>
+						<p><a class="btn" href="https://github.com/EAndresGE/power-or-nah" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> View on GitHub</a></p>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">The device</p>
+						<figure class="figure">
+							<img src="images/powerornah.jpg" alt="The Power or Nah device showing 2.55 c/kWh, labelled CHEAP" loading="lazy" decoding="async" />
+						</figure>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">The challenge</p>
+						<div class="prose">
+							<p>Finnish electricity prices swing dramatically through the day. A price of 3 c/kWh at 2 am might be rock-bottom cheap, while the same 3 c/kWh at 6 pm could be one of the cheapest hours available. Absolute numbers are meaningless without context, and most electricity apps require unlocking a phone, opening a tab, and mentally comparing against remembered averages. The goal was a device that answers one question, <em>is now a good time to use electricity?</em>, at a glance from across the room.</p>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">How it works</p>
+						<div class="flow">
+							<div class="flow-step"><b>ENTSO-E</b><span>day-ahead XML</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step"><b>HTTP fetch</b><span>every 60 s</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step is-engine"><b>Percentile classify</b><span>vs today's range</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step"><b>TFT display</b><span>colour + label</span></div>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Price levels</p>
+						<div class="prose">
+							<p>The classification is relative, not absolute. Percentile thresholds recalculate on every fetch from the day's own prices.</p>
+						</div>
+						<div class="table-wrap">
+							<table class="data">
+								<thead>
+									<tr><th scope="col">Level</th><th scope="col">Face</th><th scope="col">Threshold</th></tr>
+								</thead>
+								<tbody>
+									<tr><td>Free power</td><td>:D</td><td class="num">price below 0</td></tr>
+									<tr><td>Cheap</td><td>:)</td><td class="num">30th percentile or below</td></tr>
+									<tr><td>Okay</td><td>:|</td><td class="num">55th percentile or below</td></tr>
+									<tr><td>High</td><td>:/</td><td class="num">80th percentile or below</td></tr>
+									<tr><td>Don't use</td><td>&gt;:[</td><td class="num">above the 95th percentile</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">The approach</p>
+						<div class="prose">
+							<p>The firmware fetches the ENTSO-E day-ahead price XML for the Finnish bidding zone (10YFI-1--------U) each minute, parses all 15-minute intervals for the current day, and sorts them to compute four percentile thresholds on the fly. The current price is classified against those thresholds rather than against a fixed table. A day where every price is high still shows CHEAP for its cheapest hours, and a day of very low prices does not mislead you into thinking 2 c/kWh is expensive.</p>
+						</div>
+						<pre class="cli"><span class="c">// Dynamic thresholds, recalculated from today's sorted prices</span>
+tCheap     = <span class="k">percentile</span>(todayPrices, count, 0.30);
+tOkay      = <span class="k">percentile</span>(todayPrices, count, 0.55);
+tExpensive = <span class="k">percentile</span>(todayPrices, count, 0.80);
+tPain      = <span class="k">percentile</span>(todayPrices, count, 0.95);
+
+<span class="c">// Classify current price relative to today</span>
+<span class="k">if</span> (c &lt; 0.0)          <span class="k">return</span> NEGATIVE;
+<span class="k">if</span> (c &lt;= tCheap)      <span class="k">return</span> CHEAP;
+<span class="k">if</span> (c &lt;= tOkay)       <span class="k">return</span> OKAY;
+<span class="k">if</span> (c &lt;= tExpensive)  <span class="k">return</span> EXPENSIVE;
+<span class="k">return</span> PAIN;</pre>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Key capabilities</p>
+						<dl class="defs">
+							<div>
+								<dt>Relative pricing</dt>
+								<dd>Thresholds are recalculated each fetch from the day's own prices, so cheap means cheap <em>today</em> rather than against a fixed baseline that goes stale as the energy market shifts.</dd>
+							</div>
+							<div>
+								<dt>Cheapest hour ahead</dt>
+								<dd>Button A shows the single cheapest upcoming price and its time window, useful when you can defer the dishwasher or an EV charge by a couple of hours.</dd>
+							</div>
+							<div>
+								<dt>Today's context</dt>
+								<dd>Button B shows the day's price range and the exact threshold values, so you can see whether today is generally cheap or expensive.</dd>
+							</div>
+							<div>
+								<dt>No cloud middleman</dt>
+								<dd>The device talks directly to the ENTSO-E public API. No third-party server, no account, no subscription, just a WiFi connection and a free API token.</dd>
+							</div>
+						</dl>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Key outcomes</p>
+						<ul class="outcomes">
+							<li><strong>Always-on awareness.</strong> Sitting on a shelf, the device communicates price context passively. No phone, no app, no action required to stay informed.</li>
+							<li><strong>Smarter consumption habits.</strong> A quick glance before running a high-load appliance is enough. Over time it shifts energy use toward off-peak hours without any planning effort.</li>
+							<li><strong>End-to-end ownership.</strong> From API parsing and XML manipulation on an ESP32 to percentile maths in C++, every part of the stack was written and debugged from scratch.</li>
 						</ul>
 					</section>
-					<ul class="copyright">
-						<li>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></li>
+
+					<section class="section reveal">
+						<p class="eyebrow">Built with</p>
+						<ul class="chips">
+							<li class="chip">M5StickC Plus 2</li><li class="chip">ESP32</li><li class="chip">Arduino / C++</li>
+							<li class="chip">ENTSO-E API</li><li class="chip">WiFi / HTTPClient</li><li class="chip">NTP time sync</li>
+							<li class="chip">XML parsing</li><li class="chip">Percentile stats</li><li class="chip">TFT display</li>
+						</ul>
+					</section>
+
+				</div>
+
+			</main>
+
+			<footer class="site-footer">
+				<div class="shell">
+					<p class="colophon">&copy; 2026 Andres Gordon</p>
+					<ul class="social">
+						<li><a href="https://github.com/EAndresGE" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/andresgordon/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 			</footer>
 
 		</div>
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		<script src="assets/js/site.js" defer></script>
 	</body>
 </html>

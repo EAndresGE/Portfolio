@@ -1,0 +1,1235 @@
+/* site.css — design system for the portfolio.
+ *
+ * Replaces the HTML5 UP Phantom stylesheet on the pages that load it. Phantom
+ * is still used by the pages not yet converted; this file deliberately does
+ * not layer on top of it, because layering is what produced the 160
+ * !important declarations it is replacing. Pages load either the template or
+ * this, never both.
+ *
+ * Everything here is a token or a component. No page should need its own
+ * colour literal.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap");
+
+/* ============================================================ tokens */
+
+:root {
+	/* Ground. Warm near-black rather than navy: the project images are
+	 * cool-toned maps, so a neutral ground lets them read as the colour. */
+	--bg:          #0e0f11;
+	--surface:     #16181b;
+	--surface-2:   #1d2024;
+	--line:        #282b30;
+	--line-2:      #3a3e45;
+
+	/* Text. Warm off-white, three steps. */
+	--text:        #e9e6e1;
+	--text-2:      #a9a49c;
+	--text-3:      #8d8882;
+
+	/* One accent: contour-line ochre. 6.9:1 on --bg. */
+	--accent:      #d08b4f;
+	--accent-hi:   #e7a670;
+	--accent-dim:  rgba(208, 139, 79, 0.14);
+
+	/* Ordinal ramp for severity bands. One hue (the accent's, H=60.2), five
+	 * monotone OKLCH lightness steps, dim to bright. Checked for monotonicity
+	 * and for >=2:1 at the dim end against --surface; it is an ordinal scale,
+	 * so adjacency CVD is not the test. Every use also carries a text label,
+	 * so the colour is never the only encoding. */
+	--sev-0: #766558;
+	--sev-1: #99795f;
+	--sev-2: #bf8c62;
+	--sev-3: #e4a066;
+	--sev-4: #ffba76;
+
+	/* Type */
+	--font-sans:  "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+	--font-serif: "Source Serif 4", ui-serif, Georgia, serif;
+	--font-mono:  ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono", Menlo, monospace;
+
+	/* A tight ramp on purpose. The old scale dropped three steps between
+	 * body and a card blurb, which made whole pages read small even where
+	 * the body text was a reasonable size. Fewer, larger steps instead —
+	 * except the uppercase labels, which stay small because that restraint
+	 * is what keeps them from shouting. */
+	--fs-display: clamp(2.6rem, 7vw, 4.5rem);
+	--fs-h1:      clamp(2rem, 4.5vw, 2.9rem);
+	--fs-h2:      clamp(1.35rem, 2.5vw, 1.625rem);
+	--fs-h3:      1.1875rem;
+	--fs-body:    1.125rem;
+	--fs-sm:      1rem;
+	--fs-xs:      0.875rem;
+	--fs-2xs:     0.8125rem;
+
+	/* Rhythm */
+	--sp-1: 0.25rem;  --sp-2: 0.5rem;   --sp-3: 0.75rem;
+	--sp-4: 1rem;     --sp-5: 1.5rem;   --sp-6: 2rem;
+	--sp-7: 3rem;     --sp-8: 4rem;     --sp-9: 6rem;
+
+	--measure: 68ch;
+	/* Text pages use one centred column whose width IS the measure, so prose,
+	 * rules, figures and lists all share an edge. Capping prose narrower than
+	 * its container just strands a void down the right of a wide screen. */
+	--maxw-read: min(1680px, 92vw);
+	--gutter: clamp(1.25rem, 5vw, 3.5rem);
+	/* Fluid, not a fixed column. The page should use the screen it is given
+	 * and keep a modest gutter, rather than sitting in a narrow strip with
+	 * most of a wide monitor unused. */
+	--maxw: min(1680px, 92vw);
+	--radius: 6px;
+
+	/* Motion. Built-in easings are too weak; these are the strong variants. */
+	--ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+	--t-press:  120ms;
+	--t-hover:  180ms;
+	--t-enter:  260ms;
+}
+
+/* ============================================================ base */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: var(--fs-body);
+	font-weight: 400;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* Stops the grey flash on tap without killing :active feedback, which
+	 * the components below provide explicitly. */
+	-webkit-tap-highlight-color: transparent;
+	overscroll-behavior-y: none;
+}
+
+h1, h2, h3, h4 {
+	font-family: var(--font-serif);
+	font-optical-sizing: auto;
+	font-weight: 600;
+	line-height: 1.15;
+	letter-spacing: -0.015em;
+	color: var(--text);
+	margin: 0;
+	text-wrap: balance;
+}
+
+p { margin: 0 0 var(--sp-4); }
+p:last-child { margin-bottom: 0; }
+
+a {
+	color: var(--accent);
+	text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+	text-underline-offset: 0.18em;
+	text-decoration-thickness: 1px;
+	transition: color var(--t-hover) ease, text-decoration-color var(--t-hover) ease;
+}
+
+img { max-width: 100%; display: block; }
+strong { font-weight: 600; color: var(--text); }
+hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-6) 0; }
+
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+/* ============================================================ layout */
+
+.shell {
+	width: 100%;
+	max-width: var(--maxw);
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+.page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100svh;
+}
+
+.page > main { flex: 1 0 auto; }
+
+.prose { max-width: var(--measure); }
+.prose p + p { margin-top: var(--sp-4); }
+
+/* A section label. One weight, one size, used sparingly — it is the only
+ * uppercase element in the system. */
+.eyebrow {
+	font-size: var(--fs-2xs);
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--text-3);
+	margin: 0 0 var(--sp-3);
+}
+
+/* ============================================================ masthead */
+
+.masthead {
+	position: relative;
+	isolation: isolate;
+	min-height: min(58svh, 460px);
+	display: flex;
+	align-items: flex-end;
+	overflow: hidden;
+	background: var(--surface);
+}
+
+.masthead-img {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 42%;
+}
+
+/* Scrim graded from the bottom so the terrain stays legible at the top and
+ * the type sits on near-solid ground at the bottom. */
+.masthead::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background:
+		linear-gradient(to top, var(--bg) 2%, rgba(14, 15, 17, 0.82) 34%, rgba(14, 15, 17, 0.25) 78%, rgba(14, 15, 17, 0.45) 100%);
+}
+
+.masthead .shell {
+	padding-block: var(--sp-7) var(--sp-6);
+}
+
+.masthead h1 {
+	font-size: var(--fs-display);
+	letter-spacing: -0.025em;
+	margin-bottom: var(--sp-2);
+}
+
+.masthead-role {
+	font-size: var(--fs-sm);
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	color: var(--accent);
+	margin-bottom: var(--sp-4);
+}
+
+.masthead-line {
+	max-width: 46ch;
+	font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+	line-height: 1.55;
+	color: var(--text-2);
+	margin: 0;
+}
+
+/* ============================================================ intro */
+
+.intro { padding-block: var(--sp-7); }
+.intro p { color: var(--text-2); }
+.intro strong { color: var(--text); }
+
+/* Section links. Text with a rule, not three filled buttons. */
+.section-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-5) var(--sp-7);
+	margin-top: var(--sp-6);
+	padding-top: var(--sp-5);
+	border-top: 1px solid var(--line);
+	list-style: none;
+	padding-inline: 0;
+}
+
+.section-link {
+	display: inline-flex;
+	align-items: baseline;
+	gap: var(--sp-2);
+	font-family: var(--font-serif);
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--text);
+	text-decoration: none;
+	transition: color var(--t-hover) ease;
+}
+
+.section-link .arr {
+	font-family: var(--font-sans);
+	color: var(--text-3);
+	transition: transform var(--t-hover) var(--ease-out), color var(--t-hover) ease;
+}
+
+/* ============================================================ filters */
+
+.work-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-4);
+	padding-bottom: var(--sp-4);
+	border-bottom: 1px solid var(--line);
+}
+
+.work-head h2 { font-size: var(--fs-h2); }
+
+.filters {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--sp-1);
+	margin-inline: calc(var(--sp-3) * -1);
+}
+
+.filter {
+	appearance: none;
+	background: none;
+	border: 0;
+	border-radius: 4px;
+	padding: var(--sp-2) var(--sp-3);
+	font: inherit;
+	font-size: var(--fs-sm);
+	color: var(--text-3);
+	cursor: pointer;
+	transition: color var(--t-hover) ease, background-color var(--t-hover) ease,
+	            transform var(--t-press) var(--ease-out);
+}
+
+.filter[aria-pressed="true"] {
+	color: var(--text);
+	background: var(--surface-2);
+}
+
+.filter:active { transform: scale(0.97); }
+
+.filter-count {
+	margin-left: var(--sp-3);
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+	font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================ work grid */
+
+.work { padding-bottom: var(--sp-8); }
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+	gap: var(--sp-5);
+	margin-top: var(--sp-6);
+	/* Crossfade on filter change: the grid dips, the DOM swaps, it returns. */
+	transition: opacity 130ms ease;
+}
+
+.grid.is-swapping { opacity: 0; }
+
+.card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--surface);
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	transition: border-color var(--t-hover) ease, background-color var(--t-hover) ease,
+	            transform var(--t-press) var(--ease-out);
+}
+
+.card:active { transform: scale(0.99); }
+.card.is-hidden { display: none; }
+
+.card-figure {
+	position: relative;
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	background: var(--surface-2);
+	border-bottom: 1px solid var(--line);
+}
+
+.card-figure img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 420ms var(--ease-out);
+}
+
+/* For logo marks and diagrams, which should not be cropped. */
+.card-figure.is-contain img {
+	object-fit: contain;
+	padding: var(--sp-5);
+}
+
+.card-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+	padding: var(--sp-4) var(--sp-4) var(--sp-5);
+	flex: 1;
+}
+
+.card-title {
+	font-family: var(--font-serif);
+	font-size: var(--fs-h3);
+	font-weight: 600;
+	line-height: 1.3;
+	margin: 0;
+	transition: color var(--t-hover) ease;
+}
+
+.card-blurb {
+	font-size: var(--fs-sm);
+	line-height: 1.5;
+	color: var(--text-2);
+	margin: 0;
+	flex: 1;
+}
+
+.card-kind {
+	font-size: var(--fs-2xs);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-3);
+	margin: 0;
+}
+
+/* ============================================================ footer */
+
+.site-footer {
+	border-top: 1px solid var(--line);
+	padding-block: var(--sp-6);
+	margin-top: auto;
+}
+
+.site-footer .shell {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--sp-4);
+}
+
+.colophon {
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+	margin: 0;
+}
+
+.colophon a { color: var(--text-2); }
+
+.social {
+	display: flex;
+	gap: var(--sp-2);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.social a {
+	display: grid;
+	place-items: center;
+	width: 38px;
+	height: 38px;
+	border-radius: var(--radius);
+	color: var(--text-2);
+	font-size: 1rem;
+	text-decoration: none;
+	transition: color var(--t-hover) ease, background-color var(--t-hover) ease,
+	            transform var(--t-press) var(--ease-out);
+}
+
+.social a:active { transform: scale(0.94); }
+
+/* ============================================================ inner pages */
+
+.page-head {
+	padding-block: var(--sp-7) var(--sp-6);
+	border-bottom: 1px solid var(--line);
+}
+
+.page-head h1 {
+	font-size: var(--fs-h1);
+	margin-bottom: var(--sp-4);
+}
+
+.page-head .prose { color: var(--text-2); }
+
+.backlink {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--sp-2);
+	font-size: var(--fs-sm);
+	color: var(--text-3);
+	text-decoration: none;
+	padding-block: var(--sp-4);
+	transition: color var(--t-hover) ease;
+}
+
+.backlink .arr {
+	transition: transform var(--t-hover) var(--ease-out);
+}
+
+/* ---- skills ---- */
+
+.legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-3) var(--sp-6);
+	margin: var(--sp-6) 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+}
+
+.legend b {
+	font-weight: 600;
+	color: var(--text-2);
+	margin-right: var(--sp-2);
+}
+
+.legend .band-production { color: var(--accent); }
+
+.skill-group {
+	padding-block: var(--sp-6);
+	border-bottom: 1px solid var(--line);
+}
+
+.skill-group:last-of-type { border-bottom: 0; }
+
+.skill-group > h2 {
+	font-size: 1.1875rem;
+	margin-bottom: var(--sp-5);
+}
+
+.skill-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+	gap: var(--sp-4) var(--sp-7);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	align-items: stretch;
+}
+
+/* height:100% makes each entry fill its grid row, so the hairline under a
+ * one-line skill sits level with the one under a skill whose name wraps. */
+.skill {
+	height: 100%;
+	align-content: start;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: baseline;
+	gap: 0 var(--sp-4);
+	padding-bottom: var(--sp-3);
+	border-bottom: 1px solid var(--line);
+}
+
+.skill-name {
+	font-size: var(--fs-sm);
+	font-weight: 500;
+	color: var(--text);
+}
+
+/* The band. One hue, three weights — no pills, no traffic lights. */
+.band {
+	font-size: var(--fs-2xs);
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.band-production { color: var(--accent); font-weight: 600; }
+.band-proficient { color: var(--text-2); }
+.band-working    { color: var(--text-3); }
+
+.skill-proof {
+	grid-column: 1 / -1;
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+	margin-top: 2px;
+}
+
+.skill-proof a {
+	color: var(--text-3);
+	text-decoration-color: var(--line-2);
+	transition: color var(--t-hover) ease, text-decoration-color var(--t-hover) ease;
+}
+
+.langs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-3) var(--sp-7);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--fs-sm);
+}
+
+.langs b { font-weight: 600; }
+.langs span { color: var(--text-3); }
+
+/* ============================================================ project pages */
+
+.topbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--sp-4);
+}
+
+/* The project kind. It was a filled colour pill; it carries the same
+ * information as quiet text, and quiet text does not compete with the
+ * title two lines below it. */
+.kind {
+	font-size: var(--fs-2xs);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-3);
+}
+
+.project-head {
+	padding-block: var(--sp-5) var(--sp-6);
+	border-bottom: 1px solid var(--line);
+}
+
+.project-head h1 {
+	font-size: var(--fs-h1);
+	max-width: 26ch;
+}
+
+/* Date, organisation and role. Was three icon-prefixed chips; it is one
+ * line of text because that is what it is. */
+.meta-line {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-2) var(--sp-3);
+	margin: var(--sp-4) 0 0;
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+}
+
+.meta-line span:not(:last-child)::after {
+	content: "\00b7";
+	margin-left: var(--sp-3);
+	color: var(--line-2);
+}
+
+.section {
+	padding-block: var(--sp-6);
+	border-bottom: 1px solid var(--line);
+}
+
+.section:last-of-type { border-bottom: 0; }
+.section > .prose + .figure { margin-top: var(--sp-5); }
+
+.figure {
+	margin: var(--sp-5) 0 0;
+}
+
+.figure img {
+	width: 100%;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+}
+
+.figure figcaption {
+	margin-top: var(--sp-3);
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+}
+
+/* Outcomes. Was a grid of bordered cards, each with its own icon. The
+ * content is a list, so it is a list. */
+.outcomes {
+	margin: var(--sp-4) 0 0;
+	padding: 0;
+	list-style: none;
+	max-width: var(--measure);
+}
+
+.outcomes li {
+	padding: var(--sp-3) 0 var(--sp-3) var(--sp-4);
+	border-top: 1px solid var(--line);
+	border-left: 2px solid var(--line-2);
+	font-size: var(--fs-sm);
+	line-height: 1.55;
+	color: var(--text-2);
+}
+
+.outcomes li:last-child { border-bottom: 1px solid var(--line); }
+
+.chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-2);
+	margin: var(--sp-4) 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.chip {
+	padding: 0.25em 0.7em;
+	border: 1px solid var(--line);
+	border-radius: 4px;
+	background: var(--surface);
+	font-size: var(--fs-xs);
+	color: var(--text-2);
+	white-space: nowrap;
+}
+
+/* A note that qualifies the page, such as "the source is private". */
+.callout {
+	display: flex;
+	gap: var(--sp-3);
+	margin: var(--sp-5) 0 0;
+	padding: var(--sp-4);
+	border: 1px solid var(--line);
+	border-left: 2px solid var(--accent);
+	border-radius: var(--radius);
+	background: var(--surface);
+	font-size: var(--fs-sm);
+	line-height: 1.55;
+	color: var(--text-2);
+	max-width: var(--measure);
+}
+
+.callout strong { color: var(--text); }
+
+/* Terminal output. One accent on the command, everything else neutral —
+ * the old block used five syntax colours for three lines. */
+.cli {
+	margin: var(--sp-4) 0 0;
+	padding: var(--sp-4);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: #0a0b0c;
+	font-family: var(--font-mono);
+	font-size: var(--fs-xs);
+	line-height: 1.7;
+	color: var(--text-2);
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.cli .c { color: var(--text-3); }
+.cli .k { color: var(--accent); }
+
+/* ---- experience and education ---- */
+
+.entry {
+	padding-block: var(--sp-6);
+	border-bottom: 1px solid var(--line);
+}
+
+.entry:last-of-type { border-bottom: 0; }
+
+.entry-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-2) var(--sp-4);
+}
+
+.entry-head h2 { font-size: 1.3125rem; }
+
+.entry-when {
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+	white-space: nowrap;
+}
+
+.entry-where {
+	margin: var(--sp-1) 0 0;
+	font-size: var(--fs-sm);
+	color: var(--accent);
+}
+
+.entry ul {
+	margin: var(--sp-4) 0 0;
+	padding-left: var(--sp-4);
+	max-width: var(--measure);
+	color: var(--text-2);
+}
+
+.entry li { margin-bottom: var(--sp-2); font-size: var(--fs-sm); line-height: 1.55; }
+.entry li::marker { color: var(--line-2); }
+.entry li:last-child { margin-bottom: 0; }
+
+.entry-now {
+	display: inline-block;
+	margin-bottom: var(--sp-2);
+	font-size: var(--fs-2xs);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+
+/* ---- map pages ---- */
+
+/* The map is the artefact on these pages, so it gets the full column and a
+ * frame rather than being boxed inside a card with its own header bar. */
+.map-panel {
+	margin: var(--sp-5) 0 0;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	overflow: hidden;
+	background: var(--surface);
+}
+
+.map-panel .map {
+	width: 100%;
+	height: clamp(380px, 62vh, 620px);
+}
+
+.map-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--sp-3) var(--sp-5);
+	padding: var(--sp-4);
+	border-top: 1px solid var(--line);
+	font-size: var(--fs-xs);
+	color: var(--text-2);
+}
+
+.map-controls label {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--sp-2);
+	cursor: pointer;
+	/* Stops a double-tap on a checkbox label zooming the page. */
+	touch-action: manipulation;
+}
+
+.map-controls input[type="checkbox"] { accent-color: var(--accent); }
+.map-controls input[type="range"] { accent-color: var(--accent); }
+
+.map-note {
+	margin: var(--sp-3) 0 0;
+	font-size: var(--fs-xs);
+	color: var(--text-3);
+}
+
+/* ---- data table ---- */
+
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0 0; }
+
+table.data {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--fs-sm);
+}
+
+table.data th,
+table.data td {
+	padding: var(--sp-3) var(--sp-4) var(--sp-3) 0;
+	text-align: left;
+	border-bottom: 1px solid var(--line);
+}
+
+table.data th {
+	font-family: var(--font-sans);
+	font-size: var(--fs-2xs);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-3);
+}
+
+table.data td { color: var(--text-2); }
+table.data td:first-child { color: var(--text); }
+table.data tbody tr:last-child td { border-bottom: 0; }
+table.data .num { font-variant-numeric: tabular-nums; }
+
+/* ============================================================ geoqc parts */
+
+/* Pipeline diagram. It earns its place: it shows the shape of the thing the
+ * tool operates on, which the prose cannot. Redrawn without icons so the
+ * nodes read as boxes of data rather than as a toolbar. */
+.flow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	gap: var(--sp-2);
+	margin: var(--sp-5) 0 0;
+}
+
+.flow-step {
+	flex: 1 1 110px;
+	min-width: 110px;
+	padding: var(--sp-4) var(--sp-3);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--surface);
+	text-align: center;
+}
+
+.flow-step.is-engine {
+	flex-basis: 170px;
+	border-color: var(--accent);
+	background: var(--accent-dim);
+}
+
+.flow-step b {
+	display: block;
+	font-size: var(--fs-sm);
+	font-weight: 600;
+	color: var(--text);
+}
+
+.flow-step span {
+	display: block;
+	margin-top: 2px;
+	font-family: var(--font-mono);
+	font-size: var(--fs-2xs);
+	color: var(--text-3);
+}
+
+.flow-sep {
+	align-self: center;
+	color: var(--line-2);
+	font-size: 0.9rem;
+}
+
+.flow-out {
+	flex: 1 1 130px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--sp-1);
+}
+
+.flow-out li {
+	font-family: var(--font-mono);
+	font-size: var(--fs-2xs);
+	color: var(--text-2);
+}
+
+/* Capabilities. Was four bordered cards with four icons; it is four terms
+ * and four definitions, so it is a definition list. */
+.defs {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 0 var(--sp-7);
+	margin: var(--sp-4) 0 0;
+}
+
+.defs > div {
+	padding-block: var(--sp-4);
+	border-top: 1px solid var(--line);
+}
+
+.defs dt {
+	font-size: var(--fs-sm);
+	font-weight: 600;
+	color: var(--text);
+	margin-bottom: var(--sp-2);
+}
+
+.defs dd {
+	margin: 0;
+	font-size: var(--fs-sm);
+	line-height: 1.55;
+	color: var(--text-2);
+}
+
+/* Sample report output. Labelled as a sample, and built from plain figures
+ * rather than a fake dashboard chrome, because it illustrates the shape of
+ * the output; it is not live data and should not dress up as it. */
+.sample {
+	margin: var(--sp-4) 0 0;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+
+.sample-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-2);
+	padding: var(--sp-4);
+	border-bottom: 1px solid var(--line);
+	background: var(--surface);
+}
+
+.sample-head b { font-size: var(--fs-sm); font-weight: 600; }
+.sample-head span { font-size: var(--fs-2xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+
+.figures {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	margin: 0;
+}
+
+.figures > div {
+	padding: var(--sp-4);
+	border-right: 1px solid var(--line);
+	border-bottom: 1px solid var(--line);
+}
+
+.figures dt {
+	font-family: var(--font-serif);
+	font-size: 1.75rem;
+	font-weight: 600;
+	color: var(--text);
+	font-variant-numeric: tabular-nums;
+	line-height: 1.1;
+}
+
+.figures dd {
+	margin: var(--sp-1) 0 0;
+	font-size: var(--fs-2xs);
+	color: var(--text-3);
+}
+
+.remarks { margin: 0; padding: var(--sp-4); list-style: none; }
+
+.remarks li {
+	padding: var(--sp-3) 0 var(--sp-3) var(--sp-4);
+	border-left: 2px solid var(--line-2);
+	font-size: var(--fs-sm);
+	line-height: 1.55;
+	color: var(--text-2);
+}
+
+.remarks li + li { margin-top: var(--sp-3); }
+.remarks li.sev-major { border-left-color: var(--sev-4); }
+.remarks li.sev-mod   { border-left-color: var(--sev-3); }
+.remarks li.sev-note  { border-left-color: var(--sev-1); }
+
+.remarks .tag {
+	display: block;
+	margin-bottom: 2px;
+	font-size: var(--fs-2xs);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-3);
+}
+
+.remarks strong, .remarks em { color: var(--text); font-style: normal; }
+
+/* Severity scale. Ordinal: the order is the meaning, so it takes one hue in
+ * monotone lightness steps rather than a traffic-light palette. */
+.scale {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-2) var(--sp-5);
+	margin: var(--sp-4) 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--fs-xs);
+	color: var(--text-2);
+}
+
+.scale li { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+.scale i {
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	flex-shrink: 0;
+}
+
+.scale .s0 { background: var(--sev-0); }
+.scale .s1 { background: var(--sev-1); }
+.scale .s2 { background: var(--sev-2); }
+.scale .s3 { background: var(--sev-3); }
+.scale .s4 { background: var(--sev-4); }
+
+.scale b { font-weight: 600; color: var(--text); }
+.scale span { color: var(--text-3); }
+
+/* A status line: what state the project is actually in. */
+.status {
+	display: inline-block;
+	margin: var(--sp-4) 0 0;
+	padding: 0.3em 0.8em;
+	border: 1px solid var(--line-2);
+	border-radius: 999px;
+	font-size: var(--fs-xs);
+	color: var(--text-2);
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--sp-2);
+	margin: var(--sp-4) 0 0;
+	padding: 0.5em 1em;
+	border: 1px solid var(--line-2);
+	border-radius: var(--radius);
+	background: var(--surface);
+	font-size: var(--fs-sm);
+	color: var(--text);
+	text-decoration: none;
+	transition: border-color var(--t-hover) ease, background-color var(--t-hover) ease,
+	            transform var(--t-press) var(--ease-out);
+}
+
+.btn:active { transform: scale(0.98); }
+
+/* ============================================================ home page */
+
+/* The hero and the section heads are centred. Short, display-weight lines
+ * read as an address to the reader when they are centred; the same lines
+ * pinned left with a wide void beside them read as a layout that ran out.
+ * The project grid stays full width underneath. */
+
+body.home .masthead { align-items: center; }
+body.home .masthead .shell { text-align: center; }
+body.home .masthead-line { margin-inline: auto; }
+
+body.home .intro .prose {
+	max-width: 68ch;
+	margin-inline: auto;
+	text-align: center;
+}
+
+body.home .section-links {
+	justify-content: center;
+	gap: var(--sp-5) var(--sp-7);
+}
+
+/* The work head is not centred: the heading sits at the column's left edge
+ * with the filters opposite it, so both align with the grid beneath. Only
+ * the hero, which is an address to the reader, is centred. */
+
+@media (max-width: 600px) {
+	body.home .intro .prose { text-align: left; }
+	body.home .section-links { align-items: center; }
+}
+
+/* ============================================================ reading pages */
+
+body.reading .shell { max-width: var(--maxw-read); }
+
+/* Inside a reading column the container already enforces the measure, so the
+ * per-block caps would only narrow it a second time. */
+body.reading .prose,
+body.reading .outcomes,
+body.reading .callout,
+body.reading .entry ul,
+body.reading .page-head .prose { max-width: none; }
+
+/* No measure cap on the title: it should take one line across the column
+ * where it fits, not stack into a narrow stub. */
+body.reading .project-head h1,
+body.reading .page-head h1 { max-width: none; }
+
+/* Prose fills the column, so the leading goes up to carry the longer line.
+ * A wide measure at tight leading is where the eye loses its place on the
+ * return sweep; the extra leading is what pays for the width. */
+body.reading .prose { line-height: 1.8; }
+
+/* ============================================================ entrance */
+
+/* Staggered reveal, applied by script only when it can observe. Items are
+ * visible by default so the page is readable with JS off or blocked. */
+.reveal-ready .reveal {
+	opacity: 0;
+	transform: translateY(10px);
+}
+
+.reveal-ready .reveal.is-in {
+	opacity: 1;
+	transform: none;
+	transition: opacity var(--t-enter) var(--ease-out),
+	            transform var(--t-enter) var(--ease-out);
+}
+
+/* ============================================================ hover */
+
+/* Gated: touch devices fire :hover on tap, which strands the hovered state
+ * on the last thing the finger touched. */
+@media (hover: hover) and (pointer: fine) {
+	a:hover { color: var(--accent-hi); text-decoration-color: currentColor; }
+
+	.section-link:hover { color: var(--accent); }
+	.section-link:hover .arr { transform: translateX(3px); color: var(--accent); }
+
+	.filter:hover { color: var(--text); }
+	.filter[aria-pressed="true"]:hover { color: var(--text); }
+
+	.card:hover {
+		border-color: var(--line-2);
+		background: var(--surface-2);
+	}
+	.card:hover .card-figure img { transform: scale(1.04); }
+	.card:hover .card-title { color: var(--accent); }
+
+	.social a:hover { color: var(--text); background: var(--surface-2); }
+
+	.backlink:hover { color: var(--text); }
+	.backlink:hover .arr { transform: translateX(-3px); }
+
+	.skill-proof a:hover { color: var(--text-2); text-decoration-color: var(--text-3); }
+
+	.chip:hover { border-color: var(--line-2); color: var(--text); }
+
+	.btn:hover { border-color: var(--accent); background: var(--surface-2); color: var(--text); }
+}
+
+/* ============================================================ mobile */
+
+@media (max-width: 600px) {
+	:root { --fs-body: 1.0625rem; }
+
+	.masthead { min-height: min(62svh, 400px); }
+	.masthead .shell { padding-block: var(--sp-6) var(--sp-5); }
+
+	.section-links { gap: var(--sp-4); flex-direction: column; }
+
+	.work-head { flex-direction: column; align-items: stretch; }
+	.filters { margin-inline: calc(var(--sp-2) * -1); }
+
+	.grid { grid-template-columns: 1fr; gap: var(--sp-4); }
+
+	.site-footer .shell { flex-direction: column; align-items: flex-start; }
+}
+
+/* Keeps the footer clear of the iOS home indicator. */
+@supports (padding: max(0px)) {
+	.site-footer { padding-bottom: max(var(--sp-6), env(safe-area-inset-bottom)); }
+}
+
+/* ============================================================ reduced motion */
+
+/* Fewer and gentler, not none: opacity still carries the reveal and the
+ * filter swap, because those changes aid comprehension. Movement goes. */
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+
+	.reveal-ready .reveal { transform: none; }
+	.reveal-ready .reveal.is-in { transition: opacity var(--t-enter) ease; }
+
+	.card:active,
+	.filter:active,
+	.btn:active,
+	.social a:active { transform: none; }
+
+	.card:hover .card-figure img { transform: none; }
+	.section-link:hover .arr,
+	.backlink:hover .arr { transform: none; }
+}

@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html lang="en">
 	<head>
 		<title>TreeForge | Andres Gordon</title>
@@ -35,431 +30,172 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
-		<meta name="theme-color" content="#1b2030" />
+		<meta name="theme-color" content="#0e0f11" />
 		<!-- meta:end -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/portfolio.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<link rel="stylesheet" href="assets/css/site.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-		<style>
-			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; text-align: center; }
-			#main .inner { display: inline-block; text-align: left; width: 100%; }
-			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 2em; }
-			#footer { background-color: #141820 !important; }
-			.follow-heading { color: #d8e0f0; }
-			a { color: #2d7dd2; }
-			a:hover { color: #5ba3f5; }
-			.section-label {
-				font-size: 0.7em;
-				font-weight: 700;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
-				color: #2d7dd2;
-				margin-bottom: 0.4em;
-			}
-			.pipeline-flow {
-				display: flex;
-				align-items: center;
-				flex-wrap: wrap;
-				gap: 0;
-				margin: 2em 0;
-				justify-content: center;
-			}
-			.flow-node {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 0.7em 1em;
-				text-align: center;
-				min-width: 80px;
-			}
-			.flow-node.engine {
-				background: #1a2d4a;
-				border-color: #2d7dd2;
-				border-width: 2px;
-				padding: 0.9em 1.4em;
-			}
-			.flow-node .node-icon { font-size: 1.3em; margin-bottom: 0.25em; color: #2d7dd2; }
-			.flow-node.engine .node-icon { color: #5ba3f5; font-size: 1.7em; }
-			.flow-node .node-label { font-size: 0.68em; font-weight: 700; letter-spacing: 0.05em; color: #d8e0f0; text-transform: uppercase; }
-			.flow-node .node-sub { font-size: 0.6em; color: #b8c4dc; margin-top: 0.1em; }
-			.flow-arrow { color: #2d3855; font-size: 1em; padding: 0 0.3em; flex-shrink: 0; }
-			.flow-outputs { display: flex; flex-direction: column; gap: 0.35em; }
-			.output-chip {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 4px;
-				padding: 0.22em 0.65em;
-				font-size: 0.63em;
-				font-weight: 700;
-				letter-spacing: 0.07em;
-				text-transform: uppercase;
-				color: #b8c4dc;
-				display: flex;
-				align-items: center;
-				gap: 0.4em;
-			}
-			.output-chip.tif  { border-color: #2d7dd2; color: #5ba3f5; }
-			.output-chip.json { border-color: #ffc300; color: #ffc300; }
-			.output-chip.pdf  { border-color: #ff6d00; color: #ff9800; }
-			.feature-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-				gap: 1em;
-				margin: 1.5em 0;
-			}
-			.feature-card {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1.3em 1.1em;
-				border-top: 3px solid #2d7dd2;
-			}
-			.feature-card .fc-icon { font-size: 1.4em; color: #2d7dd2; margin-bottom: 0.55em; }
-			.feature-card h4 { font-size: 0.83em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #d8e0f0; margin: 0 0 0.45em 0; }
-			.feature-card p { font-size: 0.8em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-			.chm-preview {
-				background: #111827;
-				border: 1.5px solid #2d3855;
-				border-radius: 10px;
-				overflow: hidden;
-				margin: 1.5em 0;
-			}
-			.chm-header {
-				background: linear-gradient(135deg, #003049 0%, #1a2d4a 100%);
-				padding: 0.9em 1.4em;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				flex-wrap: wrap;
-				gap: 0.4em;
-				border-bottom: 1px solid #2d3855;
-			}
-			.chm-title { font-size: 0.88em; font-weight: 700; color: #d8e0f0; }
-			.chm-sub { font-size: 0.68em; color: #5ba3f5; letter-spacing: 0.08em; text-transform: uppercase; }
-			.kpi-strip {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-				gap: 1px;
-				background: #2d3855;
-			}
-			.kpi-cell {
-				background: #1a2d4a;
-				padding: 0.9em 0.5em;
-				text-align: center;
-			}
-			.kpi-val { font-size: 1.5em; font-weight: 700; color: #5ba3f5; line-height: 1; }
-			.kpi-label { font-size: 0.62em; color: #b8c4dc; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.25em; }
-			.stages-table {
-				width: 100%;
-				border-collapse: collapse;
-				font-size: 0.82em;
-				margin: 1em 0;
-			}
-			.stages-table th {
-				background: #242d42;
-				color: #5ba3f5;
-				font-size: 0.75em;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				padding: 0.6em 0.9em;
-				text-align: left;
-				border-bottom: 2px solid #2d3855;
-			}
-			.stages-table td {
-				padding: 0.55em 0.9em;
-				color: #d8e0f0;
-				border-bottom: 1px solid #1f2739;
-				vertical-align: top;
-			}
-			.stages-table tr:nth-child(even) td { background: #1a2235; }
-			.stages-table .stage-name { color: #d8e0f0; font-weight: 600; white-space: nowrap; }
-			.stages-table .out-fmt { color: #ffc300; font-size: 0.85em; font-weight: 600; }
-			.usecase-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-				gap: 0.8em;
-				margin: 1em 0;
-			}
-			.usecase-card {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 6px;
-				padding: 0.9em 1em;
-				display: flex;
-				align-items: flex-start;
-				gap: 0.7em;
-			}
-			.usecase-card i { color: #2d7dd2; font-size: 1em; margin-top: 0.15em; flex-shrink: 0; }
-			.usecase-card p { font-size: 0.78em; line-height: 1.5; color: #d8e0f0; margin: 0; }
-			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 1em 0; }
-			.tech-chip {
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-radius: 5px;
-				padding: 0.3em 0.8em;
-				font-size: 0.72em;
-				font-weight: 600;
-				letter-spacing: 0.05em;
-				color: #b8c4dc;
-				text-transform: uppercase;
-			}
-			.cli-block {
-				background: #0d1117;
-				border: 1.5px solid #2d3855;
-				border-radius: 8px;
-				padding: 1em 1.4em;
-				font-family: 'Courier New', monospace;
-				font-size: 0.82em;
-				color: #5ba3f5;
-				margin: 1em 0;
-				overflow-x: auto;
-			}
-			.cli-block .cli-comment { color: #b8c4dc; }
-			.cli-block .cli-flag    { color: #ffa657; }
-			.cli-block .cli-val     { color: #a5d6ff; }
-			.state-badge {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.4em;
-				background: rgba(255,152,0,0.12);
-				border: 1.5px solid #ff9800;
-				border-radius: 5px;
-				padding: 0.3em 0.8em;
-				font-size: 0.75em;
-				font-weight: 700;
-				color: #ff9800;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				margin-bottom: 1em;
-			}
-			@media (max-width: 700px) {
-				.pipeline-flow { flex-direction: column; align-items: stretch; }
-				.flow-arrow { transform: rotate(90deg); text-align: center; }
-				.flow-outputs { flex-direction: row; flex-wrap: wrap; }
-			}
-			@media screen and (max-width: 736px) {
-				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
-			}
-			.gh-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5em;
-				background: #242d42;
-				border: 1.5px solid #2d7dd2;
-				border-radius: 6px;
-				padding: 0.45em 1em;
-				font-size: 0.8em;
-				font-weight: 700;
-				color: #2d7dd2 !important;
-				letter-spacing: 0.04em;
-				text-decoration: none;
-				margin: 0.5em 0 1.5em;
-			}
-			.gh-link:hover { background: #2d7dd2; color: #fff !important; }
-		</style>
 	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<a href="index.html">
-				<img src="images/logo.png" alt="Home" class="home-logo" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
-			</a>
+	<body class="reading">
+		<div class="page">
 
-			<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<ul class="actions">
-						<li><a href="index.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All projects</a></li>
-						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-palette" style="margin-right:0.45em;"></i>Personal project</span></li>
-					</ul>
-				</div>
-			</header>
-
-			<!-- Main -->
-			<div id="main">
-				<div class="inner">
-
-					<h1>TreeForge</h1>
-					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>2026</span><span><i class="fas fa-building" aria-hidden="true"></i>Personal project</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Sole author · published on GitHub</span></p>
-					<p style="font-size:1.05em; color:#d8e0f0; line-height:1.7;">
-						A Python CLI toolkit that takes drone-acquired point clouds and produces a complete forest inventory — Digital Surface Model, Digital Terrain Model, Canopy Height Model, individual tree crown polygons, treetop locations, and a two-page PDF report — all from a single command. No GIS software required.
-					</p>
-
-					<div class="state-badge"><i class="fas fa-flask"></i> Working prototype — tested on real datasets, not yet field-validated</div>
-					<a href="https://github.com/EAndresGE/treeforge" target="_blank" rel="noopener" class="gh-link"><i class="fab fa-github" aria-hidden="true"></i> View source on GitHub</a>
-
-					<!-- Pipeline flow -->
-					<p class="section-label"><i class="fas fa-project-diagram" style="margin-right:0.4em;"></i>Processing pipeline</p>
-					<div class="pipeline-flow">
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-cloud"></i></div>
-							<div class="node-label">LAS / LAZ</div>
-							<div class="node-sub">Drone point cloud</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-layer-group"></i></div>
-							<div class="node-label">DSM · DTM</div>
-							<div class="node-sub">Surface models</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node">
-							<div class="node-icon"><i class="fas fa-tree"></i></div>
-							<div class="node-label">CHM</div>
-							<div class="node-sub">Canopy heights</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-node engine">
-							<div class="node-icon"><i class="fas fa-cogs"></i></div>
-							<div class="node-label">Segmentation</div>
-							<div class="node-sub">Crown detection</div>
-						</div>
-						<div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
-						<div class="flow-outputs">
-							<div class="output-chip tif"><i class="fas fa-map"></i> GeoTIFF (DSM / DTM / CHM)</div>
-							<div class="output-chip json"><i class="fas fa-draw-polygon"></i> GeoJSON (crowns + treetops)</div>
-							<div class="output-chip pdf"><i class="fas fa-file-pdf"></i> PDF Report</div>
-						</div>
-					</div>
-
-					<!-- CLI usage -->
-					<p class="section-label" style="margin-top:1.5em;"><i class="fas fa-terminal" style="margin-right:0.4em;"></i>Usage</p>
-					<div class="cli-block">
-						<span class="cli-comment"># Run full analysis with PDF report</span><br>
-						treeforge
-						<span class="cli-flag">--input</span> <span class="cli-val">"C:\survey\point_clouds"</span>
-						<span class="cli-flag">--out</span> <span class="cli-val">"C:\survey\results"</span>
-						<span class="cli-flag">--res</span> <span class="cli-val">0.5</span>
-						<span class="cli-flag">--srid</span> <span class="cli-val">32634</span>
-						<span class="cli-flag">--report</span>
-					</div>
-
-					<!-- KPI preview -->
-					<p class="section-label" style="margin-top:1.5em;"><i class="fas fa-eye" style="margin-right:0.4em;"></i>Report output preview</p>
-					<div class="chm-preview">
-						<div class="chm-header">
-							<div>
-								<div class="chm-title">Forest Inventory Report</div>
-								<div class="chm-sub">Site A — Drone LiDAR survey · EPSG:32634</div>
-							</div>
-							<div style="font-size:0.68em; color:#b8c4dc;">Generated by TreeForge</div>
-						</div>
-						<div class="kpi-strip">
-							<div class="kpi-cell"><div class="kpi-val">247</div><div class="kpi-label">Trees</div></div>
-							<div class="kpi-cell"><div class="kpi-val">182</div><div class="kpi-label">Trees / ha</div></div>
-							<div class="kpi-cell"><div class="kpi-val">1.36</div><div class="kpi-label">Area (ha)</div></div>
-							<div class="kpi-cell"><div class="kpi-val">74%</div><div class="kpi-label">Canopy cover</div></div>
-							<div class="kpi-cell"><div class="kpi-val">21.4 m</div><div class="kpi-label">Mean height</div></div>
-							<div class="kpi-cell"><div class="kpi-val">34.1 m</div><div class="kpi-label">Tallest tree</div></div>
-						</div>
-					</div>
-
-					<!-- Outputs table -->
-					<p class="section-label" style="margin-top:1.5em;"><i class="fas fa-folder-open" style="margin-right:0.4em;"></i>Pipeline outputs</p>
-					<table class="stages-table">
-						<thead>
-							<tr><th>Stage</th><th>What it produces</th><th>Format</th></tr>
-						</thead>
-						<tbody>
-							<tr><td class="stage-name">DSM</td><td>Highest elevation per cell — captures treetops and structures</td><td class="out-fmt">GeoTIFF</td></tr>
-							<tr><td class="stage-name">DTM</td><td>Ground surface (5th percentile of ground points, gap-filled)</td><td class="out-fmt">GeoTIFF</td></tr>
-							<tr><td class="stage-name">CHM</td><td>DSM − DTM — every pixel is a canopy height above ground</td><td class="out-fmt">GeoTIFF</td></tr>
-							<tr><td class="stage-name">Crown polygons</td><td>Individual tree crown boundaries with area (m²) per crown</td><td class="out-fmt">GeoJSON</td></tr>
-							<tr><td class="stage-name">Treetops</td><td>Point per tree with height and crown ID — one peak per crown</td><td class="out-fmt">GeoJSON</td></tr>
-							<tr><td class="stage-name">PDF report</td><td>CHM map, crown outlines, KPI strip, height histogram, top-15 trees</td><td class="out-fmt">PDF</td></tr>
-						</tbody>
-					</table>
-
-					<!-- Feature cards -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-star" style="margin-right:0.4em;"></i>Key capabilities</p>
-					<div class="feature-grid">
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-mountain"></i></div>
-							<h4>Auto ground estimation</h4>
-							<p>A lightweight Progressive Morphological Filter (pure NumPy) estimates ground points automatically in unclassified photogrammetry clouds — no preprocessing or external tools needed.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-draw-polygon"></i></div>
-							<h4>Crown segmentation</h4>
-							<p>Deterministic height thresholding replaces brittle Otsu methods. Morphological closing bridges intra-crown gaps. Connected-component labelling with 8-connectivity extracts individual crowns.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-crosshairs"></i></div>
-							<h4>Treetop detection</h4>
-							<p>Local maximum filter with a 7×7 window finds one peak per crown. Two-stage Gaussian blur separates noise filtering from peak localisation — treetop heights come from raw CHM, not smoothed data.</p>
-						</div>
-						<div class="feature-card">
-							<div class="fc-icon"><i class="fas fa-tachometer-alt"></i></div>
-							<h4>Vectorised performance</h4>
-							<p>No Python loops over points. DSM uses <code style="color:#5ba3f5;">np.maximum.at()</code>, DTM uses <code style="color:#5ba3f5;">lexsort()</code> for 5th-percentile per cell. Gap filling uses Euclidean distance transform — scales to millions of points.</p>
-						</div>
-					</div>
-
-					<!-- Motivation -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-seedling" style="margin-right:0.4em;"></i>Why I built it</p>
-					<p>Professional forestry analysis tools — Trimble, ESRI, Global Mapper — are expensive, demand specialist hardware, and require significant GIS expertise. TreeForge was built to lower that barrier: a surveyor with a consumer DJI drone and a laptop should be able to fly a site, run OpenDroneMap on the images, and get a professional tree inventory report in an afternoon.</p>
-					<p>The target user is not a GIS analyst. It's a small agricultural consultancy, a forest estate manager, a conservation organisation, or an independent surveyor who needs a repeatable, documented workflow they can hand to a client.</p>
-
-					<!-- Use cases -->
-					<p class="section-label" style="margin-top:1.5em;"><i class="fas fa-map-marked-alt" style="margin-right:0.4em;"></i>Potential use cases</p>
-					<div class="usecase-grid">
-						<div class="usecase-card"><i class="fas fa-tree"></i><p><strong style="color:#d8e0f0;">Private forest inventory</strong> — tree count, stem density, crown area, and height distribution for timber valuation or management planning</p></div>
-						<div class="usecase-card"><i class="fas fa-leaf"></i><p><strong style="color:#d8e0f0;">Carbon credit applications</strong> — height and crown area used to approximate above-ground biomass for voluntary carbon markets</p></div>
-						<div class="usecase-card"><i class="fas fa-city"></i><p><strong style="color:#d8e0f0;">Municipal tree surveys</strong> — parks departments tracking canopy cover change over time</p></div>
-						<div class="usecase-card"><i class="fas fa-fire"></i><p><strong style="color:#d8e0f0;">Post-disturbance assessment</strong> — canopy loss monitoring after storm damage, fire, or pest outbreak by comparing surveys</p></div>
-						<div class="usecase-card"><i class="fas fa-seedling"></i><p><strong style="color:#d8e0f0;">Reforestation monitoring</strong> — tracking crown development in plantation areas year on year</p></div>
-					</div>
-
-					<!-- Tech stack -->
-					<p class="section-label" style="margin-top:2em;"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</p>
-					<div class="tech-stack">
-						<span class="tech-chip">Python 3.9+</span>
-						<span class="tech-chip">NumPy</span>
-						<span class="tech-chip">SciPy</span>
-						<span class="tech-chip">rasterio</span>
-						<span class="tech-chip">laspy</span>
-						<span class="tech-chip">scikit-image</span>
-						<span class="tech-chip">Shapely</span>
-						<span class="tech-chip">Fiona</span>
-						<span class="tech-chip">matplotlib</span>
-						<span class="tech-chip">LAS / LAZ</span>
-						<span class="tech-chip">GeoTIFF</span>
-						<span class="tech-chip">GeoJSON</span>
-						<span class="tech-chip">OpenDroneMap</span>
-					</div>
-
+			<div class="shell">
+				<div class="topbar">
+					<a class="backlink" href="index.html"><span class="arr" aria-hidden="true">&larr;</span> All projects</a>
+					<span class="kind">Personal project</span>
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<section>
-						<h2 class="follow-heading">Follow</h2>
-						<ul class="icons">
-							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+			<main>
+
+				<header class="project-head">
+					<div class="shell">
+						<h1>TreeForge</h1>
+						<p class="meta-line"><span>2026</span><span>Personal project</span><span>Sole author, published on GitHub</span></p>
+					</div>
+				</header>
+
+				<div class="shell">
+
+					<section class="section reveal">
+						<div class="prose">
+							<p>A Python CLI toolkit that turns a drone-acquired point cloud into a complete forest inventory: Digital Surface Model, Digital Terrain Model, Canopy Height Model, individual tree crown polygons, treetop locations and a two-page PDF report, all from a single command. No GIS software required.</p>
+						</div>
+						<p class="status">Working prototype, tested on real datasets, not yet field-validated</p>
+						<p><a class="btn" href="https://github.com/EAndresGE/treeforge" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> View source on GitHub</a></p>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Processing pipeline</p>
+						<div class="flow">
+							<div class="flow-step"><b>LAS / LAZ</b><span>point cloud</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step"><b>DSM &middot; DTM</b><span>surface models</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step"><b>CHM</b><span>canopy heights</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<div class="flow-step is-engine"><b>Segmentation</b><span>crown detection</span></div>
+							<div class="flow-sep" aria-hidden="true">&rsaquo;</div>
+							<ul class="flow-out">
+								<li>GeoTIFF</li>
+								<li>GeoJSON</li>
+								<li>PDF report</li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Usage</p>
+						<pre class="cli"><span class="c"># Run full analysis with PDF report</span>
+<span class="k">treeforge</span> --input "C:\survey\point_clouds" --out "C:\survey\results" --res 0.5 --srid 32634 --report</pre>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Report output</p>
+						<div class="sample">
+							<div class="sample-head">
+								<b>Forest Inventory Report</b>
+								<span>Sample output &middot; EPSG:32634</span>
+							</div>
+							<dl class="figures">
+								<div><dt>247</dt><dd>Trees</dd></div>
+								<div><dt>182</dt><dd>Trees / ha</dd></div>
+								<div><dt>1.36</dt><dd>Area (ha)</dd></div>
+								<div><dt>74%</dt><dd>Canopy cover</dd></div>
+								<div><dt>21.4 m</dt><dd>Mean height</dd></div>
+								<div><dt>34.1 m</dt><dd>Tallest tree</dd></div>
+							</dl>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Pipeline outputs</p>
+						<div class="table-wrap">
+							<table class="data">
+								<thead>
+									<tr><th scope="col">Stage</th><th scope="col">What it produces</th><th scope="col">Format</th></tr>
+								</thead>
+								<tbody>
+									<tr><td>DSM</td><td>Highest elevation per cell, capturing treetops and structures</td><td>GeoTIFF</td></tr>
+									<tr><td>DTM</td><td>Ground surface, 5th percentile of ground points, gap-filled</td><td>GeoTIFF</td></tr>
+									<tr><td>CHM</td><td>DSM minus DTM, so every pixel is a canopy height above ground</td><td>GeoTIFF</td></tr>
+									<tr><td>Crown polygons</td><td>Individual tree crown boundaries with area per crown</td><td>GeoJSON</td></tr>
+									<tr><td>Treetops</td><td>Point per tree with height and crown ID, one peak per crown</td><td>GeoJSON</td></tr>
+									<tr><td>PDF report</td><td>CHM map, crown outlines, figures, height histogram, top 15 trees</td><td>PDF</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Key capabilities</p>
+						<dl class="defs">
+							<div>
+								<dt>Auto ground estimation</dt>
+								<dd>A lightweight Progressive Morphological Filter in pure NumPy estimates ground points automatically in unclassified photogrammetry clouds, with no preprocessing or external tools.</dd>
+							</div>
+							<div>
+								<dt>Crown segmentation</dt>
+								<dd>Deterministic height thresholding replaces brittle Otsu methods. Morphological closing bridges intra-crown gaps, and connected-component labelling with 8-connectivity extracts individual crowns.</dd>
+							</div>
+							<div>
+								<dt>Treetop detection</dt>
+								<dd>A local maximum filter with a 7&times;7 window finds one peak per crown. Two-stage Gaussian blur separates noise filtering from peak localisation, so treetop heights come from the raw CHM rather than smoothed data.</dd>
+							</div>
+							<div>
+								<dt>Vectorised performance</dt>
+								<dd>No Python loops over points. DSM uses <code>np.maximum.at()</code>, DTM uses <code>lexsort()</code> for the 5th percentile per cell, and gap filling uses a Euclidean distance transform, so it scales to millions of points.</dd>
+							</div>
+						</dl>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Why I built it</p>
+						<div class="prose">
+							<p>Professional forestry analysis tools such as Trimble, ESRI and Global Mapper are expensive, demand specialist hardware, and require significant GIS expertise. TreeForge was built to lower that barrier: a surveyor with a consumer DJI drone and a laptop should be able to fly a site, run OpenDroneMap on the images, and get a professional tree inventory report in an afternoon.</p>
+							<p>The target user is not a GIS analyst. It is a small agricultural consultancy, a forest estate manager, a conservation organisation, or an independent surveyor who needs a repeatable, documented workflow they can hand to a client.</p>
+						</div>
+					</section>
+
+					<section class="section reveal">
+						<p class="eyebrow">Potential use cases</p>
+						<ul class="outcomes">
+							<li><strong>Private forest inventory.</strong> Tree count, stem density, crown area and height distribution for timber valuation or management planning.</li>
+							<li><strong>Carbon credit applications.</strong> Height and crown area used to approximate above-ground biomass for voluntary carbon markets.</li>
+							<li><strong>Municipal tree surveys.</strong> Parks departments tracking canopy cover change over time.</li>
+							<li><strong>Post-disturbance assessment.</strong> Canopy loss monitoring after storm damage, fire or pest outbreak by comparing surveys.</li>
+							<li><strong>Reforestation monitoring.</strong> Tracking crown development in plantation areas year on year.</li>
 						</ul>
 					</section>
-					<ul class="copyright">
-						<li>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></li>
+
+					<section class="section reveal">
+						<p class="eyebrow">Built with</p>
+						<ul class="chips">
+							<li class="chip">Python 3.9+</li><li class="chip">NumPy</li><li class="chip">SciPy</li>
+							<li class="chip">rasterio</li><li class="chip">laspy</li><li class="chip">scikit-image</li>
+							<li class="chip">Shapely</li><li class="chip">Fiona</li><li class="chip">matplotlib</li>
+							<li class="chip">LAS / LAZ</li><li class="chip">GeoTIFF</li><li class="chip">GeoJSON</li>
+							<li class="chip">OpenDroneMap</li>
+						</ul>
+					</section>
+
+				</div>
+
+			</main>
+
+			<footer class="site-footer">
+				<div class="shell">
+					<p class="colophon">&copy; 2026 Andres Gordon</p>
+					<ul class="social">
+						<li><a href="https://github.com/EAndresGE" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/andresgordon/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 			</footer>
 
 		</div>
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		<script src="assets/js/site.js" defer></script>
 	</body>
 </html>

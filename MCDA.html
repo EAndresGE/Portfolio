@@ -30,90 +30,79 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
-		<meta name="theme-color" content="#1b2030" />
+		<meta name="theme-color" content="#0e0f11" />
 		<!-- meta:end -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/portfolio.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<link rel="stylesheet" href="assets/css/site.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<style>
-			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; text-align: center; }
-			#main .inner { display: inline-block; text-align: left; width: 100%; }
-			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 2em; }
-			#footer { background-color: #141820 !important; }
-			.follow-heading { color: #d8e0f0; }
-			a { color: #2d7dd2; }
-			a:hover { color: #5ba3f5; }
-			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
-			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
-			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
-			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
-			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #b8c4dc; text-transform: uppercase; }
-			@media screen and (max-width: 736px) {
-				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
-			}
-		</style>
 	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<a href="index.html">
-				<img src="images/logo.png" alt="Home" class="home-logo" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
-			</a>
-			<header id="header">
-				<div class="inner">
-					<ul class="actions">
-						<li><a href="index.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All projects</a></li>
-						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#1a9ea6;color:#fff;"><i class="fas fa-graduation-cap" style="margin-right:0.45em;"></i>Academic project</span></li>
-					</ul>
-				</div>
-			</header>
-			<div id="main">
-				<div class="inner">
+	<body class="reading">
+		<div class="page">
 
-					<h1>Multi-Criteria Site Selection for a Biathlon High School</h1>
-					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>Spring 2020</span><span><i class="fas fa-building" aria-hidden="true"></i>University of Eastern Finland</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>Advanced GIS coursework</span></p>
-					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
-					<p>Local policymakers in the Joensuu area needed to identify the optimal site for a new biathlon-oriented high school. Four competing spatial criteria had to be balanced: maximise distance from existing schools, minimise distance to training facilities, maximise youth population within 3 km, and avoid sites within 100 m of inland waters.</p>
-					<img src="images/mcda.png" alt="The four competing criteria used in the site selection model: maximise distance to existing high schools, minimise distance to training facilities, maximise youth population within 3 km, and exclude land within 100 m of inland water" class="project-image"/>
-					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
-					<p>Each criterion was converted into a spatial layer and reclassified into comparable score ranges. Weights were assigned based on policymaker priorities. ArcGIS Pro Model Builder was used to build a documented, repeatable workflow applying Cost Surface, Cost Distance, and weighted overlay — producing a final suitability surface from which candidate sites were extracted and ranked.</p>
-					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
-					<div class="outcome-grid">
-						<div class="outcome-card"><p><i class="fas fa-map-pin"></i> Optimal school site identified through multi-criteria weighted spatial analysis</p></div>
-						<div class="outcome-card"><p><i class="fas fa-project-diagram"></i> Full workflow built and documented in Model Builder for reproducibility</p></div>
-						<div class="outcome-card"><p><i class="fas fa-balance-scale"></i> Four competing planning criteria balanced into a single suitability index</p></div>
-					</div>
-					<div class="built-with">
-					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
-					<div class="tech-stack"><span class="tech-chip">ArcGIS Pro</span><span class="tech-chip">Model Builder</span><span class="tech-chip">MCDA</span><span class="tech-chip">Cost Surface</span><span class="tech-chip">Cost Distance</span><span class="tech-chip">Spatial Analysis</span></div>
-				</div>
+			<div class="shell">
+				<div class="topbar">
+					<a class="backlink" href="index.html"><span class="arr" aria-hidden="true">&larr;</span> All projects</a>
+					<span class="kind">Academic project</span>
 				</div>
 			</div>
-			<footer id="footer">
-				<div class="inner">
-					<section>
-						<h2 class="follow-heading">Follow</h2>
-						<ul class="icons">
-							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+
+			<main>
+
+				<header class="project-head">
+					<div class="shell">
+						<h1>Multi-Criteria Site Selection for a Biathlon High School</h1>
+						<p class="meta-line"><span>Spring 2020</span><span>University of Eastern Finland</span><span>Advanced GIS coursework</span></p>
+					</div>
+				</header>
+
+				<div class="shell">
+
+					<section class="section reveal">
+						<p class="eyebrow">The challenge</p>
+						<div class="prose"><p>Local policymakers in the Joensuu area needed to identify the optimal site for a new biathlon-oriented high school. Four competing spatial criteria had to be balanced: maximise distance from existing schools, minimise distance to training facilities, maximise youth population within 3 km, and avoid sites within 100 m of inland waters.</p></div>
+						<figure class="figure"><img src="images/mcda.png" alt="The four competing criteria used in the site selection model: maximise distance to existing high schools, minimise distance to training facilities, maximise youth population within 3 km, and exclude land within 100 m of inland water" loading="lazy" decoding="async" /></figure>
+					</section>
+					<section class="section reveal">
+						<p class="eyebrow">The approach</p>
+						<div class="prose"><p>Each criterion was converted into a spatial layer and reclassified into comparable score ranges. Weights were assigned based on policymaker priorities. ArcGIS Pro Model Builder was used to build a documented, repeatable workflow applying Cost Surface, Cost Distance, and weighted overlay, producing a final suitability surface from which candidate sites were extracted and ranked.</p></div>
+					</section>
+					<section class="section reveal">
+						<p class="eyebrow">Key outcomes</p>
+						<ul class="outcomes">
+							<li>Optimal school site identified through multi-criteria weighted spatial analysis</li>
+							<li>Full workflow built and documented in Model Builder for reproducibility</li>
+							<li>Four competing planning criteria balanced into a single suitability index</li>
 						</ul>
 					</section>
-					<ul class="copyright">
-						<li>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					<section class="section reveal">
+						<p class="eyebrow">Built with</p>
+						<ul class="chips">
+							<li class="chip">ArcGIS Pro</li>
+							<li class="chip">Model Builder</li>
+							<li class="chip">MCDA</li>
+							<li class="chip">Cost Surface</li>
+							<li class="chip">Cost Distance</li>
+							<li class="chip">Spatial Analysis</li>
+						</ul>
+					</section>
+
+				</div>
+
+			</main>
+
+			<footer class="site-footer">
+				<div class="shell">
+					<p class="colophon">&copy; 2026 Andres Gordon</p>
+					<ul class="social">
+						<li><a href="https://github.com/EAndresGE" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/andresgordon/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 			</footer>
+
 		</div>
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+
+		<script src="assets/js/site.js" defer></script>
 	</body>
 </html>

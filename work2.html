@@ -30,107 +30,79 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="images/icons/favicon-192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png" />
-		<meta name="theme-color" content="#1b2030" />
+		<meta name="theme-color" content="#0e0f11" />
 		<!-- meta:end -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/portfolio.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<link rel="stylesheet" href="assets/css/site.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<style>
-			#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-			#main { flex: 1; text-align: center; }
-			#main .inner { display: inline-block; text-align: left; width: 100%; }
-			html, body { background-color: #1b2030; color: #d8e0f0; }
-			#main { background-color: #1b2030; color: #d8e0f0; }
-			#main .inner { padding: 0 2.5em 2em; }
-			#footer { background-color: #141820 !important; }
-			.follow-heading { color: #d8e0f0; }
-			a { color: #2d7dd2; }
-			a:hover { color: #5ba3f5; }
-			.section-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2d7dd2; margin: 1.8em 0 0.5em; display: block; }
-			.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 1em 0 1.5em; }
-			.outcome-card { background: #242d42; border: 1.5px solid #2d3855; border-radius: 8px; padding: 1.1em; border-top: 3px solid #2d7dd2; }
-			.outcome-card p { font-size: 0.82em; line-height: 1.55; color: #d8e0f0; margin: 0; }
-			.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5em; }
-			.tech-chip { background: #242d42; border: 1.5px solid #2d3855; border-radius: 5px; padding: 0.3em 0.8em; font-size: 0.72em; font-weight: 600; letter-spacing: 0.05em; color: #b8c4dc; text-transform: uppercase; }
-			@media screen and (max-width: 736px) {
-				.home-logo { width: 46px !important; height: 46px !important; top: 6px !important; right: 6px !important; }
-			}
-			.thesis-cta {
-				display: flex;
-				align-items: flex-start;
-				gap: 0.8em;
-				background: #242d42;
-				border: 1.5px solid #2d3855;
-				border-left: 3px solid #2d7dd2;
-				border-radius: 6px;
-				padding: 1em 1.2em;
-				margin: 1.4em 0;
-				font-size: 0.86em;
-				line-height: 1.6;
-				color: #d8e0f0 !important;
-			}
-			.thesis-cta i { color: #7db8f0; font-size: 1.2em; margin-top: 0.1em; flex-shrink: 0; }
-			.thesis-cta strong { color: #ffffff; }
-		</style>
 	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<a href="index.html">
-				<img src="images/logo.png" alt="Home" class="home-logo" style="position: fixed; top: 10px; right: 10px; width: 80px; height: 80px; z-index:999;">
-			</a>
-			<header id="header">
-				<div class="inner">
-					<ul class="actions">
-						<li><a href="index.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All projects</a></li>
-						<li><span style="display:inline-block;padding:0.35em 1em;border-radius:4px;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#2d7dd2;color:#fff;"><i class="fas fa-briefcase" style="margin-right:0.45em;"></i>Professional project</span></li>
-					</ul>
-				</div>
-			</header>
-			<div id="main">
-				<div class="inner">
+	<body class="reading">
+		<div class="page">
 
-					<h1>Moose-Vehicle Collision Spatial Analysis</h1>
-					<p class="project-meta"><span><i class="fas fa-calendar-alt" aria-hidden="true"></i>2020 – 2022</span><span><i class="fas fa-building" aria-hidden="true"></i>LUKE / University of Eastern Finland</span><span><i class="fas fa-user-tie" aria-hidden="true"></i>MSc thesis, September 2022</span></p>
-					<span class="section-label"><i class="fas fa-question-circle" style="margin-right:0.4em;"></i>The challenge</span>
-					<p>Ungulate-vehicle collisions are an increasing safety and ecological problem across Nordic nations. In collaboration with LUKE, this project investigated how forest structure influences the spatial distribution of moose-vehicle collisions across two distinct regions of Finland — Ostrobothnia and North Karelia.</p>
-					<img src="images/mvc.jpg" alt="Moose-vehicle collision distribution map Finland" class="project-image"/>
-					<span class="section-label"><i class="fas fa-drafting-compass" style="margin-right:0.4em;"></i>The approach</span>
-					<p>Spatial analysis mapped accident distributions by road type and season. Regression modelling tested 18 forest structure variables — canopy cover, spruce and deciduous volumes, mean heights, and stem counts — against recorded collision densities. Models were built independently for each region to identify what drives the difference.</p>
-					<span class="section-label"><i class="fas fa-check-circle" style="margin-right:0.4em;"></i>Key outcomes</span>
-					<div class="outcome-grid">
-						<div class="outcome-card"><p><i class="fas fa-tree"></i> Canopy cover and moose observation density identified as primary predictors of collision spatial variation</p></div>
-						<div class="outcome-card"><p><i class="fas fa-map"></i> Regional differences quantified — spruce volume significant in Ostrobothnia, deciduous stems in North Karelia</p></div>
-						<div class="outcome-card"><p><i class="fas fa-graduation-cap"></i> Findings published as a thesis — available for review</p></div>
-					</div>
-					<div class="thesis-cta"><i class="fas fa-file-pdf" aria-hidden="true"></i><span><strong>This project is my MSc thesis.</strong> &ldquo;The Effect of Forest Structure on the Number of Moose Vehicle Collisions in Finland&rdquo;, University of Eastern Finland, September 2022. <a href="pdf/thesis.pdf">Download the full thesis (PDF, 31 pages)</a>.</span></div>
-					<div class="built-with">
-					<div class="built-with-label"><i class="fas fa-microchip" style="margin-right:0.4em;"></i>Built with</div>
-					<div class="tech-stack"><span class="tech-chip">ArcGIS</span><span class="tech-chip">R</span><span class="tech-chip">Spatial Analysis</span><span class="tech-chip">Statistical Modelling</span><span class="tech-chip">Forest GIS</span><span class="tech-chip">Regression Analysis</span></div>
-				</div>
+			<div class="shell">
+				<div class="topbar">
+					<a class="backlink" href="index.html"><span class="arr" aria-hidden="true">&larr;</span> All projects</a>
+					<span class="kind">Professional project</span>
 				</div>
 			</div>
-			<footer id="footer">
-				<div class="inner">
-					<section>
-						<h2 class="follow-heading">Follow</h2>
-						<ul class="icons">
-							<li><a href="https://github.com/EAndresGE" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="https://www.linkedin.com/in/andresgordon/" class="icon brands style2 fab fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire&body=Write%20your%20enquire%20here" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+
+			<main>
+
+				<header class="project-head">
+					<div class="shell">
+						<h1>Moose-Vehicle Collision Spatial Analysis</h1>
+						<p class="meta-line"><span>2020 – 2022</span><span>LUKE / University of Eastern Finland</span><span>MSc thesis, September 2022</span></p>
+					</div>
+				</header>
+
+				<div class="shell">
+
+					<section class="section reveal">
+						<p class="eyebrow">The challenge</p>
+						<div class="prose"><p>Ungulate-vehicle collisions are an increasing safety and ecological problem across Nordic nations. In collaboration with LUKE, this project investigated how forest structure influences the spatial distribution of moose-vehicle collisions across two distinct regions of Finland: Ostrobothnia and North Karelia.</p></div>
+						<figure class="figure"><img src="images/mvc.jpg" alt="Moose-vehicle collision distribution map Finland" loading="lazy" decoding="async" /></figure>
+					</section>
+					<section class="section reveal">
+						<p class="eyebrow">The approach</p>
+						<div class="prose"><p>Spatial analysis mapped accident distributions by road type and season. Regression modelling tested 18 forest structure variables (canopy cover, spruce and deciduous volumes, mean heights and stem counts) against recorded collision densities. Models were built independently for each region to identify what drives the difference.</p></div>
+					</section>
+					<section class="section reveal">
+						<p class="eyebrow">Key outcomes</p>
+						<ul class="outcomes">
+							<li>Canopy cover and moose observation density identified as primary predictors of collision spatial variation</li>
+							<li>Regional differences quantified: spruce volume significant in Ostrobothnia, deciduous stems in North Karelia</li>
+							<li>Findings published as a thesis, available for review</li>
 						</ul>
 					</section>
-					<ul class="copyright">
-						<li>Copyright &copy; 2026 Andres Gordon | Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					<section class="section reveal">
+						<p class="eyebrow">Built with</p>
+						<ul class="chips">
+							<li class="chip">ArcGIS</li>
+							<li class="chip">R</li>
+							<li class="chip">Spatial Analysis</li>
+							<li class="chip">Statistical Modelling</li>
+							<li class="chip">Forest GIS</li>
+							<li class="chip">Regression Analysis</li>
+						</ul>
+					</section>
+
+				</div>
+
+			</main>
+
+			<footer class="site-footer">
+				<div class="shell">
+					<p class="colophon">&copy; 2026 Andres Gordon</p>
+					<ul class="social">
+						<li><a href="https://github.com/EAndresGE" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/andresgordon/" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="mailto:andogordon@hotmail.com?subject=Information%20enquire" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 			</footer>
+
 		</div>
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+
+		<script src="assets/js/site.js" defer></script>
 	</body>
 </html>
