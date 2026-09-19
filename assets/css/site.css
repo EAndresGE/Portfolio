@@ -1101,9 +1101,10 @@ body.home .masthead { align-items: center; }
 body.home .masthead .shell { text-align: center; }
 body.home .masthead-line { margin-inline: auto; }
 
+/* The intro spans the column like everything else. Centred alignment keeps
+ * it tied to the hero above; the width comes from the container, not a cap. */
 body.home .intro .prose {
-	max-width: 68ch;
-	margin-inline: auto;
+	max-width: none;
 	text-align: center;
 }
 
