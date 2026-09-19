@@ -1144,6 +1144,14 @@ body.reading .page-head h1 { max-width: none; }
  * return sweep; the extra leading is what pays for the width. */
 body.reading .prose { line-height: 1.8; }
 
+/* The map widgets set no font-family of their own, so they inherited the
+ * page default. The serif heading rule changed what that resolves to and
+ * put a serif title on top of an otherwise sans panel. Put it back. */
+#vm-wrap h2, #av-wrap h2, #gm-wrap h2 {
+	font-family: var(--font-sans);
+	letter-spacing: 0.06em;
+}
+
 /* ============================================================ entrance */
 
 /* Staggered reveal, applied by script only when it can observe. Items are
