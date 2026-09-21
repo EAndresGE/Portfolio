@@ -46,6 +46,11 @@ PAGES = {
               "GeoQC Flow: a Python CLI that automates QA across multi-step FileGDB pipelines, "
               "classifying geometry changes by severity and generating HTML and DOCX reports.",
               "GeoQC Flow, automated pipeline QC and reporting"),
+    "agol": ("article",
+             "Asset tracking dashboards on ArcGIS Online: an FME workspace reconciling an asset "
+             "API, a Monday delivery board and circuit geometry into a self-provisioning hosted "
+             "feature service, deployed across ten-plus utility inspection projects.",
+             "Asset tracking dashboard, captured against delivered"),
     "treeforge": ("article",
                   "TreeForge: a browser UI and Python CLI that turn drone point clouds into a forest "
                   "inventory, producing DSM, DTM, canopy height model, tree crowns, treetops, "

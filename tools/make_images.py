@@ -64,6 +64,7 @@ PAGES = [
     ("academic", "Technical Skills", "ArcGIS Pro / QGIS / FME / Python / R", "banner.jpg"),
 
     ("geoqc", "GeoQC Flow", "Automated pipeline QC and reporting", "geoqc_preview.svg"),
+    ("agol", "Asset Tracking Dashboards", "Captured against delivered, on ArcGIS Online", "agol_preview.svg"),
     ("treeforge", "TreeForge", "Drone point cloud to forest inventory", "treeforge_tile.jpg"),
     ("powerornah", "Power or Nah", "Live electricity price at a glance", "powerornah.jpg"),
     ("pp1", "Paper-Cut Cartography of Quito", "Andean topography as layered paper", "Quito_paper_cut.jpg"),

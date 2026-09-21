@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="'Source Sans 3', 'Segoe UI', Arial, sans-serif">
+  <title>Asset tracking dashboard, captured against delivered</title>
+
+  <!-- Ground -->
+  <rect width="800" height="500" fill="#0e0f11"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="52" fill="#16181b"/>
+  <text x="24" y="24" fill="#e9e6e1" font-size="13" font-weight="600" letter-spacing="0.4">ASSET TRACKING DASHBOARD</text>
+  <text x="24" y="40" fill="#d08b4f" font-size="9" font-weight="600" letter-spacing="1.1">CAPTURED AGAINST DELIVERED</text>
+  <text x="776" y="33" fill="#8d8882" font-size="9" text-anchor="end">Refreshed from the published feature service</text>
+
+  <!-- Circuit list -->
+  <rect x="24" y="68" width="188" height="248" rx="4" fill="#16181b"/>
+  <text x="38" y="88" fill="#a9a49c" font-size="9" font-weight="600" letter-spacing="1.1">CIRCUITS</text>
+  <line x1="24" y1="96" x2="212" y2="96" stroke="#282b30" stroke-width="1"/>
+
+  <g font-size="9.5" fill="#a9a49c">
+    <rect x="34" y="106" width="9" height="9" rx="2" fill="#766558"/><text x="52" y="114">Circuit 01</text>
+    <rect x="34" y="132" width="9" height="9" rx="2" fill="#bf8c62"/><text x="52" y="140">Circuit 02</text>
+    <rect x="34" y="158" width="9" height="9" rx="2" fill="#ffba76"/><text x="52" y="166">Circuit 03</text>
+    <rect x="34" y="184" width="9" height="9" rx="2" fill="#99795f"/><text x="52" y="192">Circuit 04</text>
+    <rect x="34" y="210" width="9" height="9" rx="2" fill="#e4a066"/><text x="52" y="218">Circuit 05</text>
+    <rect x="34" y="236" width="9" height="9" rx="2" fill="#766558"/><text x="52" y="244">Circuit 06</text>
+    <rect x="34" y="262" width="9" height="9" rx="2" fill="#bf8c62"/><text x="52" y="270">Circuit 07</text>
+    <rect x="34" y="288" width="9" height="9" rx="2" fill="#99795f"/><text x="52" y="296">Circuit 08</text>
+  </g>
+
+  <!-- Map pane, abstract: no real network geometry -->
+  <rect x="224" y="68" width="552" height="248" rx="4" fill="#16181b"/>
+  <path d="M224 250 Q330 214 420 236 T608 210 T776 228 L776 316 L224 316 Z" fill="#1d2024"/>
+  <path d="M224 250 Q330 214 420 236 T608 210 T776 228" fill="none" stroke="#282b30" stroke-width="1"/>
+  <g fill="#d08b4f">
+    <circle cx="322" cy="150" r="3.2" opacity="0.9"/><circle cx="336" cy="163" r="3.2" opacity="0.8"/>
+    <circle cx="349" cy="142" r="3.2" opacity="0.85"/><circle cx="361" cy="176" r="3.2" opacity="0.7"/>
+    <circle cx="374" cy="158" r="3.2" opacity="0.9"/><circle cx="392" cy="186" r="3.2" opacity="0.75"/>
+    <circle cx="408" cy="132" r="3.2" opacity="0.85"/><circle cx="423" cy="170" r="3.2" opacity="0.8"/>
+  </g>
+  <g fill="#ffba76">
+    <circle cx="520" cy="128" r="3.2" opacity="0.9"/><circle cx="536" cy="149" r="3.2" opacity="0.85"/>
+    <circle cx="551" cy="134" r="3.2" opacity="0.8"/><circle cx="566" cy="162" r="3.2" opacity="0.9"/>
+    <circle cx="583" cy="145" r="3.2" opacity="0.75"/><circle cx="598" cy="172" r="3.2" opacity="0.85"/>
+  </g>
+  <g fill="#766558">
+    <circle cx="650" cy="156" r="3.2" opacity="0.8"/><circle cx="666" cy="140" r="3.2" opacity="0.7"/>
+    <circle cx="681" cy="167" r="3.2" opacity="0.8"/><circle cx="697" cy="151" r="3.2" opacity="0.7"/>
+  </g>
+  <text x="238" y="308" fill="#8d8882" font-size="8">Illustrative distribution. No client geometry is shown.</text>
+
+  <!-- Gauge row -->
+  <g>
+    <rect x="24" y="332" width="240" height="144" rx="4" fill="#16181b"/>
+    <text x="144" y="356" fill="#a9a49c" font-size="9" font-weight="600" letter-spacing="1" text-anchor="middle">SPAN MILES ACQUIRED</text>
+    <circle cx="144" cy="418" r="34" fill="none" stroke="#282b30" stroke-width="10"/>
+    <circle cx="144" cy="418" r="34" fill="none" stroke="#d08b4f" stroke-width="10" stroke-linecap="round"
+            stroke-dasharray="192 214" transform="rotate(-90 144 418)"/>
+    <text x="144" y="424" fill="#e9e6e1" font-size="20" font-weight="600" text-anchor="middle">90%</text>
+  </g>
+  <g>
+    <rect x="280" y="332" width="240" height="144" rx="4" fill="#16181b"/>
+    <text x="400" y="356" fill="#a9a49c" font-size="9" font-weight="600" letter-spacing="1" text-anchor="middle">STRUCTURES IN OPERATIONS</text>
+    <circle cx="400" cy="418" r="34" fill="none" stroke="#282b30" stroke-width="10"/>
+    <circle cx="400" cy="418" r="34" fill="none" stroke="#e4a066" stroke-width="10" stroke-linecap="round"
+            stroke-dasharray="197 217" transform="rotate(-90 400 418)"/>
+    <text x="400" y="424" fill="#e9e6e1" font-size="20" font-weight="600" text-anchor="middle">93%</text>
+  </g>
+  <g>
+    <rect x="536" y="332" width="240" height="144" rx="4" fill="#16181b"/>
+    <text x="656" y="356" fill="#a9a49c" font-size="9" font-weight="600" letter-spacing="1" text-anchor="middle">SPAN MILES DELIVERED</text>
+    <circle cx="656" cy="418" r="34" fill="none" stroke="#282b30" stroke-width="10"/>
+    <circle cx="656" cy="418" r="34" fill="none" stroke="#99795f" stroke-width="10" stroke-linecap="round"
+            stroke-dasharray="61 153" transform="rotate(-90 656 418)"/>
+    <text x="656" y="424" fill="#e9e6e1" font-size="20" font-weight="600" text-anchor="middle">28%</text>
+  </g>
+</svg>

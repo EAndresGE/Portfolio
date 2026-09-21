@@ -2,97 +2,101 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eandresge.github.io/Portfolio/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/geoqc.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/powerornah.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/treeforge.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/academic.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/education.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/risk.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/visibility.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/work.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/MCDA.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eandresge.github.io/Portfolio/agol.html</loc>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/batch.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/geo.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/network.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/pp1.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/remote.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/work1.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/work2.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/work3.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eandresge.github.io/Portfolio/work4.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
