@@ -466,7 +466,13 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-6) 0; }
 	margin-bottom: var(--sp-4);
 }
 
-.page-head .prose { color: var(--text-2); }
+/* The page intro fills the shell. Capping it at --measure left a void down
+ * the right-hand side, which is the thing to avoid. Body copy inside a
+ * project page keeps the measure; this is a standfirst, not reading text. */
+.page-head .prose {
+	color: var(--text-2);
+	max-width: none;
+}
 
 .backlink {
 	display: inline-flex;
